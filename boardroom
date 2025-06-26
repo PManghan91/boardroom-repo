@@ -1,0 +1,11 @@
+#!/bin/bash
+echo "Building and starting containerized services..."
+docker compose up -d --build
+
+# It's good practice to wait for services to be healthy.
+# A more robust script would loop and check health endpoints.
+echo "Waiting for services to initialize..."
+sleep 10
+
+echo "Starting Tauri desktop application..."
+pnpm tauri dev
