@@ -15,6 +15,7 @@ from app.core.metrics import (
     db_connections,
 )
 from app.core.logging import logger
+from app.core.error_monitoring import record_error
 from app.utils.sanitization import sanitize_string
 
 
@@ -57,11 +58,27 @@ class ValidationMiddleware(BaseHTTPMiddleware):
             response = await call_next(request)
             status_code = response.status_code
             
-        except HTTPException:
+        except HTTPException as e:
+            # Record validation errors for monitoring
+            record_error(
+                error_type="validation_error",
+                path=request.url.path,
+                status_code=e.status_code,
+                error_message=str(e.detail),
+                client_ip=request.client.host if request.client else None
+            )
             # Re-raise HTTP exceptions (validation failures)
             raise
         except Exception as e:
             status_code = 500
+            # Record server errors for monitoring
+            record_error(
+                error_type="server_error",
+                path=request.url.path,
+                status_code=status_code,
+                error_message=str(e),
+                client_ip=request.client.host if request.client else None
+            )
             logger.error("middleware_error", error=str(e), path=request.url.path, exc_info=True)
             raise
         finally:

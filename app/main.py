@@ -24,10 +24,12 @@ from slowapi.errors import RateLimitExceeded
 
 from app.api.v1.api import api_router
 from app.core.config import settings
+from app.core.exceptions import BoardroomException
 from app.core.limiter import limiter
 from app.core.logging import logger
 from app.core.metrics import setup_metrics
 from app.core.middleware import MetricsMiddleware, ValidationMiddleware, validation_error_handler
+from app.core.error_monitoring import record_error
 from app.services.database import database_service
 
 # Load environment variables
@@ -97,6 +99,15 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         method=request.method,
         error_count=len(exc.errors()),
     )
+    
+    # Record error for monitoring
+    record_error(
+        error_type="pydantic_validation_error",
+        path=request.url.path,
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        error_message="Request validation failed",
+        client_ip=request.client.host if request.client else None
+    )
 
     # Format the errors to be more user-friendly
     formatted_errors = []
@@ -135,6 +146,15 @@ async def value_error_handler(request: Request, exc: ValueError):
         client_ip=request.client.host if request.client else "unknown"
     )
     
+    # Record error for monitoring
+    record_error(
+        error_type="value_error",
+        path=request.url.path,
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        error_message=str(exc),
+        client_ip=request.client.host if request.client else None
+    )
+    
     error_response = {
         "error": {
             "code": status.HTTP_422_UNPROCESSABLE_ENTITY,
@@ -162,6 +182,15 @@ async def internal_server_error_handler(request: Request, exc: Exception):
         exc_info=True
     )
     
+    # Record error for monitoring
+    record_error(
+        error_type="internal_server_error",
+        path=request.url.path,
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        error_message="Internal server error",
+        client_ip=request.client.host if request.client else None
+    )
+    
     error_response = {
         "error": {
             "code": status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -174,6 +203,34 @@ async def internal_server_error_handler(request: Request, exc: Exception):
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content=error_response
+    )
+
+
+@app.exception_handler(BoardroomException)
+async def boardroom_exception_handler(request: Request, exc: BoardroomException):
+    """Handle custom Boardroom exceptions with standardized response."""
+    logger.error(
+        "boardroom_exception",
+        error_code=exc.error_code,
+        path=request.url.path,
+        method=request.method,
+        error=exc.message,
+        client_ip=request.client.host if request.client else "unknown",
+        exc_info=True
+    )
+    
+    # Record error for monitoring
+    record_error(
+        error_type=exc.error_code.lower(),
+        path=request.url.path,
+        status_code=exc.status_code,
+        error_message=exc.message,
+        client_ip=request.client.host if request.client else None
+    )
+    
+    return JSONResponse(
+        status_code=exc.status_code,
+        content=exc.to_dict()
     )
 
 
@@ -230,3 +287,41 @@ async def health_check(request: Request) -> Dict[str, Any]:
     status_code = status.HTTP_200_OK if db_healthy else status.HTTP_503_SERVICE_UNAVAILABLE
 
     return JSONResponse(content=response, status_code=status_code)
+
+
+@app.get("/monitoring/errors")
+@limiter.limit("10/minute")
+async def error_monitoring_status(request: Request) -> Dict[str, Any]:
+    """Get error monitoring status and recent error summary.
+    
+    Returns:
+        Dict[str, Any]: Error monitoring information
+    """
+    logger.info("error_monitoring_endpoint_called")
+    
+    from app.core.error_monitoring import get_monitoring_health, get_error_summary
+    
+    # Get monitoring health status
+    health_status = get_monitoring_health()
+    
+    # Get error summary for last 24 hours
+    error_summary = get_error_summary(hours=24)
+    
+    # Convert ErrorMetric objects to dictionaries for JSON response
+    summary_dict = {}
+    for error_type, metric in error_summary.items():
+        summary_dict[error_type] = {
+            "count": metric.count,
+            "last_occurrence": metric.last_occurrence.isoformat(),
+            "first_occurrence": metric.first_occurrence.isoformat(),
+            "paths": metric.paths[:10],  # Limit to first 10 paths
+            "status_codes": list(set(metric.status_codes))
+        }
+    
+    response = {
+        "monitoring_health": health_status,
+        "error_summary_24h": summary_dict,
+        "timestamp": datetime.now().isoformat()
+    }
+    
+    return JSONResponse(content=response, status_code=status.HTTP_200_OK)
