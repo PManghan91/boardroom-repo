@@ -1,152 +1,100 @@
+# FastAPI LangGraph Template - Makefile for development and code quality
+
+.PHONY: help install install-dev format lint test coverage quality clean run
+
+# Default target
+help:
+	@echo "FastAPI LangGraph Template - Available Commands:"
+	@echo ""
+	@echo "Setup and Installation:"
+	@echo "  install        Install production dependencies"
+	@echo "  install-dev    Install development dependencies"
+	@echo ""
+	@echo "Code Quality:"
+	@echo "  format         Format code with Black and isort"
+	@echo "  lint           Run linting with Ruff"
+	@echo "  quality        Run comprehensive quality checks"
+	@echo ""
+	@echo "Testing:"
+	@echo "  test           Run all tests"
+	@echo "  test-unit      Run unit tests only"
+	@echo "  test-integration Run integration tests only"
+	@echo "  coverage       Run tests with coverage report"
+	@echo ""
+	@echo "Development:"
+	@echo "  run            Run development server"
+	@echo "  clean          Clean temporary files and caches"
+
+# Installation targets
 install:
-	pip install uv
-	uv sync
+	pip install -e .
 
-set-env:
-	@if [ -z "$(ENV)" ]; then \
-		echo "ENV is not set. Usage: make set-env ENV=development|staging|production"; \
-		exit 1; \
-	fi
-	@if [ "$(ENV)" != "development" ] && [ "$(ENV)" != "staging" ] && [ "$(ENV)" != "production" ] && [ "$(ENV)" != "test" ]; then \
-		echo "ENV is not valid. Must be one of: development, staging, production, test"; \
-		exit 1; \
-	fi
-	@echo "Setting environment to $(ENV)"
-	@bash -c "source scripts/set_env.sh $(ENV)"
+install-dev:
+	pip install -e ".[dev]"
+	pip install --dependency-groups dev,test
+	pre-commit install
 
-prod:
-	@echo "Starting server in production environment"
-	@bash -c "source scripts/set_env.sh production && ./.venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port 8000"
-
-staging:
-	@echo "Starting server in staging environment"
-	@bash -c "source scripts/set_env.sh staging && ./.venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port 8000"
-
-dev:
-	@echo "Starting server in development environment"
-	@bash -c "source scripts/set_env.sh development && uv run uvicorn app.main:app --reload --port 8000"
-
-# Evaluation commands
-eval:
-	@echo "Running evaluation with interactive mode"
-	@bash -c "source scripts/set_env.sh ${ENV:-development} && python -m evals.main --interactive"
-
-eval-quick:
-	@echo "Running evaluation with default settings"
-	@bash -c "source scripts/set_env.sh ${ENV:-development} && python -m evals.main --quick"
-
-eval-no-report:
-	@echo "Running evaluation without generating report"
-	@bash -c "source scripts/set_env.sh ${ENV:-development} && python -m evals.main --no-report"
+# Code quality targets
+format:
+	@echo "🎨 Formatting code with Black and isort..."
+	black app tests scripts --line-length 119
+	isort app tests scripts --profile black --line-length 119
+	@echo "✅ Code formatting completed"
 
 lint:
-	ruff check .
+	@echo "🔍 Linting code with Ruff..."
+	ruff check app tests scripts
 
-format:
-	ruff format .
+quality:
+	@echo "📊 Running comprehensive quality checks..."
+	python scripts/code_quality.py --all --report quality-report.txt
 
+# Testing targets
+test:
+	@echo "🧪 Running all tests..."
+	pytest tests/ -v
+
+test-unit:
+	@echo "🧪 Running unit tests..."
+	pytest tests/unit/ -v
+
+test-integration:
+	@echo "🧪 Running integration tests..."
+	pytest tests/integration/ -v
+
+coverage:
+	@echo "📈 Running tests with coverage..."
+	pytest tests/ --cov=app --cov-report=html --cov-report=term-missing
+
+# Development targets
+run:
+	@echo "🚀 Starting development server..."
+	uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+# Utility targets
 clean:
-	rm -rf .venv
-	rm -rf __pycache__
-	rm -rf .pytest_cache
+	@echo "🧹 Cleaning temporary files and caches..."
+	find . -type f -name "*.pyc" -delete
+	find . -type d -name "__pycache__" -delete
+	find . -type d -name "*.egg-info" -exec rm -rf {} +
+	find . -type f -name ".coverage" -delete
+	find . -type d -name "htmlcov" -exec rm -rf {} +
+	find . -type d -name ".pytest_cache" -exec rm -rf {} +
+	find . -type d -name ".mypy_cache" -exec rm -rf {} +
+	find . -type d -name ".ruff_cache" -exec rm -rf {} +
+	@echo "✅ Cleanup completed"
 
-docker-build:
-	docker build -t fastapi-langgraph-template .
+# CI targets (for GitHub Actions)
+ci-quality:
+	@echo "🤖 Running CI quality checks..."
+	black --check app tests scripts --line-length 119
+	isort --check-only app tests scripts --profile black --line-length 119
+	ruff check app tests scripts
+	python scripts/code_quality.py --all --fail-on-score 7.0
 
-docker-build-env:
-	@if [ -z "$(ENV)" ]; then \
-		echo "ENV is not set. Usage: make docker-build-env ENV=development|staging|production"; \
-		exit 1; \
-	fi
-	@if [ "$(ENV)" != "development" ] && [ "$(ENV)" != "staging" ] && [ "$(ENV)" != "production" ]; then \
-		echo "ENV is not valid. Must be one of: development, staging, production"; \
-		exit 1; \
-	fi
-	@./scripts/build-docker.sh $(ENV)
+# All-in-one targets
+check: format lint test
+	@echo "✅ All checks completed successfully!"
 
-docker-run:
-	docker run -p 8000:8000 fastapi-langgraph-template
-
-docker-run-env:
-	@if [ -z "$(ENV)" ]; then \
-		echo "ENV is not set. Usage: make docker-run-env ENV=development|staging|production"; \
-		exit 1; \
-	fi
-	@if [ "$(ENV)" != "development" ] && [ "$(ENV)" != "staging" ] && [ "$(ENV)" != "production" ]; then \
-		echo "ENV is not valid. Must be one of: development, staging, production"; \
-		exit 1; \
-	fi
-	@./scripts/run-docker.sh $(ENV)
-
-docker-logs:
-	@if [ -z "$(ENV)" ]; then \
-		echo "ENV is not set. Usage: make docker-logs ENV=development|staging|production"; \
-		exit 1; \
-	fi
-	@if [ "$(ENV)" != "development" ] && [ "$(ENV)" != "staging" ] && [ "$(ENV)" != "production" ]; then \
-		echo "ENV is not valid. Must be one of: development, staging, production"; \
-		exit 1; \
-	fi
-	@./scripts/logs-docker.sh $(ENV)
-
-docker-stop:
-	@if [ -z "$(ENV)" ]; then \
-		echo "ENV is not set. Usage: make docker-stop ENV=development|staging|production"; \
-		exit 1; \
-	fi
-	@if [ "$(ENV)" != "development" ] && [ "$(ENV)" != "staging" ] && [ "$(ENV)" != "production" ]; then \
-		echo "ENV is not valid. Must be one of: development, staging, production"; \
-		exit 1; \
-	fi
-	@./scripts/stop-docker.sh $(ENV)
-
-# Docker Compose commands for the entire stack
-docker-compose-up:
-	@if [ -z "$(ENV)" ]; then \
-		echo "ENV is not set. Usage: make docker-compose-up ENV=development|staging|production"; \
-		exit 1; \
-	fi
-	@if [ "$(ENV)" != "development" ] && [ "$(ENV)" != "staging" ] && [ "$(ENV)" != "production" ]; then \
-		echo "ENV is not valid. Must be one of: development, staging, production"; \
-		exit 1; \
-	fi
-	APP_ENV=$(ENV) docker-compose up -d
-
-docker-compose-down:
-	@if [ -z "$(ENV)" ]; then \
-		echo "ENV is not set. Usage: make docker-compose-down ENV=development|staging|production"; \
-		exit 1; \
-	fi
-	APP_ENV=$(ENV) docker-compose down
-
-docker-compose-logs:
-	@if [ -z "$(ENV)" ]; then \
-		echo "ENV is not set. Usage: make docker-compose-logs ENV=development|staging|production"; \
-		exit 1; \
-	fi
-	APP_ENV=$(ENV) docker-compose logs -f
-
-# Help
-help:
-	@echo "Usage: make <target>"
-	@echo "Targets:"
-	@echo "  install: Install dependencies"
-	@echo "  set-env ENV=<environment>: Set environment variables (development, staging, production, test)"
-	@echo "  run ENV=<environment>: Set environment and run server"
-	@echo "  prod: Run server in production environment"
-	@echo "  staging: Run server in staging environment"
-	@echo "  dev: Run server in development environment"
-	@echo "  eval: Run evaluation with interactive mode"
-	@echo "  eval-quick: Run evaluation with default settings"
-	@echo "  eval-no-report: Run evaluation without generating report"
-	@echo "  test: Run tests"
-	@echo "  clean: Clean up"
-	@echo "  docker-build: Build default Docker image"
-	@echo "  docker-build-env ENV=<environment>: Build Docker image for specific environment"
-	@echo "  docker-run: Run default Docker container"
-	@echo "  docker-run-env ENV=<environment>: Run Docker container for specific environment"
-	@echo "  docker-logs ENV=<environment>: View logs from running container"
-	@echo "  docker-stop ENV=<environment>: Stop and remove container"
-	@echo "  docker-compose-up: Start the entire stack (API, Prometheus, Grafana)"
-	@echo "  docker-compose-down: Stop the entire stack"
-	@echo "  docker-compose-logs: View logs from all services"
+setup: install-dev
+	@echo "✅ Development environment setup completed!"

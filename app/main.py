@@ -31,9 +31,12 @@ from app.core.metrics import setup_metrics
 from app.core.middleware import MetricsMiddleware, ValidationMiddleware, validation_error_handler
 from app.core.api_standards import APIStandardsMiddleware
 from app.core.cache_middleware import CacheMiddleware
+from app.core.response_optimization import ResponseOptimizationMiddleware
 from app.core.error_monitoring import record_error
 from app.services.database import database_service
 from app.services.redis_service import redis_service
+from app.core.shutdown_manager import shutdown_manager
+from app.core.health_checks import health_service
 
 # Load environment variables
 load_dotenv()
@@ -48,38 +51,47 @@ langfuse = Langfuse(
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Handle application startup and shutdown events."""
-    logger.info(
-        "application_startup",
-        project_name=settings.PROJECT_NAME,
-        version=settings.VERSION,
-        api_prefix=settings.API_V1_STR,
-    )
-    
-    # Initialize Redis service
-    try:
-        await redis_service.initialize()
-        logger.info("redis_service_initialized")
-    except Exception as e:
-        logger.warning(
-            "redis_service_initialization_failed",
-            error=str(e),
-            message="Continuing without Redis - cache will be disabled"
+    """Handle application startup and shutdown events with health monitoring."""
+    async with shutdown_manager.lifecycle_manager():
+        logger.info(
+            "application_startup_with_health_monitoring",
+            project_name=settings.PROJECT_NAME,
+            version=settings.VERSION,
+            api_prefix=settings.API_V1_STR,
         )
-    
-    yield
-    
-    # Cleanup Redis service
-    try:
-        await redis_service.cleanup()
-        logger.info("redis_service_cleanup_completed")
-    except Exception as e:
-        logger.warning(
-            "redis_service_cleanup_failed",
-            error=str(e)
-        )
-    
-    logger.info("application_shutdown")
+        
+        # Initialize Redis service
+        try:
+            await redis_service.initialize()
+            logger.info("redis_service_initialized")
+        except Exception as e:
+            logger.warning(
+                "redis_service_initialization_failed",
+                error=str(e),
+                message="Continuing without Redis - cache will be disabled"
+            )
+        
+        # Initialize performance optimization services
+        try:
+            from app.core.memory_management import setup_memory_management
+            from app.core.advanced_caching import setup_advanced_caching
+            
+            await setup_memory_management(app)
+            await setup_advanced_caching(app)
+            logger.info("performance_optimization_services_initialized")
+        except Exception as e:
+            logger.warning(
+                "performance_optimization_initialization_failed",
+                error=str(e),
+                message="Continuing without performance optimization - some features may be disabled"
+            )
+        
+        logger.info("application_startup_completed_with_health_validation")
+        
+        yield
+        
+        # Cleanup is handled by shutdown_manager
+        logger.info("application_shutdown_initiated_by_lifespan_manager")
 
 
 app = FastAPI(
@@ -150,6 +162,9 @@ setup_metrics(app)
 
 # Add API standards middleware first
 app.add_middleware(APIStandardsMiddleware)
+
+# Add response optimization middleware (should be early in the chain)
+app.add_middleware(ResponseOptimizationMiddleware)
 
 # Add cache middleware (before validation to cache responses)
 app.add_middleware(CacheMiddleware)
@@ -478,3 +493,43 @@ async def error_monitoring_status(request: Request) -> Dict[str, Any]:
     }
     
     return JSONResponse(content=response, status_code=status.HTTP_200_OK)
+
+
+@app.get("/performance")
+@limiter.limit("10/minute")
+async def performance_stats(request: Request) -> Dict[str, Any]:
+    """Performance statistics endpoint.
+    
+    Returns:
+        Dict[str, Any]: Performance optimization statistics and metrics
+    """
+    logger.info("performance_stats_endpoint_called")
+    
+    try:
+        from app.core.advanced_caching import multi_level_cache
+        from app.core.memory_management import memory_monitor
+        
+        performance_data = {
+            "cache_stats": multi_level_cache.get_stats(),
+            "memory_stats": memory_monitor.get_memory_stats(),
+            "optimization_status": "active",
+            "timestamp": datetime.now().isoformat()
+        }
+        
+        return JSONResponse(content=performance_data, status_code=status.HTTP_200_OK)
+        
+    except Exception as e:
+        logger.error(
+            "performance_stats_error",
+            error=str(e),
+            exc_info=True
+        )
+        
+        # Return basic status if performance modules aren't available
+        fallback_data = {
+            "optimization_status": "unavailable",
+            "error": "Performance monitoring not available",
+            "timestamp": datetime.now().isoformat()
+        }
+        
+        return JSONResponse(content=fallback_data, status_code=status.HTTP_503_SERVICE_UNAVAILABLE)

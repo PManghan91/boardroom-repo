@@ -1,10 +1,15 @@
-"""Custom exception classes for the Boardroom AI application.
+"""Custom exception classes for the FastAPI LangGraph Template.
 
-This module defines standardized exception classes with proper error categorization
-and consistent error response patterns for effective troubleshooting in solo development.
+This module defines standardized exception classes with proper error categorization,
+type safety, and consistent error response patterns for effective troubleshooting
+and maintainable error handling.
 """
 
+from __future__ import annotations
+
+from datetime import datetime
 from typing import Any, Dict, Optional
+
 from fastapi import HTTPException, status
 
 
@@ -17,17 +22,17 @@ class BoardroomException(Exception):
     def __init__(
         self,
         message: str,
-        error_code: str = "BOARDROOM_ERROR",
+        error_code: str = "LANGGRAPH_ERROR",
         details: Optional[Dict[str, Any]] = None,
-        status_code: int = status.HTTP_500_INTERNAL_SERVER_ERROR
-    ):
+        status_code: int = status.HTTP_500_INTERNAL_SERVER_ERROR,
+    ) -> None:
         """Initialize the exception.
         
         Args:
-            message: Human-readable error message
-            error_code: Specific error code for categorization
-            details: Additional error details (sanitized)
-            status_code: HTTP status code for API responses
+            message: Human-readable error message.
+            error_code: Specific error code for categorization.
+            details: Additional error details (sanitized).
+            status_code: HTTP status code for API responses.
         """
         self.message = message
         self.error_code = error_code
@@ -36,16 +41,18 @@ class BoardroomException(Exception):
         super().__init__(message)
 
     def to_dict(self) -> Dict[str, Any]:
-        """Convert exception to dictionary for JSON response."""
-        from datetime import datetime
+        """Convert exception to dictionary for JSON response.
         
+        Returns:
+            Dict[str, Any]: Structured error response.
+        """
         return {
             "error": {
                 "code": self.status_code,
                 "message": self.message,
                 "type": self.error_code.lower(),
                 "details": self.details,
-                "timestamp": datetime.now().isoformat()
+                "timestamp": datetime.now().isoformat(),
             }
         }
 
@@ -53,7 +60,19 @@ class BoardroomException(Exception):
 class ValidationException(BoardroomException):
     """Exception for input validation errors."""
     
-    def __init__(self, message: str, field: Optional[str] = None, details: Optional[Dict[str, Any]] = None):
+    def __init__(
+        self,
+        message: str,
+        field: Optional[str] = None,
+        details: Optional[Dict[str, Any]] = None,
+    ) -> None:
+        """Initialize validation exception.
+        
+        Args:
+            message: Validation error message.
+            field: Name of the field that failed validation.
+            details: Additional validation details.
+        """
         error_details = details or {}
         if field:
             error_details["field"] = field
@@ -62,7 +81,7 @@ class ValidationException(BoardroomException):
             message=message,
             error_code="VALIDATION_ERROR",
             details=error_details,
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         )
 
 

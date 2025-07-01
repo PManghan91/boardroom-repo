@@ -27,6 +27,25 @@ from app.schemas.ai_operations import (
 from app.services.ai_state_manager import ai_state_manager
 from app.core.langgraph.graph import LangGraphAgent
 
+# Import performance optimization components
+try:
+    from app.core.memory_management import memory_optimized, ai_memory_optimizer
+    from app.core.advanced_caching import cached, multi_level_cache
+    PERFORMANCE_OPTIMIZATION_AVAILABLE = True
+except ImportError:
+    # Graceful fallback if performance optimization modules aren't available
+    PERFORMANCE_OPTIMIZATION_AVAILABLE = False
+    
+    def memory_optimized(func):
+        """Fallback decorator when performance optimization isn't available."""
+        return func
+    
+    def cached(ttl=300, key_prefix=""):
+        """Fallback decorator when caching isn't available."""
+        def decorator(func):
+            return func
+        return decorator
+
 router = APIRouter()
 agent = LangGraphAgent()
 
@@ -81,6 +100,8 @@ async def get_ai_health(
 
 @router.get("/sessions/active")
 @limiter.limit("10 per minute")
+@memory_optimized
+@cached(ttl=30, key_prefix="active_sessions")
 async def get_active_sessions(
     request: Request,
     session: Session = Depends(get_current_session),
@@ -91,11 +112,17 @@ async def get_active_sessions(
     for monitoring and management purposes.
     """
     try:
-        active_sessions = await ai_state_manager.get_active_sessions()
+        if PERFORMANCE_OPTIMIZATION_AVAILABLE:
+            async with ai_memory_optimizer.optimized_ai_context():
+                active_sessions = await ai_state_manager.get_active_sessions()
+        else:
+            # Fallback without memory optimization
+            active_sessions = await ai_state_manager.get_active_sessions()
         
-        logger.info("active_sessions_requested", 
+        logger.info("active_sessions_requested",
                    session_id=session.id,
-                   active_count=len(active_sessions))
+                   active_count=len(active_sessions),
+                   optimized=PERFORMANCE_OPTIMIZATION_AVAILABLE)
         
         return create_standard_response(
             data={
