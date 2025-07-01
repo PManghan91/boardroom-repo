@@ -177,6 +177,17 @@ class Settings:
         # Sync database URL for Alembic migrations
         self.database_url_sync = self.database_url.replace("postgresql+asyncpg://", "postgresql://")
 
+        # Redis Configuration
+        self.REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+        self.REDIS_MAX_CONNECTIONS = int(os.getenv("REDIS_MAX_CONNECTIONS", "10"))
+        self.REDIS_SOCKET_TIMEOUT = int(os.getenv("REDIS_SOCKET_TIMEOUT", "5"))
+        self.REDIS_SOCKET_CONNECT_TIMEOUT = int(os.getenv("REDIS_SOCKET_CONNECT_TIMEOUT", "5"))
+        
+        # Cache Configuration
+        self.CACHE_ENABLED = os.getenv("CACHE_ENABLED", "true").lower() in ("true", "1", "t", "yes")
+        self.CACHE_DEFAULT_TTL = int(os.getenv("CACHE_DEFAULT_TTL", "300"))
+        self.CACHE_MAX_MEMORY = os.getenv("CACHE_MAX_MEMORY", "256mb")
+
         # Rate Limiting Configuration
         self.RATE_LIMIT_DEFAULT = parse_list_from_env("RATE_LIMIT_DEFAULT", ["200 per day", "50 per hour"])
 
