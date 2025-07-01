@@ -39,6 +39,10 @@ dependencies = [
 dev = ["black", "isort", "flake8", "ruff", "djlint==1.36.4"]
 
 [dependency-groups]
+dev = [
+    "bandit[toml]>=1.8.5",
+    "safety>=3.2.9",
+]
 test = ["httpx>=0.28.1", "pytest>=8.3.5"]
 
 
