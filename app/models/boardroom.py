@@ -1,72 +1,49 @@
+"""Boardroom model for the application."""
+
+from typing import (
+    TYPE_CHECKING,
+    List,
+    Optional,
+)
 import uuid
 from datetime import datetime
-from typing import List, Optional
 
-from sqlalchemy import (
-    Column,
-    DateTime,
-    ForeignKey,
-    Integer,
-    JSON,
-    String,
-    Text,
-    func,
+from sqlmodel import (
+    Field,
+    Relationship,
 )
-from sqlalchemy.dialects.postgresql import INET, UUID
-from sqlalchemy.orm import declarative_base, relationship
-from sqlalchemy import UniqueConstraint
 
-Base = declarative_base()
+from app.models.base import BaseModel
+
+if TYPE_CHECKING:
+    from app.models.user import User
+    from app.models.session import Session
 
 
-class Decision(Base):
-    __tablename__ = "decisions"
+class Boardroom(BaseModel, table=True):
+    """Boardroom model for storing meeting spaces.
 
-    id = Column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, server_default=func.gen_random_uuid()
-    )
-    title = Column(Text, nullable=False)
-    description = Column(Text)
-    created_at = Column(DateTime, nullable=False, server_default=func.now())
-    overall_status = Column(String, nullable=False, default="draft")
+    Attributes:
+        id: The primary key (UUID)
+        name: Name of the boardroom
+        description: Description of the boardroom
+        owner_id: Foreign key to the owner user
+        is_active: Whether the boardroom is active
+        max_participants: Maximum number of participants
+        created_at: When the boardroom was created (inherited from BaseModel)
+        updated_at: When the boardroom was last updated
+        owner: Relationship to the owner user
+        sessions: Relationship to boardroom sessions
+    """
+
+    id: Optional[str] = Field(default_factory=lambda: str(uuid.uuid4()), primary_key=True)
+    name: str = Field(max_length=255, index=True)
+    description: Optional[str] = Field(default=None)
+    owner_id: str = Field(foreign_key="user.id", index=True)
+    is_active: bool = Field(default=True)
+    max_participants: Optional[int] = Field(default=10)
+    updated_at: Optional[datetime] = Field(default=None)
     
-    rounds = relationship("DecisionRound", back_populates="decision", cascade="all, delete-orphan")
-
-
-class DecisionRound(Base):
-    __tablename__ = "decision_rounds"
-
-    id = Column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, server_default=func.gen_random_uuid()
-    )
-    decision_id = Column(UUID(as_uuid=True), ForeignKey("decisions.id"), nullable=False)
-    round_number = Column(Integer, nullable=False)
-    title = Column(Text)
-    description = Column(Text)
-    options = Column(JSON, nullable=False)
-    opens_at = Column(DateTime, nullable=False)
-    closes_at = Column(DateTime)
-    round_status = Column(String, nullable=False, default="pending")
-    created_at = Column(DateTime, nullable=False, server_default=func.now())
-
-    decision = relationship("Decision", back_populates="rounds")
-    votes = relationship("Vote", back_populates="round", cascade="all, delete-orphan")
-
-    __table_args__ = (UniqueConstraint('decision_id', 'round_number', name='_decision_round_uc'),)
-
-
-class Vote(Base):
-    __tablename__ = "votes"
-
-    id = Column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, server_default=func.gen_random_uuid()
-    )
-    decision_round_id = Column(UUID(as_uuid=True), ForeignKey("decision_rounds.id"), nullable=False)
-    voter_ip = Column(INET, nullable=False)
-    selected_option_key = Column(Text, nullable=False)
-    voted_at = Column(DateTime, nullable=False, server_default=func.now())
-    rationale = Column(Text)
-
-    round = relationship("DecisionRound", back_populates="votes")
-
-    __table_args__ = (UniqueConstraint('decision_round_id', 'voter_ip', name='_round_voter_uc'),)
+    # Relationships
+    owner: "User" = Relationship(back_populates="owned_boardrooms")
+    sessions: List["Session"] = Relationship(back_populates="boardroom")

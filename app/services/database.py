@@ -1,68 +1,200 @@
-"""This file contains the database service for the application."""
+"""Enhanced database service for the application with async support and improved error handling."""
 
+import asyncio
+from contextlib import asynccontextmanager
 from typing import (
+    AsyncGenerator,
     List,
     Optional,
 )
 
 from fastapi import HTTPException
-from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.pool import QueuePool
-from sqlmodel import (
-    Session,
-    SQLModel,
-    create_engine,
-    select,
-)
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
+from sqlalchemy.pool import QueuePool, NullPool
+from sqlalchemy import text
+from sqlalchemy.exc import SQLAlchemyError, OperationalError
+from sqlmodel import SQLModel
 
-from app.core.config import (
-    Environment,
-    settings,
-)
+from app.core.config import get_settings
 from app.core.logging import logger
 from app.models.session import Session as ChatSession
 from app.models.user import User
 
 
 class DatabaseService:
-    """Service class for database operations.
+    """Enhanced database service for managing async connections and sessions.
 
-    This class handles all database operations for Users, Sessions, and Messages.
-    It uses SQLModel for ORM operations and maintains a connection pool.
+    This class handles all database operations with async support, connection pooling,
+    retry logic, and comprehensive error handling.
     """
 
     def __init__(self):
-        """Initialize database service with connection pool."""
+        """Initialize database service with async connection pool."""
+        self.settings = get_settings()
+        self._engine = None
+        self._session_factory = None
+        self._initialized = False
+        self._connection_retries = 3
+        self._retry_delay = 1.0
+
+    async def initialize(self):
+        """Initialize database engine and session factory with retry logic."""
+        if self._initialized:
+            return
+
+        for attempt in range(self._connection_retries):
+            try:
+                # Create async engine with enhanced connection pooling
+                engine_kwargs = {
+                    "echo": self.settings.DEBUG,
+                    "pool_pre_ping": True,
+                    "pool_recycle": 3600,
+                    "connect_args": {
+                        "server_settings": {
+                            "application_name": "boardroom_ai",
+                        }
+                    }
+                }
+
+                # Configure pooling based on environment
+                if self.settings.ENVIRONMENT.value == "test":
+                    engine_kwargs["poolclass"] = NullPool
+                else:
+                    engine_kwargs["poolclass"] = QueuePool
+                    engine_kwargs["pool_size"] = 5
+                    engine_kwargs["max_overflow"] = 10
+                    engine_kwargs["pool_timeout"] = 30
+
+                self._engine = create_async_engine(
+                    self.settings.database_url,
+                    **engine_kwargs
+                )
+
+                # Create session factory
+                self._session_factory = async_sessionmaker(
+                    bind=self._engine,
+                    class_=AsyncSession,
+                    expire_on_commit=False,
+                    autoflush=True,
+                    autocommit=False
+                )
+
+                # Test the connection
+                await self._test_connection()
+
+                self._initialized = True
+                logger.info("Database service initialized successfully")
+                break
+
+            except Exception as e:
+                logger.warning(f"Database initialization attempt {attempt + 1} failed: {e}")
+                if attempt < self._connection_retries - 1:
+                    await asyncio.sleep(self._retry_delay * (2 ** attempt))
+                else:
+                    logger.error(f"Failed to initialize database service after {self._connection_retries} attempts")
+                    raise
+
+    async def _test_connection(self):
+        """Test database connection."""
+        async with self._engine.begin() as conn:
+            await conn.execute(text("SELECT 1"))
+
+    async def close(self):
+        """Close database connections."""
+        if self._engine:
+            await self._engine.dispose()
+            self._initialized = False
+            logger.info("Database connections closed")
+
+    @asynccontextmanager
+    async def get_session(self) -> AsyncGenerator[AsyncSession, None]:
+        """Get database session with automatic cleanup and error handling."""
+        if not self._initialized:
+            await self.initialize()
+
+        session = None
         try:
-            # Configure environment-specific database connection pool settings
-            pool_size = settings.POSTGRES_POOL_SIZE
-            max_overflow = settings.POSTGRES_MAX_OVERFLOW
+            session = self._session_factory()
+            yield session
 
-            # Create engine with appropriate pool configuration
-            self.engine = create_engine(
-                settings.POSTGRES_URL,
-                pool_pre_ping=True,
-                poolclass=QueuePool,
-                pool_size=pool_size,
-                max_overflow=max_overflow,
-                pool_timeout=30,  # Connection timeout (seconds)
-                pool_recycle=1800,  # Recycle connections after 30 minutes
-            )
+        except OperationalError as e:
+            if session:
+                await session.rollback()
+            logger.error(f"Database operational error: {e}")
+            # Re-initialize connection pool on operational errors
+            await self.close()
+            await self.initialize()
+            raise
 
-            # Create tables (only if they don't exist)
-            SQLModel.metadata.create_all(self.engine)
-
-            logger.info(
-                "database_initialized",
-                environment=settings.ENVIRONMENT.value,
-                pool_size=pool_size,
-                max_overflow=max_overflow,
-            )
         except SQLAlchemyError as e:
-            logger.error("database_initialization_error", error=str(e), environment=settings.ENVIRONMENT.value)
-            # In production, don't raise - allow app to start even with DB issues
-            if settings.ENVIRONMENT != Environment.PRODUCTION:
-                raise
+            if session:
+                await session.rollback()
+            logger.error(f"Database SQLAlchemy error: {e}")
+            raise
+
+        except Exception as e:
+            if session:
+                await session.rollback()
+            logger.error(f"Database session error: {e}")
+            raise
+
+        finally:
+            if session:
+                await session.close()
+
+    async def health_check(self) -> dict:
+        """Enhanced health check with detailed information."""
+        health_info = {
+            "status": "unknown",
+            "database": "disconnected",
+            "pool_status": None,
+            "error": None
+        }
+
+        try:
+            if not self._initialized:
+                await self.initialize()
+
+            async with self.get_session() as session:
+                # Test basic connectivity
+                result = await session.execute(text("SELECT 1 as test"))
+                test_value = result.scalar()
+
+                if test_value == 1:
+                    health_info["status"] = "healthy"
+                    health_info["database"] = "connected"
+
+                # Get pool status if available
+                if hasattr(self._engine.pool, 'size'):
+                    health_info["pool_status"] = {
+                        "size": self._engine.pool.size(),
+                        "checked_in": self._engine.pool.checkedin(),
+                        "checked_out": self._engine.pool.checkedout(),
+                        "invalidated": self._engine.pool.invalidated()
+                    }
+
+        except Exception as e:
+            health_info["status"] = "unhealthy"
+            health_info["error"] = str(e)
+            logger.error(f"Database health check failed: {e}")
+
+        return health_info
+
+    async def execute_migration_check(self) -> Optional[str]:
+        """Check current migration status."""
+        try:
+            async with self.get_session() as session:
+                result = await session.execute(text("""
+                    SELECT version_num
+                    FROM alembic_version
+                    ORDER BY version_num DESC
+                    LIMIT 1
+                """))
+                version = result.scalar()
+                return version
+        except Exception as e:
+            logger.warning(f"Could not check migration status: {e}")
+            return None
 
     async def create_user(self, email: str, password: str) -> User:
         """Create a new user.
