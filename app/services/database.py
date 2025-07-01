@@ -206,11 +206,11 @@ class DatabaseService:
         Returns:
             User: The created user
         """
-        with Session(self.engine) as session:
+        async with self.get_session() as session:
             user = User(email=email, hashed_password=password)
             session.add(user)
-            session.commit()
-            session.refresh(user)
+            await session.commit()
+            await session.refresh(user)
             logger.info("user_created", email=email)
             return user
 
