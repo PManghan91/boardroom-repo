@@ -149,23 +149,111 @@ http://localhost:8000/docs
 
 ## Next Actions
 
+### Pre-Execution: Environment Verification
+**Before starting any tasks, verify the development environment:**
+
+```bash
+# 1. Verify dependencies are installed
+uv sync
+echo "✓ Dependencies installed"
+
+# 2. Check environment configuration
+make set-env ENV=development
+source scripts/set_env.sh development
+echo "✓ Environment configured"
+
+# 3. Test basic application startup
+make dev &
+sleep 5
+curl http://localhost:8000/health
+kill %1
+echo "✓ Application starts successfully"
+
+# 4. Verify database connectivity
+python -c "from app.services.database import database_service; print('✓ Database connection:', database_service.health_check())"
+
+# 5. Check key environment variables
+python -c "
+import os
+required_vars = ['POSTGRES_URL', 'LLM_API_KEY', 'JWT_SECRET_KEY']
+missing = [var for var in required_vars if not os.getenv(var)]
+if missing:
+    print('✗ Missing environment variables:', missing)
+    exit(1)
+else:
+    print('✓ All required environment variables present')
+"
+```
+
+### Git Workflow for Task Execution
+
+**Branch Strategy:**
+```bash
+# For each task, create a feature branch
+git checkout -b task-01-security-audit
+git checkout -b task-02-database-schema
+# etc.
+```
+
+**Commit Convention:**
+```bash
+# Use conventional commits aligned with task numbers
+git commit -m "feat(task-01): implement automated security scanning"
+git commit -m "fix(task-01): resolve critical authentication vulnerability"
+git commit -m "docs(task-01): add security audit findings"
+git commit -m "test(task-01): add security validation tests"
+
+# Task completion commit
+git commit -m "feat(task-01): complete security audit and vulnerability assessment
+
+- Implemented automated security scanning with bandit/safety
+- Identified and documented 3 critical vulnerabilities
+- Established secure authentication patterns
+- Added security practices documentation
+- Integrated security checks into development workflow
+
+Closes: Task 01
+Next: Task 02 - Database Schema Alignment"
+```
+
+**Task Completion Workflow:**
+```bash
+# 1. Complete task implementation on feature branch
+# 2. Update task_list.md progress
+# 3. Make final task completion commit
+# 4. Merge to main and tag
+git checkout main
+git merge task-01-security-audit
+git tag task-01-complete
+git push origin main --tags
+
+# 5. Create next task branch
+git checkout -b task-02-database-schema
+```
+
 ### Immediate Priority: Start Task 01
-1. **Begin with Task 01**: [`docs/tasks/task_01_security_audit.md`](docs/tasks/task_01_security_audit.md)
+1. **Verify Environment**: Run the environment verification checklist above
+2. **Create Task Branch**: `git checkout -b task-01-security-audit`
+3. **Begin with Task 01**: [`docs/tasks/task_01_security_audit.md`](docs/tasks/task_01_security_audit.md)
    - Security audit and vulnerability assessment
    - Foundation task that informs all subsequent security decisions
    - Estimated: 2-3 days, Week 1 (Days 1-3)
 
 ### Execution Approach
-1. **Read the specific task document** for detailed requirements
-2. **Update [`docs/task_list.md`](docs/task_list.md)** progress as you work
-3. **Follow solo development principles** - practical over perfect
-4. **Make focused git commits** for each completed task
-5. **Move sequentially** through tasks respecting dependencies
+1. **Verify environment** using checklist above before starting
+2. **Create feature branch** for the task
+3. **Read the specific task document** for detailed requirements
+4. **Follow git workflow** with conventional commits
+5. **Update [`docs/task_list.md`](docs/task_list.md)** progress as you work
+6. **Follow solo development principles** - practical over perfect
+7. **Complete task with final commit** and merge to main
+8. **Move sequentially** through tasks respecting dependencies
 
 ### Weekly Progress Pattern
 - **Complete 1-2 tasks per week** depending on complexity
 - **Update progress tracking** in [`docs/task_list.md`](docs/task_list.md)
-- **Document key decisions** and lessons learned
+- **Tag completed tasks** for easy reference
+- **Document key decisions** and lessons learned in commit messages
 - **Focus on MVP functionality** over enterprise features
 
 ## Reference Documents
