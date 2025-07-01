@@ -1,6 +1,6 @@
 import asyncio
 import uuid # Added for UUID type hinting
-from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List, Dict, Any, Optional # Added Optional
 
@@ -16,7 +16,13 @@ from app.schemas.decision import (
 from app.services.database import database_service # Using global instance
 from app.core.langgraph.boardroom import create_boardroom_workflow, BoardroomGraphState, decision_event_queues
 from app.core.config import settings
+from app.core.limiter import limiter
 from app.core.logging import logger
+from app.utils.sanitization import (
+    sanitize_string,
+    validate_uuid_string,
+    validate_ip_address,
+)
 from langgraph.checkpoint.postgres import PostgresSaver
 
 router = APIRouter()
@@ -122,67 +128,110 @@ async def get_decision_endpoint(
     return decision_val
 
 @router.post("/{decision_id}/rounds", response_model=DecisionRoundRead)
+@limiter.limit("10 per minute")
 async def create_round_for_decision_endpoint(
+    request: Request,
     decision_id: uuid.UUID, # Path param is now UUID
     round_data: DecisionRoundCreate, # DecisionRoundCreate.decision_id is UUID
     background_tasks: BackgroundTasks,
 ):
-    if round_data.decision_id != decision_id: # Both are UUIDs now
-        raise HTTPException(status_code=400, detail="Path decision_id does not match payload decision_id")
-
-    # create_round should expect UUID and return DecisionRoundRead (with UUID id)
-    new_round: DecisionRoundRead = await database_service.create_round(decision_id, round_data)
-
-    if boardroom_app and new_round:
-        thread_id = str(decision_id) # Convert UUID to string for thread_id
-        config = {"configurable": {"thread_id": thread_id}}
+    try:
+        # Validate UUID format
+        validate_uuid_string(str(decision_id))
         
-        graph_update_state_data = {
-            "decision_id": decision_id, # UUID
-            "current_round_id": new_round.id, # UUID from DecisionRoundRead
-            "votes": [],
-            "results": None,
-            "status": "pending_votes" 
-        }
-        logger.info(f"create_round_for_decision_endpoint: Scheduling graph update for new round {new_round.id} in decision {decision_id}")
-        background_tasks.add_task(run_graph_async, config, graph_update_state_data)
+        logger.info("create_round_request", decision_id=str(decision_id), round_number=round_data.round_number)
         
-    return new_round
+        if round_data.decision_id != decision_id: # Both are UUIDs now
+            logger.warning("decision_id_mismatch", path_id=str(decision_id), payload_id=str(round_data.decision_id))
+            raise HTTPException(status_code=400, detail="Path decision_id does not match payload decision_id")
+
+        # create_round should expect UUID and return DecisionRoundRead (with UUID id)
+        new_round: DecisionRoundRead = await database_service.create_round(decision_id, round_data)
+
+        if boardroom_app and new_round:
+            thread_id = str(decision_id) # Convert UUID to string for thread_id
+            config = {"configurable": {"thread_id": thread_id}}
+            
+            graph_update_state_data = {
+                "decision_id": decision_id, # UUID
+                "current_round_id": new_round.id, # UUID from DecisionRoundRead
+                "votes": [],
+                "results": None,
+                "status": "pending_votes"
+            }
+            logger.info(f"create_round_for_decision_endpoint: Scheduling graph update for new round {new_round.id} in decision {decision_id}")
+            background_tasks.add_task(run_graph_async, config, graph_update_state_data)
+        
+        logger.info("round_created_successfully", decision_id=str(decision_id), round_id=str(new_round.id))
+        return new_round
+        
+    except ValueError as ve:
+        logger.error("create_round_validation_failed", error=str(ve), decision_id=str(decision_id), exc_info=True)
+        raise HTTPException(status_code=422, detail=str(ve))
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("create_round_failed", error=str(e), decision_id=str(decision_id), exc_info=True)
+        raise HTTPException(status_code=500, detail="Failed to create round")
 
 
 @router.post("/rounds/{round_id}/votes", response_model=VoteRead)
+@limiter.limit("10 per minute")
 async def create_vote_endpoint(
+    request: Request,
     round_id: uuid.UUID, # Path param is now UUID
     vote_data: VoteCreate, # VoteCreate.round_id is UUID
     background_tasks: BackgroundTasks,
 ):
-    if vote_data.round_id != round_id: # Both are UUIDs now
-         raise HTTPException(status_code=400, detail="Path round_id does not match payload round_id")
-
-    # create_vote should expect UUID and return VoteRead (with UUID id)
-    created_vote: VoteRead = await database_service.create_vote(round_id, vote_data)
-
-    if boardroom_app and created_vote:
-        # get_round_details should expect UUID and return an object with decision_id (UUID)
-        # This method needs to be implemented in DatabaseService
-        round_details_obj = await database_service.get_round_details(round_id) 
+    try:
+        # Validate UUID format
+        validate_uuid_string(str(round_id))
         
-        if not round_details_obj or not hasattr(round_details_obj, 'decision_id') or not isinstance(round_details_obj.decision_id, uuid.UUID):
-            logger.error(f"create_vote_endpoint: Could not determine valid decision_id (UUID) for round_id {round_id}. Cannot invoke graph.")
-            return created_vote 
+        # Get and validate client IP
+        voter_ip = request.client.host if request.client else "unknown"
+        if voter_ip != "unknown":
+            validate_ip_address(voter_ip)
+        
+        logger.info("create_vote_request", round_id=str(round_id), voter_ip=voter_ip, vote=vote_data.vote[:20])
+        
+        if vote_data.round_id != round_id: # Both are UUIDs now
+            logger.warning("round_id_mismatch", path_id=str(round_id), payload_id=str(vote_data.round_id))
+            raise HTTPException(status_code=400, detail="Path round_id does not match payload round_id")
 
-        decision_id_for_graph: uuid.UUID = round_details_obj.decision_id
-        thread_id = str(decision_id_for_graph) # Convert UUID to string for thread_id
-        config = {"configurable": {"thread_id": thread_id}}
+        # create_vote should expect UUID and return VoteRead (with UUID id)
+        created_vote: VoteRead = await database_service.create_vote(round_id, vote_data)
+
+        if boardroom_app and created_vote:
+            # get_round_details should expect UUID and return an object with decision_id (UUID)
+            # This method needs to be implemented in DatabaseService
+            round_details_obj = await database_service.get_round_details(round_id)
+            
+            if not round_details_obj or not hasattr(round_details_obj, 'decision_id') or not isinstance(round_details_obj.decision_id, uuid.UUID):
+                logger.error(f"create_vote_endpoint: Could not determine valid decision_id (UUID) for round_id {round_id}. Cannot invoke graph.")
+                return created_vote
+
+            decision_id_for_graph: uuid.UUID = round_details_obj.decision_id
+            thread_id = str(decision_id_for_graph) # Convert UUID to string for thread_id
+            config = {"configurable": {"thread_id": thread_id}}
+            
+            graph_trigger_state_data = {
+                "decision_id": decision_id_for_graph, # UUID
+                "current_round_id": round_id, # UUID
+                "votes": [],
+                "results": None,
+                "status": "new_vote_cast"
+            }
+            logger.info(f"create_vote_endpoint: Scheduling graph run for new vote in round_id: {round_id}, decision_id: {decision_id_for_graph}")
+            background_tasks.add_task(run_graph_async, config, graph_trigger_state_data)
         
-        graph_trigger_state_data = {
-            "decision_id": decision_id_for_graph, # UUID
-            "current_round_id": round_id, # UUID
-            "votes": [],
-            "results": None,
-            "status": "new_vote_cast"
-        }
-        logger.info(f"create_vote_endpoint: Scheduling graph run for new vote in round_id: {round_id}, decision_id: {decision_id_for_graph}")
-        background_tasks.add_task(run_graph_async, config, graph_trigger_state_data)
+        logger.info("vote_created_successfully", round_id=str(round_id), vote_id=str(created_vote.id), voter_ip=voter_ip)
+        return created_vote
         
-    return created_vote
+    except ValueError as ve:
+        logger.error("create_vote_validation_failed", error=str(ve), round_id=str(round_id), exc_info=True)
+        raise HTTPException(status_code=422, detail=str(ve))
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("create_vote_failed", error=str(e), round_id=str(round_id), exc_info=True)
+        raise HTTPException(status_code=500, detail="Failed to create vote")

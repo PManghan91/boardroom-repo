@@ -11,6 +11,7 @@ from typing import (
 from dotenv import load_dotenv
 from fastapi import (
     FastAPI,
+    HTTPException,
     Request,
     status,
 )
@@ -26,7 +27,7 @@ from app.core.config import settings
 from app.core.limiter import limiter
 from app.core.logging import logger
 from app.core.metrics import setup_metrics
-from app.core.middleware import MetricsMiddleware
+from app.core.middleware import MetricsMiddleware, ValidationMiddleware, validation_error_handler
 from app.services.database import database_service
 
 # Load environment variables
@@ -64,6 +65,9 @@ app = FastAPI(
 # Set up Prometheus metrics
 setup_metrics(app)
 
+# Add validation middleware first (before metrics)
+app.add_middleware(ValidationMiddleware)
+
 # Add custom metrics middleware
 app.add_middleware(MetricsMiddleware)
 
@@ -71,8 +75,9 @@ app.add_middleware(MetricsMiddleware)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
+# Add validation exception handlers
+app.add_exception_handler(HTTPException, validation_error_handler)
 
-# Add validation exception handler
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     """Handle validation errors from request data.
@@ -84,23 +89,91 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     Returns:
         JSONResponse: A formatted error response
     """
-    # Log the validation error
-    logger.error(
-        "validation_error",
+    # Log the validation error (without sensitive data)
+    logger.warning(
+        "pydantic_validation_error",
         client_host=request.client.host if request.client else "unknown",
         path=request.url.path,
-        errors=str(exc.errors()),
+        method=request.method,
+        error_count=len(exc.errors()),
     )
 
     # Format the errors to be more user-friendly
     formatted_errors = []
     for error in exc.errors():
         loc = " -> ".join([str(loc_part) for loc_part in error["loc"] if loc_part != "body"])
-        formatted_errors.append({"field": loc, "message": error["msg"]})
+        formatted_errors.append({
+            "field": loc,
+            "message": error["msg"],
+            "type": error.get("type", "unknown")
+        })
+
+    error_response = {
+        "error": {
+            "code": status.HTTP_422_UNPROCESSABLE_ENTITY,
+            "message": "Request validation failed",
+            "type": "validation_error",
+            "details": formatted_errors,
+            "timestamp": datetime.now().isoformat()
+        }
+    }
 
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        content={"detail": "Validation error", "errors": formatted_errors},
+        content=error_response,
+    )
+
+
+@app.exception_handler(ValueError)
+async def value_error_handler(request: Request, exc: ValueError):
+    """Handle ValueError exceptions with standardized response."""
+    logger.warning(
+        "value_error",
+        path=request.url.path,
+        method=request.method,
+        error=str(exc),
+        client_ip=request.client.host if request.client else "unknown"
+    )
+    
+    error_response = {
+        "error": {
+            "code": status.HTTP_422_UNPROCESSABLE_ENTITY,
+            "message": str(exc),
+            "type": "value_error",
+            "timestamp": datetime.now().isoformat()
+        }
+    }
+    
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content=error_response
+    )
+
+
+@app.exception_handler(500)
+async def internal_server_error_handler(request: Request, exc: Exception):
+    """Handle internal server errors with standardized response."""
+    logger.error(
+        "internal_server_error",
+        path=request.url.path,
+        method=request.method,
+        error=str(exc),
+        client_ip=request.client.host if request.client else "unknown",
+        exc_info=True
+    )
+    
+    error_response = {
+        "error": {
+            "code": status.HTTP_500_INTERNAL_SERVER_ERROR,
+            "message": "Internal server error",
+            "type": "server_error",
+            "timestamp": datetime.now().isoformat()
+        }
+    }
+    
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content=error_response
     )
 
 
