@@ -1,5 +1,8 @@
 """This file contains the LangGraph Agent/workflow and interactions with the LLM."""
 
+import time
+import uuid
+from datetime import datetime
 from typing import (
     Any,
     AsyncGenerator,
@@ -32,12 +35,35 @@ from app.core.config import (
 )
 from app.core.langgraph.tools import tools
 from app.core.logging import logger
-from app.core.metrics import llm_inference_duration_seconds
+from app.core.metrics import (
+    llm_inference_duration_seconds,
+    ai_operations_total,
+    ai_operation_duration_seconds,
+    ai_token_usage_total,
+    ai_graph_node_executions_total,
+    ai_conversation_turns_total,
+)
 from app.core.prompts import SYSTEM_PROMPT
+from app.core.exceptions import (
+    raise_llm_error,
+    raise_graph_execution_error,
+    raise_tool_execution_error,
+    LLMException,
+    GraphExecutionException,
+    ToolExecutionException,
+)
+from app.core.error_monitoring import record_error
 from app.schemas import (
     GraphState,
     Message,
 )
+from app.schemas.ai_operations import (
+    AIOperationMetrics,
+    AIOperationStatus,
+    TokenUsage,
+    ConversationContext,
+)
+from app.services.ai_state_manager import ai_state_manager
 from app.utils import (
     dump_messages,
     prepare_messages,
@@ -45,10 +71,11 @@ from app.utils import (
 
 
 class LangGraphAgent:
-    """Manages the LangGraph Agent/workflow and interactions with the LLM.
+    """Enhanced LangGraph Agent with comprehensive AI operations monitoring and error handling.
 
     This class handles the creation and management of the LangGraph workflow,
-    including LLM interactions, database connections, and response processing.
+    including LLM interactions, database connections, response processing,
+    performance monitoring, and advanced error handling.
     """
 
     def __init__(self):
@@ -64,6 +91,7 @@ class LangGraphAgent:
         self.tools_by_name = {tool.name: tool for tool in tools}
         self._connection_pool: Optional[AsyncConnectionPool] = None
         self._graph: Optional[CompiledStateGraph] = None
+        self._active_operations: Dict[str, AIOperationMetrics] = {}
 
         logger.info("llm_initialized", model=settings.LLM_MODEL, environment=settings.ENVIRONMENT.value)
 
@@ -120,7 +148,7 @@ class LangGraphAgent:
         return self._connection_pool
 
     async def _chat(self, state: GraphState) -> dict:
-        """Process the chat state and generate a response.
+        """Process the chat state and generate a response with enhanced monitoring.
 
         Args:
             state (GraphState): The current state of the conversation.
@@ -128,51 +156,121 @@ class LangGraphAgent:
         Returns:
             dict: Updated state with new messages.
         """
-        messages = prepare_messages(state.messages, self.llm, SYSTEM_PROMPT)
+        operation_id = str(uuid.uuid4())
+        
+        # Create operation metrics
+        operation_metrics = AIOperationMetrics(
+            operation_id=operation_id,
+            operation_type="llm_inference",
+            model=settings.LLM_MODEL,
+            status=AIOperationStatus.IN_PROGRESS,
+            start_time=datetime.now()
+        )
+        self._active_operations[operation_id] = operation_metrics
 
-        llm_calls_num = 0
+        try:
+            ai_operations_total.labels(operation="llm_inference", model=settings.LLM_MODEL, status="started").inc()
+            ai_graph_node_executions_total.labels(node_name="chat", status="started").inc()
+            
+            messages = prepare_messages(state.messages, self.llm, SYSTEM_PROMPT)
+            llm_calls_num = 0
+            max_retries = settings.MAX_LLM_CALL_RETRIES
 
-        # Configure retry attempts based on environment
-        max_retries = settings.MAX_LLM_CALL_RETRIES
-
-        for attempt in range(max_retries):
-            try:
-                with llm_inference_duration_seconds.labels(model=self.llm.model_name).time():
-                    generated_state = {"messages": [await self.llm.ainvoke(dump_messages(messages))]}
-                logger.info(
-                    "llm_response_generated",
-                    session_id=state.session_id,
-                    llm_calls_num=llm_calls_num + 1,
-                    model=settings.LLM_MODEL,
-                    environment=settings.ENVIRONMENT.value,
-                )
-                return generated_state
-            except OpenAIError as e:
-                logger.error(
-                    "llm_call_failed",
-                    llm_calls_num=llm_calls_num,
-                    attempt=attempt + 1,
-                    max_retries=max_retries,
-                    error=str(e),
-                    environment=settings.ENVIRONMENT.value,
-                )
-                llm_calls_num += 1
-
-                # In production, we might want to fall back to a more reliable model
-                if settings.ENVIRONMENT == Environment.PRODUCTION and attempt == max_retries - 2:
-                    fallback_model = "gpt-4o"
-                    logger.warning(
-                        "using_fallback_model", model=fallback_model, environment=settings.ENVIRONMENT.value
+            for attempt in range(max_retries):
+                try:
+                    start_time = time.time()
+                    
+                    with llm_inference_duration_seconds.labels(model=self.llm.model_name).time():
+                        with ai_operation_duration_seconds.labels(operation="llm_inference", model=settings.LLM_MODEL).time():
+                            response = await self.llm.ainvoke(dump_messages(messages))
+                            generated_state = {"messages": [response]}
+                    
+                    # Record token usage if available
+                    if hasattr(response, 'usage') and response.usage:
+                        token_usage = TokenUsage(
+                            prompt_tokens=getattr(response.usage, 'prompt_tokens', 0),
+                            completion_tokens=getattr(response.usage, 'completion_tokens', 0)
+                        )
+                        token_usage.calculate_total()
+                        operation_metrics.token_usage = token_usage
+                        
+                        # Update metrics
+                        ai_token_usage_total.labels(model=settings.LLM_MODEL, operation="inference").inc(token_usage.total_tokens)
+                    
+                    # Complete operation successfully
+                    operation_metrics.complete_operation(success=True)
+                    ai_operations_total.labels(operation="llm_inference", model=settings.LLM_MODEL, status="success").inc()
+                    ai_graph_node_executions_total.labels(node_name="chat", status="success").inc()
+                    
+                    logger.info(
+                        "llm_response_generated",
+                        session_id=state.session_id,
+                        operation_id=operation_id,
+                        llm_calls_num=llm_calls_num + 1,
+                        model=settings.LLM_MODEL,
+                        duration_seconds=operation_metrics.duration_seconds,
+                        token_usage=operation_metrics.token_usage.total_tokens if operation_metrics.token_usage else None,
+                        environment=settings.ENVIRONMENT.value,
                     )
-                    self.llm.model_name = fallback_model
+                    
+                    return generated_state
+                    
+                except OpenAIError as e:
+                    llm_calls_num += 1
+                    error_msg = f"LLM call failed (attempt {attempt + 1}/{max_retries}): {str(e)}"
+                    
+                    # Record error for monitoring
+                    record_error(
+                        error_type="llm_call_error",
+                        path="/api/v1/chat",
+                        status_code=503,
+                        error_message=error_msg
+                    )
+                    
+                    logger.error(
+                        "llm_call_failed",
+                        operation_id=operation_id,
+                        llm_calls_num=llm_calls_num,
+                        attempt=attempt + 1,
+                        max_retries=max_retries,
+                        error=str(e),
+                        environment=settings.ENVIRONMENT.value,
+                    )
 
-                continue
+                    # In production, try fallback model on second-to-last attempt
+                    if settings.ENVIRONMENT == Environment.PRODUCTION and attempt == max_retries - 2:
+                        fallback_model = "gpt-4o"
+                        logger.warning(
+                            "using_fallback_model",
+                            operation_id=operation_id,
+                            model=fallback_model,
+                            environment=settings.ENVIRONMENT.value
+                        )
+                        self.llm.model_name = fallback_model
 
-        raise Exception(f"Failed to get a response from the LLM after {max_retries} attempts")
+                    if attempt == max_retries - 1:
+                        # Final attempt failed
+                        operation_metrics.complete_operation(success=False, error_message=error_msg)
+                        ai_operations_total.labels(operation="llm_inference", model=settings.LLM_MODEL, status="error").inc()
+                        ai_graph_node_executions_total.labels(node_name="chat", status="error").inc()
+                        raise_llm_error(f"Failed to get response from LLM after {max_retries} attempts: {str(e)}", settings.LLM_MODEL)
 
-    # Define our tool node
+        except Exception as e:
+            operation_metrics.complete_operation(success=False, error_message=str(e))
+            ai_operations_total.labels(operation="llm_inference", model=settings.LLM_MODEL, status="error").inc()
+            ai_graph_node_executions_total.labels(node_name="chat", status="error").inc()
+            
+            if not isinstance(e, LLMException):
+                logger.error("chat_node_execution_failed", operation_id=operation_id, error=str(e), exc_info=True)
+                raise_graph_execution_error(f"Chat node execution failed: {str(e)}", "chat", state.session_id)
+            raise
+        finally:
+            # Clean up operation tracking
+            if operation_id in self._active_operations:
+                del self._active_operations[operation_id]
+
     async def _tool_call(self, state: GraphState) -> GraphState:
-        """Process tool calls from the last message.
+        """Process tool calls with enhanced monitoring and error handling.
 
         Args:
             state: The current agent state containing messages and tool calls.
@@ -180,17 +278,79 @@ class LangGraphAgent:
         Returns:
             Dict with updated messages containing tool responses.
         """
-        outputs = []
-        for tool_call in state.messages[-1].tool_calls:
-            tool_result = await self.tools_by_name[tool_call["name"]].ainvoke(tool_call["args"])
-            outputs.append(
-                ToolMessage(
-                    content=tool_result,
-                    name=tool_call["name"],
-                    tool_call_id=tool_call["id"],
-                )
-            )
-        return {"messages": outputs}
+        operation_id = str(uuid.uuid4())
+        
+        try:
+            ai_graph_node_executions_total.labels(node_name="tool_call", status="started").inc()
+            
+            outputs = []
+            last_message = state.messages[-1]
+            
+            if not hasattr(last_message, 'tool_calls') or not last_message.tool_calls:
+                logger.warning("tool_call_node_no_tools", session_id=state.session_id, operation_id=operation_id)
+                return {"messages": []}
+            
+            for tool_call in last_message.tool_calls:
+                tool_name = tool_call["name"]
+                
+                try:
+                    if tool_name not in self.tools_by_name:
+                        error_msg = f"Tool '{tool_name}' not found"
+                        logger.error("tool_not_found", tool_name=tool_name, operation_id=operation_id)
+                        raise_tool_execution_error(error_msg, tool_name)
+                    
+                    start_time = time.time()
+                    
+                    # Execute tool with monitoring
+                    tool_result = await self.tools_by_name[tool_name].ainvoke(tool_call["args"])
+                    
+                    duration = time.time() - start_time
+                    
+                    # Create tool response message
+                    tool_message = ToolMessage(
+                        content=tool_result,
+                        name=tool_name,
+                        tool_call_id=tool_call["id"],
+                    )
+                    outputs.append(tool_message)
+                    
+                    logger.info("tool_executed_successfully",
+                               tool_name=tool_name,
+                               operation_id=operation_id,
+                               duration_seconds=duration)
+                    
+                except Exception as e:
+                    error_msg = f"Tool execution failed for '{tool_name}': {str(e)}"
+                    
+                    # Record error for monitoring
+                    record_error(
+                        error_type="tool_execution_error",
+                        path=f"/tool/{tool_name}",
+                        status_code=500,
+                        error_message=error_msg
+                    )
+                    
+                    logger.error("tool_execution_failed",
+                                tool_name=tool_name,
+                                operation_id=operation_id,
+                                error=str(e),
+                                exc_info=True)
+                    
+                    # Create error response message
+                    error_message = ToolMessage(
+                        content=f"Error executing tool {tool_name}: {str(e)}",
+                        name=tool_name,
+                        tool_call_id=tool_call["id"],
+                    )
+                    outputs.append(error_message)
+            
+            ai_graph_node_executions_total.labels(node_name="tool_call", status="success").inc()
+            return {"messages": outputs}
+            
+        except Exception as e:
+            ai_graph_node_executions_total.labels(node_name="tool_call", status="error").inc()
+            logger.error("tool_call_node_failed", operation_id=operation_id, error=str(e), exc_info=True)
+            raise_graph_execution_error(f"Tool call node execution failed: {str(e)}", "tool_call", state.session_id)
 
     def _should_continue(self, state: GraphState) -> Literal["end", "continue"]:
         """Determine if the agent should continue or end based on the last message.

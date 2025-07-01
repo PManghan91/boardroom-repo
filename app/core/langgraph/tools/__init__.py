@@ -8,5 +8,15 @@ and other external integrations.
 from langchain_core.tools.base import BaseTool
 
 from .duckduckgo_search import duckduckgo_search_tool
+from .meeting_management import (
+    create_meeting_agenda_tool,
+    decision_support_tool,
+    generate_meeting_minutes_tool,
+)
 
-tools: list[BaseTool] = [duckduckgo_search_tool]
+tools: list[BaseTool] = [
+    duckduckgo_search_tool,
+    create_meeting_agenda_tool,
+    decision_support_tool,
+    generate_meeting_minutes_tool,
+]

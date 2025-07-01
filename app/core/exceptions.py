@@ -238,3 +238,134 @@ def raise_database_error(message: str = "Database operation failed") -> None:
 def raise_business_logic_error(message: str, rule: Optional[str] = None) -> None:
     """Utility function to raise a business logic exception."""
     raise BusinessLogicException(message=message, rule=rule)
+
+
+class AIOperationException(BoardroomException):
+    """Exception for AI operation-related errors."""
+    
+    def __init__(
+        self,
+        message: str,
+        operation: Optional[str] = None,
+        model: Optional[str] = None,
+        details: Optional[Dict[str, Any]] = None
+    ):
+        error_details = details or {}
+        if operation:
+            error_details["operation"] = operation
+        if model:
+            error_details["model"] = model
+            
+        super().__init__(
+            message=message,
+            error_code="AI_OPERATION_ERROR",
+            details=error_details,
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE
+        )
+
+
+class LLMException(AIOperationException):
+    """Exception for LLM-specific errors."""
+    
+    def __init__(
+        self,
+        message: str,
+        model: Optional[str] = None,
+        token_usage: Optional[int] = None,
+        details: Optional[Dict[str, Any]] = None
+    ):
+        error_details = details or {}
+        if token_usage:
+            error_details["token_usage"] = token_usage
+            
+        super().__init__(
+            message=message,
+            operation="llm_inference",
+            model=model,
+            details=error_details
+        )
+
+
+class GraphExecutionException(AIOperationException):
+    """Exception for LangGraph execution errors."""
+    
+    def __init__(
+        self,
+        message: str,
+        node: Optional[str] = None,
+        session_id: Optional[str] = None,
+        details: Optional[Dict[str, Any]] = None
+    ):
+        error_details = details or {}
+        if node:
+            error_details["node"] = node
+        if session_id:
+            error_details["session_id"] = session_id
+            
+        super().__init__(
+            message=message,
+            operation="graph_execution",
+            details=error_details
+        )
+
+
+class ToolExecutionException(AIOperationException):
+    """Exception for tool execution errors."""
+    
+    def __init__(
+        self,
+        message: str,
+        tool_name: Optional[str] = None,
+        details: Optional[Dict[str, Any]] = None
+    ):
+        error_details = details or {}
+        if tool_name:
+            error_details["tool_name"] = tool_name
+            
+        super().__init__(
+            message=message,
+            operation="tool_execution",
+            details=error_details
+        )
+
+
+class StateManagementException(AIOperationException):
+    """Exception for state management errors."""
+    
+    def __init__(
+        self,
+        message: str,
+        session_id: Optional[str] = None,
+        details: Optional[Dict[str, Any]] = None
+    ):
+        error_details = details or {}
+        if session_id:
+            error_details["session_id"] = session_id
+            
+        super().__init__(
+            message=message,
+            operation="state_management",
+            details=error_details
+        )
+
+
+# Utility functions for AI-specific errors
+
+def raise_llm_error(message: str, model: Optional[str] = None, token_usage: Optional[int] = None) -> None:
+    """Utility function to raise an LLM exception."""
+    raise LLMException(message=message, model=model, token_usage=token_usage)
+
+
+def raise_graph_execution_error(message: str, node: Optional[str] = None, session_id: Optional[str] = None) -> None:
+    """Utility function to raise a graph execution exception."""
+    raise GraphExecutionException(message=message, node=node, session_id=session_id)
+
+
+def raise_tool_execution_error(message: str, tool_name: Optional[str] = None) -> None:
+    """Utility function to raise a tool execution exception."""
+    raise ToolExecutionException(message=message, tool_name=tool_name)
+
+
+def raise_state_management_error(message: str, session_id: Optional[str] = None) -> None:
+    """Utility function to raise a state management exception."""
+    raise StateManagementException(message=message, session_id=session_id)
