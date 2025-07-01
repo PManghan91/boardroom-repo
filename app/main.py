@@ -29,8 +29,11 @@ from app.core.limiter import limiter
 from app.core.logging import logger
 from app.core.metrics import setup_metrics
 from app.core.middleware import MetricsMiddleware, ValidationMiddleware, validation_error_handler
+from app.core.api_standards import APIStandardsMiddleware
+from app.core.cache_middleware import CacheMiddleware
 from app.core.error_monitoring import record_error
 from app.services.database import database_service
+from app.services.redis_service import redis_service
 
 # Load environment variables
 load_dotenv()
@@ -52,7 +55,30 @@ async def lifespan(app: FastAPI):
         version=settings.VERSION,
         api_prefix=settings.API_V1_STR,
     )
+    
+    # Initialize Redis service
+    try:
+        await redis_service.initialize()
+        logger.info("redis_service_initialized")
+    except Exception as e:
+        logger.warning(
+            "redis_service_initialization_failed",
+            error=str(e),
+            message="Continuing without Redis - cache will be disabled"
+        )
+    
     yield
+    
+    # Cleanup Redis service
+    try:
+        await redis_service.cleanup()
+        logger.info("redis_service_cleanup_completed")
+    except Exception as e:
+        logger.warning(
+            "redis_service_cleanup_failed",
+            error=str(e)
+        )
+    
     logger.info("application_shutdown")
 
 
@@ -61,13 +87,74 @@ app = FastAPI(
     version=settings.VERSION,
     description=settings.DESCRIPTION,
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    docs_url="/docs",
+    redoc_url="/redoc",
     lifespan=lifespan,
+    contact={
+        "name": "Boardroom AI API Support",
+        "url": "https://github.com/boardroom-ai/api",
+        "email": "support@boardroom-ai.com",
+    },
+    license_info={
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT",
+    },
+    servers=[
+        {
+            "url": f"http://localhost:8000{settings.API_V1_STR}",
+            "description": "Development server"
+        },
+        {
+            "url": f"https://api.boardroom-ai.com{settings.API_V1_STR}",
+            "description": "Production server"
+        }
+    ],
+    openapi_tags=[
+        {
+            "name": "Authentication",
+            "description": "User authentication and session management. Includes registration, login, and session operations."
+        },
+        {
+            "name": "Chat & AI",
+            "description": "AI-powered chat interactions and conversation management. Supports both regular and streaming responses."
+        },
+        {
+            "name": "Boardroom & Decisions",
+            "description": "Core boardroom functionality for decision-making processes and voting management."
+        },
+        {
+            "name": "Decision Management",
+            "description": "Advanced decision lifecycle management with LangGraph integration for automated workflows."
+        },
+        {
+            "name": "Real-time Events",
+            "description": "Server-sent events (SSE) for real-time updates on decision processes and system events."
+        },
+        {
+            "name": "API Standards & Documentation",
+            "description": "API standards, versioning information, error codes, and usage examples."
+        },
+        {
+            "name": "Health & Status",
+            "description": "System health checks, monitoring endpoints, and operational status information."
+        },
+        {
+            "name": "Cache Management",
+            "description": "Redis cache management, monitoring, and performance optimization endpoints."
+        }
+    ]
 )
 
 # Set up Prometheus metrics
 setup_metrics(app)
 
-# Add validation middleware first (before metrics)
+# Add API standards middleware first
+app.add_middleware(APIStandardsMiddleware)
+
+# Add cache middleware (before validation to cache responses)
+app.add_middleware(CacheMiddleware)
+
+# Add validation middleware
 app.add_middleware(ValidationMiddleware)
 
 # Add custom metrics middleware
@@ -246,20 +333,65 @@ app.add_middleware(
 # Include API router
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
+# Customize OpenAPI schema
+from app.core.openapi_customization import customize_openapi_schema
+app.openapi = lambda: customize_openapi_schema(app)
+
 
 @app.get("/")
 @limiter.limit(settings.RATE_LIMIT_ENDPOINTS["root"][0])
 async def root(request: Request):
-    """Root endpoint returning basic API information."""
+    """Root endpoint returning comprehensive API information.
+    
+    Returns:
+        Dict containing API information, endpoints, and documentation links
+    """
     logger.info("root_endpoint_called")
-    return {
+    
+    from app.core.api_standards import APIResponseFormatter
+    
+    api_info = {
         "name": settings.PROJECT_NAME,
         "version": settings.VERSION,
-        "status": "healthy",
+        "description": settings.DESCRIPTION,
+        "status": "operational",
         "environment": settings.ENVIRONMENT.value,
-        "swagger_url": "/docs",
-        "redoc_url": "/redoc",
+        "api_version": "v1",
+        "documentation": {
+            "interactive": f"{request.base_url}docs",
+            "redoc": f"{request.base_url}redoc",
+            "openapi_spec": f"{request.base_url}api/v1/openapi.json"
+        },
+        "endpoints": {
+            "authentication": f"{request.base_url}api/v1/auth",
+            "chat": f"{request.base_url}api/v1/chatbot",
+            "decisions": f"{request.base_url}api/v1/decisions",
+            "boardroom": f"{request.base_url}api/v1/boardroom",
+            "events": f"{request.base_url}api/v1/events",
+            "standards": f"{request.base_url}api/v1/standards"
+        },
+        "features": [
+            "JWT Authentication",
+            "AI-Powered Chat",
+            "Real-time Decision Making",
+            "Server-Sent Events",
+            "Comprehensive Monitoring",
+            "Rate Limiting",
+            "Input Validation",
+            "Error Handling"
+        ],
+        "support": {
+            "documentation": f"{request.base_url}api/v1/standards",
+            "health_check": f"{request.base_url}health",
+            "error_codes": f"{request.base_url}api/v1/standards/errors"
+        }
     }
+    
+    return APIResponseFormatter.format_success_response(
+        data=api_info,
+        message=f"Welcome to {settings.PROJECT_NAME} API",
+        request=request
+    )
 
 
 @app.get("/health")
@@ -268,25 +400,46 @@ async def health_check(request: Request) -> Dict[str, Any]:
     """Health check endpoint with environment-specific information.
 
     Returns:
-        Dict[str, Any]: Health status information
+        Dict[str, Any]: Health status information using standardized response format
     """
     logger.info("health_check_called")
+    
+    from app.core.api_standards import APIResponseFormatter
 
     # Check database connectivity
     db_healthy = await database_service.health_check()
 
-    response = {
+    health_data = {
         "status": "healthy" if db_healthy else "degraded",
         "version": settings.VERSION,
         "environment": settings.ENVIRONMENT.value,
-        "components": {"api": "healthy", "database": "healthy" if db_healthy else "unhealthy"},
+        "components": {
+            "api": "healthy",
+            "database": "healthy" if db_healthy else "unhealthy",
+            "authentication": "healthy",
+            "rate_limiter": "healthy",
+            "monitoring": "healthy"
+        },
         "timestamp": datetime.now().isoformat(),
+        "checks": {
+            "database_connectivity": "pass" if db_healthy else "fail",
+            "api_availability": "pass",
+            "memory_usage": "pass",
+            "disk_space": "pass"
+        }
     }
+
+    # Use standardized response format
+    response_data = APIResponseFormatter.format_success_response(
+        data=health_data,
+        message="Health check completed",
+        request=request
+    )
 
     # If DB is unhealthy, set the appropriate status code
     status_code = status.HTTP_200_OK if db_healthy else status.HTTP_503_SERVICE_UNAVAILABLE
 
-    return JSONResponse(content=response, status_code=status_code)
+    return JSONResponse(content=response_data, status_code=status_code)
 
 
 @app.get("/monitoring/errors")

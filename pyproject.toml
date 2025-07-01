@@ -34,6 +34,8 @@ dependencies = [
     "tqdm>=4.67.1",
     "colorama>=0.4.6",
     "alembic>=1.14.0",
+    "redis>=5.0.1",
+    "aioredis>=2.0.1",
 ]
 
 [project.optional-dependencies]
@@ -44,12 +46,82 @@ dev = [
     "bandit[toml]>=1.8.5",
     "safety>=3.2.9",
 ]
-test = ["httpx>=0.28.1", "pytest>=8.3.5"]
+test = [
+    "httpx>=0.28.1", 
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.25.0",
+    "pytest-cov>=6.0.0",
+    "pytest-mock>=3.14.0",
+    "faker>=33.1.0",
+    "pytest-xdist>=3.6.0",
+    "pytest-env>=1.1.5"
+]
 
 
 [tool.pytest.ini_options]
-markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "asyncio: marks tests as async tests"
+]
 python_files = ["test_*.py", "*_test.py", "tests.py"]
+python_classes = ["Test*", "*Tests"]
+python_functions = ["test_*"]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=app",
+    "--cov-report=html:htmlcov",
+    "--cov-report=term-missing",
+    "--cov-report=json:coverage.json",
+    "--cov-fail-under=70",
+    "--tb=short",
+    "--no-cov-on-fail"
+]
+env = [
+    "APP_ENV=test",
+    "LOG_LEVEL=ERROR",
+    "RATE_LIMIT_DEFAULT=1000 per day,1000 per hour"
+]
+
+[tool.coverage.run]
+source = ["app"]
+omit = [
+    "app/__init__.py",
+    "app/core/prompts/*",
+    "*/tests/*",
+    "*/migrations/*",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/.venv/*"
+]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod"
+]
+ignore_errors = true
+show_missing = true
+precision = 2
+
+[tool.coverage.html]
+directory = "htmlcov"
+skip_covered = false
+skip_empty = false
 
 [tool.black]
 line-length = 119
