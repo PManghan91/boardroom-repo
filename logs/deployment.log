@@ -1,0 +1,11 @@
+[2025-07-02 23:20:04] [INFO] Starting deployment process
+[2025-07-02 23:20:04] [INFO] =========================================
+[2025-07-02 23:20:04] [INFO] Validating environment: development
+[2025-07-02 23:20:05] [SUCCESS] Environment validation passed
+[2025-07-02 23:20:05] [INFO] Getting deployment information
+[2025-07-02 23:20:05] [INFO] Deploying version: latest
+[2025-07-02 23:20:05] [INFO] Current version: boardroom-repo-app
+[2025-07-02 23:20:05] [INFO] Target version: latest
+[2025-07-02 23:20:05] [INFO] Running pre-deployment tests
+[2025-07-02 23:20:05] [INFO] Running unit tests
+[2025-07-02 23:20:05] [ERROR] Unit tests failed
