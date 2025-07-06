@@ -1,32 +1,51 @@
-"""AI State Management Service for LangGraph integration."""
+"""AI State Management Service for LangGraph integration.
+
+This module provides comprehensive state management for AI conversations,
+including persistence, recovery, checkpointing, and cleanup capabilities
+with full async support and proper error handling.
+"""
+
+from __future__ import annotations
 
 import json
 import uuid
-from datetime import datetime, timedelta
-from typing import Any, Dict, Optional, List
 from contextlib import asynccontextmanager
+from datetime import datetime, timedelta
+from typing import Any, AsyncGenerator, Dict, List, Optional
 
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
+from app.core.exceptions import raise_state_management_error
 from app.core.logging import logger
 from app.core.metrics import ai_state_operations_total
-from app.core.exceptions import raise_state_management_error
-from app.schemas.ai_operations import ConversationState, AIOperationStatus
+from app.schemas.ai_operations import AIOperationStatus, ConversationState
 from app.services.database import get_db
 
 
 class AIStateManager:
-    """Manages AI conversation states with persistence and recovery capabilities."""
+    """Manages AI conversation states with persistence and recovery capabilities.
     
-    def __init__(self):
+    Provides comprehensive state management for AI conversations including:
+    - In-memory state caching for performance
+    - Database persistence for durability
+    - Checkpoint creation and restoration
+    - Concurrent access control with simple locking
+    - Automatic cleanup of expired states
+    """
+    
+    def __init__(self) -> None:
         """Initialize the state manager."""
         self._active_states: Dict[str, ConversationState] = {}
         self._state_locks: Dict[str, bool] = {}
     
     @asynccontextmanager
-    async def get_session(self):
-        """Get a database session."""
+    async def get_session(self) -> AsyncGenerator[AsyncSession, None]:
+        """Get a database session.
+        
+        Yields:
+            AsyncSession: Database session for operations.
+        """
         async for session in get_db():
             yield session
             break

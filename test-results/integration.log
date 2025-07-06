@@ -1,0 +1,1940 @@
+============================= test session starts ==============================
+collecting ... collected 134 items
+
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_ai_health_check_success ERROR [  0%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_ai_health_check_degraded_performance ERROR [  1%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_ai_health_check_error_handling ERROR [  2%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_get_active_sessions_success ERROR [  2%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_get_active_sessions_empty ERROR [  3%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_create_session_checkpoint_success ERROR [  4%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_create_session_checkpoint_error ERROR [  5%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_restore_session_checkpoint_success ERROR [  5%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_restore_session_checkpoint_error ERROR [  6%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_cleanup_expired_sessions_success ERROR [  7%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_cleanup_expired_sessions_default_expiry ERROR [  8%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_cleanup_expired_sessions_error ERROR [  8%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_get_ai_metrics_summary_success ERROR [  9%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_get_ai_metrics_summary_error ERROR [ 10%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_rate_limiting ERROR [ 11%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsAuthentication::test_health_check_without_auth ERROR [ 11%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsAuthentication::test_active_sessions_without_auth ERROR [ 12%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsAuthentication::test_checkpoint_creation_without_auth ERROR [ 13%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsAuthentication::test_metrics_summary_without_auth ERROR [ 14%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndToEnd::test_session_management_workflow ERROR [ 14%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndToEnd::test_health_monitoring_workflow ERROR [ 15%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsPerformance::test_health_check_response_time ERROR [ 16%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsPerformance::test_metrics_summary_response_time ERROR [ 17%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsPerformance::test_concurrent_requests_handling ERROR [ 17%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsPerformance::test_session_operations_performance ERROR [ 18%]
+tests/integration/test_ai_operations_endpoints.py::TestAIOperationsPerformance::test_throughput_under_sustained_load ERROR [ 19%]
+tests/integration/test_api_standards.py::TestAPIStandards::test_root_endpoint_standard_format PASSED [ 20%]
+tests/integration/test_api_standards.py::TestAPIStandards::test_health_endpoint_standard_format PASSED [ 20%]
+tests/integration/test_api_standards.py::TestAPIStandards::test_standard_headers_present FAILED [ 21%]
+tests/integration/test_api_standards.py::TestAPIStandards::test_api_version_info_endpoint FAILED [ 22%]
+tests/integration/test_api_standards.py::TestAPIStandards::test_api_standards_documentation PASSED [ 23%]
+tests/integration/test_api_standards.py::TestAPIStandards::test_error_codes_documentation PASSED [ 23%]
+tests/integration/test_api_standards.py::TestAPIStandards::test_api_examples_endpoint PASSED [ 24%]
+tests/integration/test_api_standards.py::TestAPIStandards::test_detailed_health_endpoint FAILED [ 25%]
+tests/integration/test_api_standards.py::TestAPIConsistency::test_error_response_consistency FAILED [ 26%]
+tests/integration/test_api_standards.py::TestAPIConsistency::test_validation_error_consistency PASSED [ 26%]
+tests/integration/test_api_standards.py::TestAPIConsistency::test_cors_headers_present FAILED [ 27%]
+tests/integration/test_api_standards.py::TestAPIConsistency::test_openapi_spec_available PASSED [ 28%]
+tests/integration/test_api_standards.py::TestAPIConsistency::test_documentation_pages_accessible PASSED [ 29%]
+tests/integration/test_api_standards.py::TestRateLimitingStandards::test_rate_limit_headers_present PASSED [ 29%]
+tests/integration/test_api_standards.py::TestRateLimitingStandards::test_rate_limit_documentation PASSED [ 30%]
+tests/integration/test_api_standards.py::TestAPIVersioning::test_version_in_url_path PASSED [ 31%]
+tests/integration/test_api_standards.py::TestAPIVersioning::test_version_header_support FAILED [ 32%]
+tests/integration/test_api_standards.py::TestAPIVersioning::test_unsupported_version_handling FAILED [ 32%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_login_success ERROR [ 33%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_login_invalid_credentials ERROR [ 34%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_login_wrong_password ERROR [ 35%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_login_inactive_user ERROR [ 35%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_login_invalid_input ERROR [ 36%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_register_success ERROR [ 37%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_register_duplicate_email ERROR [ 38%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_register_weak_password ERROR [ 38%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_register_invalid_input ERROR [ 39%]
+tests/integration/test_auth_endpoints.py::TestTokenValidation::test_protected_endpoint_with_valid_token ERROR [ 40%]
+tests/integration/test_auth_endpoints.py::TestTokenValidation::test_protected_endpoint_with_invalid_token ERROR [ 41%]
+tests/integration/test_auth_endpoints.py::TestTokenValidation::test_protected_endpoint_without_token ERROR [ 41%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationFlow::test_register_login_flow ERROR [ 42%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationFlow::test_multiple_login_attempts ERROR [ 43%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationSecurity::test_sql_injection_prevention ERROR [ 44%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationSecurity::test_xss_prevention_in_registration ERROR [ 44%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationSecurity::test_password_not_returned_in_responses ERROR [ 45%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationSecurity::test_case_insensitive_email_handling ERROR [ 46%]
+tests/integration/test_auth_endpoints.py::TestAuthenticationRateLimiting::test_login_rate_limiting ERROR [ 47%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_create_boardroom_success ERROR [ 47%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_create_boardroom_unauthorized ERROR [ 48%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_create_boardroom_missing_token ERROR [ 49%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_create_boardroom_invalid_input ERROR [ 50%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_get_boardroom_success ERROR [ 50%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_get_boardroom_not_found ERROR [ 51%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_list_boardrooms_success ERROR [ 52%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_update_boardroom_success ERROR [ 52%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_update_boardroom_not_owner ERROR [ 53%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_delete_boardroom_success ERROR [ 54%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_delete_boardroom_not_owner ERROR [ 55%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomSessionEndpoints::test_create_session_success ERROR [ 55%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomSessionEndpoints::test_get_session_success ERROR [ 56%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomSessionEndpoints::test_list_sessions_success ERROR [ 57%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomSessionEndpoints::test_end_session_success ERROR [ 58%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomPermissions::test_admin_can_access_any_boardroom ERROR [ 58%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomPermissions::test_user_cannot_access_private_boardroom ERROR [ 59%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomPermissions::test_user_can_access_public_boardroom ERROR [ 60%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomValidation::test_boardroom_name_validation ERROR [ 61%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomValidation::test_boardroom_settings_validation ERROR [ 61%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomErrorHandling::test_database_error_handling ERROR [ 62%]
+tests/integration/test_boardroom_endpoints.py::TestBoardroomErrorHandling::test_concurrent_access_handling ERROR [ 63%]
+tests/integration/test_health_checks.py::TestHealthCheckService::test_database_health_check PASSED [ 64%]
+tests/integration/test_health_checks.py::TestHealthCheckService::test_redis_health_check FAILED [ 64%]
+tests/integration/test_health_checks.py::TestHealthCheckService::test_system_resources_health_check PASSED [ 65%]
+tests/integration/test_health_checks.py::TestHealthCheckService::test_comprehensive_health_check PASSED [ 66%]
+tests/integration/test_health_checks.py::TestHealthCheckService::test_is_ready PASSED [ 67%]
+tests/integration/test_health_checks.py::TestHealthCheckService::test_is_alive PASSED [ 67%]
+tests/integration/test_health_checks.py::TestHealthCheckService::test_dependencies_status PASSED [ 68%]
+tests/integration/test_health_checks.py::TestCircuitBreaker::test_circuit_breaker_initialization PASSED [ 69%]
+tests/integration/test_health_checks.py::TestCircuitBreaker::test_circuit_breaker_success PASSED [ 70%]
+tests/integration/test_health_checks.py::TestCircuitBreaker::test_circuit_breaker_failure_threshold PASSED [ 70%]
+tests/integration/test_health_checks.py::TestCircuitBreaker::test_circuit_breaker_blocks_when_open PASSED [ 71%]
+tests/integration/test_health_checks.py::TestRetryManager::test_retry_success_on_first_attempt PASSED [ 72%]
+tests/integration/test_health_checks.py::TestRetryManager::test_retry_with_failures PASSED [ 73%]
+tests/integration/test_health_checks.py::TestRetryManager::test_retry_max_attempts_exceeded PASSED [ 73%]
+tests/integration/test_health_checks.py::TestHealthEndpoints::test_basic_health_endpoint FAILED [ 74%]
+tests/integration/test_health_checks.py::TestHealthEndpoints::test_readiness_endpoint FAILED [ 75%]
+tests/integration/test_health_checks.py::TestHealthEndpoints::test_liveness_endpoint FAILED [ 76%]
+tests/integration/test_health_checks.py::TestHealthEndpoints::test_detailed_health_endpoint FAILED [ 76%]
+tests/integration/test_health_checks.py::TestHealthEndpoints::test_dependencies_endpoint FAILED [ 77%]
+tests/integration/test_health_checks.py::TestHealthEndpoints::test_circuit_breakers_endpoint FAILED [ 78%]
+tests/integration/test_health_checks.py::TestHealthEndpoints::test_metrics_endpoint FAILED [ 79%]
+tests/integration/test_health_checks.py::TestHealthCaching::test_health_check_caching PASSED [ 79%]
+tests/integration/test_health_checks.py::TestExternalAPIHealthCheck::test_external_api_health_check_success FAILED [ 80%]
+tests/integration/test_health_checks.py::TestExternalAPIHealthCheck::test_external_api_health_check_failure FAILED [ 81%]
+tests/integration/test_monitoring_endpoints.py::TestHealthEndpoints::test_health_check_healthy ERROR [ 82%]
+tests/integration/test_monitoring_endpoints.py::TestHealthEndpoints::test_health_check_unhealthy_database ERROR [ 82%]
+tests/integration/test_monitoring_endpoints.py::TestHealthEndpoints::test_root_endpoint ERROR [ 83%]
+tests/integration/test_monitoring_endpoints.py::TestHealthEndpoints::test_health_check_with_migration_status ERROR [ 84%]
+tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_get_error_summary_success ERROR [ 85%]
+tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_get_error_summary_empty ERROR [ 85%]
+tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_get_error_summary_with_timeframe ERROR [ 86%]
+tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_get_error_summary_invalid_timeframe ERROR [ 87%]
+tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_get_monitoring_health_success ERROR [ 88%]
+tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_get_monitoring_health_degraded ERROR [ 88%]
+tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_record_error_endpoint ERROR [ 89%]
+tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_record_error_endpoint_invalid_data ERROR [ 90%]
+tests/integration/test_monitoring_endpoints.py::TestMetricsEndpoints::test_get_system_metrics_success ERROR [ 91%]
+tests/integration/test_monitoring_endpoints.py::TestMetricsEndpoints::test_get_application_metrics_success ERROR [ 91%]
+tests/integration/test_monitoring_endpoints.py::TestMetricsEndpoints::test_prometheus_metrics_endpoint ERROR [ 92%]
+tests/integration/test_monitoring_endpoints.py::TestMonitoringAuthentication::test_monitoring_endpoints_require_admin ERROR [ 93%]
+tests/integration/test_monitoring_endpoints.py::TestMonitoringAuthentication::test_monitoring_endpoints_allow_admin ERROR [ 94%]
+tests/integration/test_monitoring_endpoints.py::TestMonitoringAuthentication::test_health_endpoint_public_access ERROR [ 94%]
+tests/integration/test_monitoring_endpoints.py::TestMonitoringAuthentication::test_prometheus_metrics_public_access ERROR [ 95%]
+tests/integration/test_monitoring_endpoints.py::TestMonitoringErrorScenarios::test_error_summary_service_failure ERROR [ 96%]
+tests/integration/test_monitoring_endpoints.py::TestMonitoringErrorScenarios::test_metrics_collection_failure ERROR [ 97%]
+tests/integration/test_monitoring_endpoints.py::TestMonitoringErrorScenarios::test_health_check_partial_failure ERROR [ 97%]
+tests/integration/test_monitoring_endpoints.py::TestMonitoringPerformance::test_monitoring_endpoints_response_time ERROR [ 98%]
+tests/integration/test_monitoring_endpoints.py::TestMonitoringPerformance::test_concurrent_monitoring_requests ERROR [ 99%]
+tests/integration/test_monitoring_endpoints.py::TestMonitoringPerformance::test_large_error_summary_handling ERROR [100%]
+
+==================================== ERRORS ====================================
+___ ERROR at setup of TestAIOperationsEndpoints.test_ai_health_check_success ___
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndpoints.test_ai_health_check_degraded_performance _
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndpoints.test_ai_health_check_error_handling _
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndpoints.test_get_active_sessions_success _
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+__ ERROR at setup of TestAIOperationsEndpoints.test_get_active_sessions_empty __
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndpoints.test_create_session_checkpoint_success _
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndpoints.test_create_session_checkpoint_error _
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndpoints.test_restore_session_checkpoint_success _
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndpoints.test_restore_session_checkpoint_error _
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndpoints.test_cleanup_expired_sessions_success _
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndpoints.test_cleanup_expired_sessions_default_expiry _
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndpoints.test_cleanup_expired_sessions_error _
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndpoints.test_get_ai_metrics_summary_success _
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndpoints.test_get_ai_metrics_summary_error _
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+________ ERROR at setup of TestAIOperationsEndpoints.test_rate_limiting ________
+tests/integration/test_ai_operations_endpoints.py:22: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsAuthentication.test_health_check_without_auth _
+tests/integration/test_ai_operations_endpoints.py:345: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsAuthentication.test_active_sessions_without_auth _
+tests/integration/test_ai_operations_endpoints.py:345: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsAuthentication.test_checkpoint_creation_without_auth _
+tests/integration/test_ai_operations_endpoints.py:345: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsAuthentication.test_metrics_summary_without_auth _
+tests/integration/test_ai_operations_endpoints.py:345: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsEndToEnd.test_session_management_workflow __
+tests/integration/test_ai_operations_endpoints.py:389: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+__ ERROR at setup of TestAIOperationsEndToEnd.test_health_monitoring_workflow __
+tests/integration/test_ai_operations_endpoints.py:389: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsPerformance.test_health_check_response_time _
+tests/integration/test_ai_operations_endpoints.py:518: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsPerformance.test_metrics_summary_response_time _
+tests/integration/test_ai_operations_endpoints.py:518: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsPerformance.test_concurrent_requests_handling _
+tests/integration/test_ai_operations_endpoints.py:518: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsPerformance.test_session_operations_performance _
+tests/integration/test_ai_operations_endpoints.py:518: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAIOperationsPerformance.test_throughput_under_sustained_load _
+tests/integration/test_ai_operations_endpoints.py:518: in client
+    async with AsyncClient(app=app, base_url="http://testserver") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+____ ERROR at setup of TestAuthenticationEndpoints.test_user_login_success _____
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAuthenticationEndpoints.test_user_login_invalid_credentials _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAuthenticationEndpoints.test_user_login_wrong_password _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAuthenticationEndpoints.test_user_login_inactive_user __
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAuthenticationEndpoints.test_user_login_invalid_input __
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+___ ERROR at setup of TestAuthenticationEndpoints.test_user_register_success ___
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAuthenticationEndpoints.test_user_register_duplicate_email _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAuthenticationEndpoints.test_user_register_weak_password _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAuthenticationEndpoints.test_user_register_invalid_input _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestTokenValidation.test_protected_endpoint_with_valid_token _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestTokenValidation.test_protected_endpoint_with_invalid_token _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestTokenValidation.test_protected_endpoint_without_token __
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+______ ERROR at setup of TestAuthenticationFlow.test_register_login_flow _______
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+____ ERROR at setup of TestAuthenticationFlow.test_multiple_login_attempts _____
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+__ ERROR at setup of TestAuthenticationSecurity.test_sql_injection_prevention __
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAuthenticationSecurity.test_xss_prevention_in_registration _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAuthenticationSecurity.test_password_not_returned_in_responses _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestAuthenticationSecurity.test_case_insensitive_email_handling _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+__ ERROR at setup of TestAuthenticationRateLimiting.test_login_rate_limiting ___
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+____ ERROR at setup of TestBoardroomEndpoints.test_create_boardroom_success ____
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestBoardroomEndpoints.test_create_boardroom_unauthorized __
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestBoardroomEndpoints.test_create_boardroom_missing_token _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestBoardroomEndpoints.test_create_boardroom_invalid_input _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_____ ERROR at setup of TestBoardroomEndpoints.test_get_boardroom_success ______
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+____ ERROR at setup of TestBoardroomEndpoints.test_get_boardroom_not_found _____
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+____ ERROR at setup of TestBoardroomEndpoints.test_list_boardrooms_success _____
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+____ ERROR at setup of TestBoardroomEndpoints.test_update_boardroom_success ____
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+___ ERROR at setup of TestBoardroomEndpoints.test_update_boardroom_not_owner ___
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+____ ERROR at setup of TestBoardroomEndpoints.test_delete_boardroom_success ____
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+___ ERROR at setup of TestBoardroomEndpoints.test_delete_boardroom_not_owner ___
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestBoardroomSessionEndpoints.test_create_session_success __
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+___ ERROR at setup of TestBoardroomSessionEndpoints.test_get_session_success ___
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+__ ERROR at setup of TestBoardroomSessionEndpoints.test_list_sessions_success __
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+___ ERROR at setup of TestBoardroomSessionEndpoints.test_end_session_success ___
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestBoardroomPermissions.test_admin_can_access_any_boardroom _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestBoardroomPermissions.test_user_cannot_access_private_boardroom _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestBoardroomPermissions.test_user_can_access_public_boardroom _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+___ ERROR at setup of TestBoardroomValidation.test_boardroom_name_validation ___
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestBoardroomValidation.test_boardroom_settings_validation _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+__ ERROR at setup of TestBoardroomErrorHandling.test_database_error_handling ___
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestBoardroomErrorHandling.test_concurrent_access_handling _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_______ ERROR at setup of TestHealthEndpoints.test_health_check_healthy ________
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+__ ERROR at setup of TestHealthEndpoints.test_health_check_unhealthy_database __
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+___________ ERROR at setup of TestHealthEndpoints.test_root_endpoint ___________
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestHealthEndpoints.test_health_check_with_migration_status _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestErrorMonitoringEndpoints.test_get_error_summary_success _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestErrorMonitoringEndpoints.test_get_error_summary_empty __
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestErrorMonitoringEndpoints.test_get_error_summary_with_timeframe _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestErrorMonitoringEndpoints.test_get_error_summary_invalid_timeframe _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestErrorMonitoringEndpoints.test_get_monitoring_health_success _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestErrorMonitoringEndpoints.test_get_monitoring_health_degraded _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+__ ERROR at setup of TestErrorMonitoringEndpoints.test_record_error_endpoint ___
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestErrorMonitoringEndpoints.test_record_error_endpoint_invalid_data _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+____ ERROR at setup of TestMetricsEndpoints.test_get_system_metrics_success ____
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestMetricsEndpoints.test_get_application_metrics_success __
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+___ ERROR at setup of TestMetricsEndpoints.test_prometheus_metrics_endpoint ____
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestMonitoringAuthentication.test_monitoring_endpoints_require_admin _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestMonitoringAuthentication.test_monitoring_endpoints_allow_admin _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestMonitoringAuthentication.test_health_endpoint_public_access _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestMonitoringAuthentication.test_prometheus_metrics_public_access _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestMonitoringErrorScenarios.test_error_summary_service_failure _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestMonitoringErrorScenarios.test_metrics_collection_failure _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestMonitoringErrorScenarios.test_health_check_partial_failure _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestMonitoringPerformance.test_monitoring_endpoints_response_time _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestMonitoringPerformance.test_concurrent_monitoring_requests _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_ ERROR at setup of TestMonitoringPerformance.test_large_error_summary_handling _
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:321: in _asyncgen_fixture_wrapper
+    result = event_loop.run_until_complete(setup_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:316: in setup
+    res = await gen_obj.__anext__()  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/conftest.py:137: in client
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+=================================== FAILURES ===================================
+________________ TestAPIStandards.test_standard_headers_present ________________
+tests/integration/test_api_standards.py:80: in test_standard_headers_present
+    assert response.headers["x-api-version"] == "1.0.0"
+E   AssertionError: assert '0.01' == '1.0.0'
+E     
+E     - 1.0.0
+E     + 0.01
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:redis_service.py:242 [2m2025-07-05T17:04:45.675658Z[0m [[31m[1merror    [0m] [1mredis_get_failed              [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m'Event loop is closed'[0m [36mfilename[0m=[35mredis_service.py[0m [36mfunc_name[0m=[35mget[0m [36mkey[0m=[35mapi_cache:6666cd76f96956469e7be39d750cc7d9[0m [36mlineno[0m=[35m242[0m [36mmodule[0m=[35mredis_service[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/redis_service.py[0m
+WARNING  app.core.response_optimization:response_optimization.py:227 Cache storage error: 'utf-8' codec can't decode byte 0x8b in position 1: invalid start byte
+_______________ TestAPIStandards.test_api_version_info_endpoint ________________
+tests/integration/test_api_standards.py:97: in test_api_version_info_endpoint
+    assert "deprecated_versions" in version_info
+E   AssertionError: assert 'deprecated_versions' in {'documentation_url': 'http://testserver/docs', 'latest_version': '0.01', 'supported_versions': ['1.0.0', 'v1'], 'version': '0.01'}
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:redis_service.py:242 [2m2025-07-05T17:04:45.687456Z[0m [[31m[1merror    [0m] [1mredis_get_failed              [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m'Event loop is closed'[0m [36mfilename[0m=[35mredis_service.py[0m [36mfunc_name[0m=[35mget[0m [36mkey[0m=[35mapi_cache:e7182fdc6468a78af04ea4f718f24102[0m [36mlineno[0m=[35m242[0m [36mmodule[0m=[35mredis_service[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/redis_service.py[0m
+________________ TestAPIStandards.test_detailed_health_endpoint ________________
+tests/integration/test_api_standards.py:162: in test_detailed_health_endpoint
+    response = client.get("/api/v1/standards/health/detailed")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/starlette/testclient.py:465: in get
+    return super().get(
+../.local/lib/python3.12/site-packages/httpx/_client.py:1053: in get
+    return self.request(
+../.local/lib/python3.12/site-packages/starlette/testclient.py:437: in request
+    return super().request(
+../.local/lib/python3.12/site-packages/httpx/_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/httpx/_client.py:914: in send
+    response = self._send_handling_auth(
+../.local/lib/python3.12/site-packages/httpx/_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+../.local/lib/python3.12/site-packages/httpx/_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/httpx/_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/starlette/testclient.py:340: in handle_request
+    raise exc
+../.local/lib/python3.12/site-packages/starlette/testclient.py:337: in handle_request
+    portal.call(self.app, scope, receive, send)
+../.local/lib/python3.12/site-packages/anyio/from_thread.py:290: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/concurrent/futures/_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/concurrent/futures/_base.py:401: in __get_result
+    raise self._exception
+../.local/lib/python3.12/site-packages/anyio/from_thread.py:221: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/fastapi/applications.py:1054: in __call__
+    await super().__call__(scope, receive, send)
+../.local/lib/python3.12/site-packages/starlette/applications.py:112: in __call__
+    await self.middleware_stack(scope, receive, send)
+../.local/lib/python3.12/site-packages/starlette/middleware/errors.py:187: in __call__
+    raise exc
+../.local/lib/python3.12/site-packages/starlette/middleware/errors.py:165: in __call__
+    await self.app(scope, receive, _send)
+../.local/lib/python3.12/site-packages/starlette/middleware/cors.py:85: in __call__
+    await self.app(scope, receive, send)
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:176: in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+/usr/lib/python3.12/contextlib.py:158: in __exit__
+    self.gen.throw(value)
+../.local/lib/python3.12/site-packages/starlette/_utils.py:82: in collapse_excgroups
+    raise exc
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:178: in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/core/middleware.py:151: in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:156: in call_next
+    raise app_exc
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:141: in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:176: in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+/usr/lib/python3.12/contextlib.py:158: in __exit__
+    self.gen.throw(value)
+../.local/lib/python3.12/site-packages/starlette/_utils.py:82: in collapse_excgroups
+    raise exc
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:178: in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/core/middleware.py:58: in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:156: in call_next
+    raise app_exc
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:141: in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:176: in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+/usr/lib/python3.12/contextlib.py:158: in __exit__
+    self.gen.throw(value)
+../.local/lib/python3.12/site-packages/starlette/_utils.py:82: in collapse_excgroups
+    raise exc
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:178: in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/core/cache_middleware.py:95: in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:156: in call_next
+    raise app_exc
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:141: in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:176: in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+/usr/lib/python3.12/contextlib.py:158: in __exit__
+    self.gen.throw(value)
+../.local/lib/python3.12/site-packages/starlette/_utils.py:82: in collapse_excgroups
+    raise exc
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:178: in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/core/response_optimization.py:53: in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:156: in call_next
+    raise app_exc
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:141: in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+app/core/api_standards.py:70: in __call__
+    await self.app(scope, receive, send_wrapper)
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:176: in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+/usr/lib/python3.12/contextlib.py:158: in __exit__
+    self.gen.throw(value)
+../.local/lib/python3.12/site-packages/starlette/_utils.py:82: in collapse_excgroups
+    raise exc
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:178: in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/starlette_prometheus/middleware.py:57: in dispatch
+    raise e from None
+../.local/lib/python3.12/site-packages/starlette_prometheus/middleware.py:53: in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:156: in call_next
+    raise app_exc
+../.local/lib/python3.12/site-packages/starlette/middleware/base.py:141: in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+../.local/lib/python3.12/site-packages/starlette/middleware/exceptions.py:62: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+../.local/lib/python3.12/site-packages/starlette/_exception_handler.py:53: in wrapped_app
+    raise exc
+../.local/lib/python3.12/site-packages/starlette/_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+../.local/lib/python3.12/site-packages/starlette/routing.py:714: in __call__
+    await self.middleware_stack(scope, receive, send)
+../.local/lib/python3.12/site-packages/starlette/routing.py:734: in app
+    await route.handle(scope, receive, send)
+../.local/lib/python3.12/site-packages/starlette/routing.py:288: in handle
+    await self.app(scope, receive, send)
+../.local/lib/python3.12/site-packages/starlette/routing.py:76: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+../.local/lib/python3.12/site-packages/starlette/_exception_handler.py:53: in wrapped_app
+    raise exc
+../.local/lib/python3.12/site-packages/starlette/_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+../.local/lib/python3.12/site-packages/starlette/routing.py:73: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/fastapi/routing.py:301: in app
+    raw_response = await run_endpoint_function(
+../.local/lib/python3.12/site-packages/fastapi/routing.py:212: in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/slowapi/extension.py:734: in async_wrapper
+    response = await func(*args, **kwargs)  # type: ignore
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/api/v1/standards.py:107: in get_detailed_health
+    return JSONResponse(
+../.local/lib/python3.12/site-packages/starlette/responses.py:182: in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+../.local/lib/python3.12/site-packages/starlette/responses.py:45: in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+../.local/lib/python3.12/site-packages/starlette/responses.py:185: in render
+    return json.dumps(
+/usr/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/json/encoder.py:180: in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+E   TypeError: Object of type datetime is not JSON serializable
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:redis_service.py:242 [2m2025-07-05T17:04:45.716119Z[0m [[31m[1merror    [0m] [1mredis_get_failed              [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m'Event loop is closed'[0m [36mfilename[0m=[35mredis_service.py[0m [36mfunc_name[0m=[35mget[0m [36mkey[0m=[35mapi_cache:63a87bb2716e6425abe354486287833d[0m [36mlineno[0m=[35m242[0m [36mmodule[0m=[35mredis_service[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/redis_service.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:45.718958Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 1 failed: Pool class QueuePool cannot be used with asyncio engine (Background on this error at: https://sqlalche.me/e/20/pcls)[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:46.720849Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 2 failed: Pool class QueuePool cannot be used with asyncio engine (Background on this error at: https://sqlalche.me/e/20/pcls)[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:database.py:91 [2m2025-07-05T17:04:48.723895Z[0m [[33m[1mwarning  [0m] [1mDatabase initialization attempt 3 failed: Pool class QueuePool cannot be used with asyncio engine (Background on this error at: https://sqlalche.me/e/20/pcls)[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m91[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+ERROR    app.core.logging:database.py:95 [2m2025-07-05T17:04:48.724124Z[0m [[31m[1merror    [0m] [1mFailed to initialize database service after 3 attempts[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35minitialize[0m [36mlineno[0m=[35m95[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+ERROR    app.core.logging:database.py:180 [2m2025-07-05T17:04:48.724213Z[0m [[31m[1merror    [0m] [1mDatabase health check failed: Pool class QueuePool cannot be used with asyncio engine (Background on this error at: https://sqlalche.me/e/20/pcls)[0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mdatabase.py[0m [36mfunc_name[0m=[35mhealth_check[0m [36mlineno[0m=[35m180[0m [36mmodule[0m=[35mdatabase[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/database.py[0m
+WARNING  app.core.logging:error_monitoring.py:100 [2m2025-07-05T17:04:48.724868Z[0m [[33m[1mwarning  [0m] [1merror_monitored               [0m [[0m[1m[34mapp.core.logging[0m][0m [36mclient_ip[0m=[35mtestclient[0m [36mcount_in_window[0m=[35m1[0m [36menvironment[0m=[35mdevelopment[0m [36merror_message[0m=[35m'Object of type datetime is not JSON serializable'[0m [36merror_type[0m=[35mserver_error[0m [36mfilename[0m=[35merror_monitoring.py[0m [36mfunc_name[0m=[35mrecord_error[0m [36mlineno[0m=[35m100[0m [36mmodule[0m=[35merror_monitoring[0m [36mpath[0m=[35m/api/v1/standards/health/detailed[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/error_monitoring.py[0m [36mstatus_code[0m=[35m500[0m
+ERROR    app.core.logging:middleware.py:82 [2m2025-07-05T17:04:48.724997Z[0m [[31m[1merror    [0m] [1mmiddleware_error              [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m'Object of type datetime is not JSON serializable'[0m [36mfilename[0m=[35mmiddleware.py[0m [36mfunc_name[0m=[35mdispatch[0m [36mlineno[0m=[35m82[0m [36mmodule[0m=[35mmiddleware[0m [36mpath[0m=[35m/api/v1/standards/health/detailed[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/middleware.py[0m
+Traceback (most recent call last):
+  File "/home/paul/boardroom-repo/app/core/middleware.py", line 58, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 156, in call_next
+    raise app_exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 176, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 178, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/boardroom-repo/app/core/cache_middleware.py", line 95, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 156, in call_next
+    raise app_exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 176, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 178, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/boardroom-repo/app/core/response_optimization.py", line 53, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 156, in call_next
+    raise app_exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/paul/boardroom-repo/app/core/api_standards.py", line 70, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 176, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 178, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette_prometheus/middleware.py", line 57, in dispatch
+    raise e from None
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette_prometheus/middleware.py", line 53, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 156, in call_next
+    raise app_exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/slowapi/extension.py", line 734, in async_wrapper
+    response = await func(*args, **kwargs)  # type: ignore
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/boardroom-repo/app/api/v1/standards.py", line 107, in get_detailed_health
+    return JSONResponse(
+           ^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/responses.py", line 182, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/responses.py", line 45, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/responses.py", line 185, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+ERROR    app.core.logging:main.py:278 [2m2025-07-05T17:04:48.736534Z[0m [[31m[1merror    [0m] [1minternal_server_error         [0m [[0m[1m[34mapp.core.logging[0m][0m [36mclient_ip[0m=[35mtestclient[0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m'Object of type datetime is not JSON serializable'[0m [36mfilename[0m=[35mmain.py[0m [36mfunc_name[0m=[35minternal_server_error_handler[0m [36mlineno[0m=[35m278[0m [36mmethod[0m=[35mGET[0m [36mmodule[0m=[35mmain[0m [36mpath[0m=[35m/api/v1/standards/health/detailed[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/main.py[0m
+Traceback (most recent call last):
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 176, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 178, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/boardroom-repo/app/core/middleware.py", line 151, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 156, in call_next
+    raise app_exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 176, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 178, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/boardroom-repo/app/core/middleware.py", line 58, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 156, in call_next
+    raise app_exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 176, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 178, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/boardroom-repo/app/core/cache_middleware.py", line 95, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 156, in call_next
+    raise app_exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 176, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 178, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/boardroom-repo/app/core/response_optimization.py", line 53, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 156, in call_next
+    raise app_exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/paul/boardroom-repo/app/core/api_standards.py", line 70, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 176, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 178, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette_prometheus/middleware.py", line 57, in dispatch
+    raise e from None
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette_prometheus/middleware.py", line 53, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 156, in call_next
+    raise app_exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/slowapi/extension.py", line 734, in async_wrapper
+    response = await func(*args, **kwargs)  # type: ignore
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/boardroom-repo/app/api/v1/standards.py", line 107, in get_detailed_health
+    return JSONResponse(
+           ^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/responses.py", line 182, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/responses.py", line 45, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/paul/.local/lib/python3.12/site-packages/starlette/responses.py", line 185, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+WARNING  app.core.logging:error_monitoring.py:100 [2m2025-07-05T17:04:48.738369Z[0m [[33m[1mwarning  [0m] [1merror_monitored               [0m [[0m[1m[34mapp.core.logging[0m][0m [36mclient_ip[0m=[35mtestclient[0m [36mcount_in_window[0m=[35m1[0m [36menvironment[0m=[35mdevelopment[0m [36merror_message[0m=[35m'Internal server error'[0m [36merror_type[0m=[35minternal_server_error[0m [36mfilename[0m=[35merror_monitoring.py[0m [36mfunc_name[0m=[35mrecord_error[0m [36mlineno[0m=[35m100[0m [36mmodule[0m=[35merror_monitoring[0m [36mpath[0m=[35m/api/v1/standards/health/detailed[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/error_monitoring.py[0m [36mstatus_code[0m=[35m500[0m
+______________ TestAPIConsistency.test_error_response_consistency ______________
+tests/integration/test_api_standards.py:188: in test_error_response_consistency
+    assert response.status_code == 401
+E   assert 403 == 401
+E    +  where 403 = <Response [403 Forbidden]>.status_code
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:redis_service.py:242 [2m2025-07-05T17:04:49.046049Z[0m [[31m[1merror    [0m] [1mredis_get_failed              [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m'Event loop is closed'[0m [36mfilename[0m=[35mredis_service.py[0m [36mfunc_name[0m=[35mget[0m [36mkey[0m=[35mapi_cache:GET:/api/v1/chatbot/messages:anonymous:-3647058338273244275[0m [36mlineno[0m=[35m242[0m [36mmodule[0m=[35mredis_service[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/redis_service.py[0m
+WARNING  app.core.logging:middleware.py:181 [2m2025-07-05T17:04:49.046679Z[0m [[33m[1mwarning  [0m] [1mvalidation_error              [0m [[0m[1m[34mapp.core.logging[0m][0m [36mclient_ip[0m=[35mtestclient[0m [36menvironment[0m=[35mdevelopment[0m [36mfilename[0m=[35mmiddleware.py[0m [36mfunc_name[0m=[35mvalidation_error_handler[0m [36mlineno[0m=[35m181[0m [36mmethod[0m=[35mGET[0m [36mmodule[0m=[35mmiddleware[0m [36mpath[0m=[35m/api/v1/chatbot/messages[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/middleware.py[0m [36mstatus_code[0m=[35m403[0m
+_________________ TestAPIConsistency.test_cors_headers_present _________________
+tests/integration/test_api_standards.py:223: in test_cors_headers_present
+    assert "access-control-allow-origin" in response.headers
+E   AssertionError: assert 'access-control-allow-origin' in Headers({'allow': 'POST', 'content-length': '31', 'content-type': 'application/json', 'x-request-id': 'f999f243-0b87-4590-8d61-06b25094863d', 'x-api-version': '0.01', 'x-response-time': '0', 'x-cache-status': 'MISS', 'x-original-size': '31', 'x-compressed-size': '31'})
+E    +  where Headers({'allow': 'POST', 'content-length': '31', 'content-type': 'application/json', 'x-request-id': 'f999f243-0b87-4590-8d61-06b25094863d', 'x-api-version': '0.01', 'x-response-time': '0', 'x-cache-status': 'MISS', 'x-original-size': '31', 'x-compressed-size': '31'}) = <Response [405 Method Not Allowed]>.headers
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:redis_service.py:242 [2m2025-07-05T17:04:49.061973Z[0m [[31m[1merror    [0m] [1mredis_get_failed              [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m'Event loop is closed'[0m [36mfilename[0m=[35mredis_service.py[0m [36mfunc_name[0m=[35mget[0m [36mkey[0m=[35mapi_cache:OPTIONS:/api/v1/auth/login:anonymous:-3647058338273244275[0m [36mlineno[0m=[35m242[0m [36mmodule[0m=[35mredis_service[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/redis_service.py[0m
+________________ TestAPIVersioning.test_version_header_support _________________
+tests/integration/test_api_standards.py:310: in test_version_header_support
+    assert response.headers.get("x-api-version") == "1.0.0"
+E   AssertionError: assert '0.01' == '1.0.0'
+E     
+E     - 1.0.0
+E     + 0.01
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:redis_service.py:242 [2m2025-07-05T17:04:49.266169Z[0m [[31m[1merror    [0m] [1mredis_get_failed              [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m'Event loop is closed'[0m [36mfilename[0m=[35mredis_service.py[0m [36mfunc_name[0m=[35mget[0m [36mkey[0m=[35mapi_cache:e7182fdc6468a78af04ea4f718f24102[0m [36mlineno[0m=[35m242[0m [36mmodule[0m=[35mredis_service[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/redis_service.py[0m
+_____________ TestAPIVersioning.test_unsupported_version_handling ______________
+tests/integration/test_api_standards.py:319: in test_unsupported_version_handling
+    assert response.headers.get("x-api-version") == "1.0.0"
+E   AssertionError: assert '0.01' == '1.0.0'
+E     
+E     - 1.0.0
+E     + 0.01
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:redis_service.py:242 [2m2025-07-05T17:04:49.275118Z[0m [[31m[1merror    [0m] [1mredis_get_failed              [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m'Event loop is closed'[0m [36mfilename[0m=[35mredis_service.py[0m [36mfunc_name[0m=[35mget[0m [36mkey[0m=[35mapi_cache:e7182fdc6468a78af04ea4f718f24102[0m [36mlineno[0m=[35m242[0m [36mmodule[0m=[35mredis_service[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/redis_service.py[0m
+________________ TestHealthCheckService.test_redis_health_check ________________
+tests/integration/test_health_checks.py:46: in test_redis_health_check
+    assert result.service_name == "redis"
+E   AssertionError: assert 'unknown' == 'redis'
+E     
+E     - redis
+E     + unknown
+------------------------------ Captured log call -------------------------------
+ERROR    app.core.logging:redis_service.py:167 [2m2025-07-05T17:04:53.615289Z[0m [[31m[1merror    [0m] [1mredis_health_check_failed     [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m'Event loop is closed'[0m [36mfilename[0m=[35mredis_service.py[0m [36mfunc_name[0m=[35mhealth_check[0m [36mlineno[0m=[35m167[0m [36mmodule[0m=[35mredis_service[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/services/redis_service.py[0m
+ERROR    app.core.logging:health_checks.py:216 [2m2025-07-05T17:04:53.615442Z[0m [[31m[1merror    [0m] [1mhealth_check_execution_failed [0m [[0m[1m[34mapp.core.logging[0m][0m [36menvironment[0m=[35mdevelopment[0m [36merror[0m=[35m"Redis health check failed: {'status': 'unhealthy', 'last_check': 1751735093.6150043, 'connection_pool_created': True, 'recent_errors': [{'timestamp': 1751735093.6152778, 'error': 'Event loop is closed'}], 'stats': {'hits': 3, 'misses': 17, 'sets': 1, 'deletes': 0, 'errors': 17, 'hit_rate': 0.15, 'total_operations': 21, 'uptime_seconds': 11.470233917236328}}"[0m [36mfilename[0m=[35mhealth_checks.py[0m [36mfunc_name[0m=[35m_timed_check[0m [36mlineno[0m=[35m216[0m [36mmodule[0m=[35mhealth_checks[0m [36mpathname[0m=[35m/home/paul/boardroom-repo/app/core/health_checks.py[0m
+________________ TestHealthEndpoints.test_basic_health_endpoint ________________
+tests/integration/test_health_checks.py:229: in test_basic_health_endpoint
+    async with AsyncClient(app=app, base_url="http://test") as client:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_________________ TestHealthEndpoints.test_readiness_endpoint __________________
+tests/integration/test_health_checks.py:243: in test_readiness_endpoint
+    async with AsyncClient(app=app, base_url="http://test") as client:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+__________________ TestHealthEndpoints.test_liveness_endpoint __________________
+tests/integration/test_health_checks.py:257: in test_liveness_endpoint
+    async with AsyncClient(app=app, base_url="http://test") as client:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+______________ TestHealthEndpoints.test_detailed_health_endpoint _______________
+tests/integration/test_health_checks.py:271: in test_detailed_health_endpoint
+    async with AsyncClient(app=app, base_url="http://test") as client:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+________________ TestHealthEndpoints.test_dependencies_endpoint ________________
+tests/integration/test_health_checks.py:287: in test_dependencies_endpoint
+    async with AsyncClient(app=app, base_url="http://test") as client:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+______________ TestHealthEndpoints.test_circuit_breakers_endpoint ______________
+tests/integration/test_health_checks.py:300: in test_circuit_breakers_endpoint
+    async with AsyncClient(app=app, base_url="http://test") as client:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+__________________ TestHealthEndpoints.test_metrics_endpoint ___________________
+tests/integration/test_health_checks.py:314: in test_metrics_endpoint
+    async with AsyncClient(app=app, base_url="http://test") as client:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+______ TestExternalAPIHealthCheck.test_external_api_health_check_success _______
+tests/integration/test_health_checks.py:369: in test_external_api_health_check_success
+    result = await health_service.check_external_api_health("test_api", "https://api.example.com/health")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'HealthCheckService' object has no attribute 'check_external_api_health'
+______ TestExternalAPIHealthCheck.test_external_api_health_check_failure _______
+tests/integration/test_health_checks.py:382: in test_external_api_health_check_failure
+    result = await health_service.check_external_api_health("test_api", "https://api.example.com/health")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'HealthCheckService' object has no attribute 'check_external_api_health'
+=============================== warnings summary ===============================
+../.local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323
+../.local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323
+../.local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323
+../.local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323
+../.local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323
+../.local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323
+  /home/paul/.local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+app/core/health_checks.py:192
+  /home/paul/boardroom-repo/app/core/health_checks.py:192: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    self.startup_time = datetime.utcnow()
+
+tests/integration/test_api_standards.py::TestAPIStandards::test_detailed_health_endpoint
+  /home/paul/.local/lib/python3.12/site-packages/structlog/_base.py:173: UserWarning: Remove `format_exc_info` from your processor chain if you want pretty exceptions.
+    event_dict = proc(self._logger, method_name, event_dict)
+
+tests/integration/test_health_checks.py: 10 warnings
+  /home/paul/boardroom-repo/app/core/health_checks.py:84: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.utcnow()
+
+tests/integration/test_health_checks.py::TestHealthCheckService::test_database_health_check
+tests/integration/test_health_checks.py::TestHealthCaching::test_health_check_caching
+tests/integration/test_health_checks.py::TestHealthCaching::test_health_check_caching
+  /home/paul/boardroom-repo/app/core/health_checks.py:265: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow(),
+
+tests/integration/test_health_checks.py::TestHealthCheckService::test_database_health_check
+tests/integration/test_health_checks.py::TestCircuitBreaker::test_circuit_breaker_success
+tests/integration/test_health_checks.py::TestHealthCaching::test_health_check_caching
+tests/integration/test_health_checks.py::TestHealthCaching::test_health_check_caching
+  /home/paul/boardroom-repo/app/core/health_checks.py:101: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    self.state.last_success_time = datetime.utcnow()
+
+tests/integration/test_health_checks.py::TestHealthCheckService::test_redis_health_check
+tests/integration/test_health_checks.py::TestCircuitBreaker::test_circuit_breaker_failure_threshold
+tests/integration/test_health_checks.py::TestCircuitBreaker::test_circuit_breaker_failure_threshold
+tests/integration/test_health_checks.py::TestCircuitBreaker::test_circuit_breaker_blocks_when_open
+  /home/paul/boardroom-repo/app/core/health_checks.py:116: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    self.state.last_failure_time = datetime.utcnow()
+
+tests/integration/test_health_checks.py::TestHealthCheckService::test_redis_health_check
+  /home/paul/boardroom-repo/app/core/health_checks.py:222: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow(),
+
+tests/integration/test_health_checks.py::TestHealthCheckService::test_system_resources_health_check
+tests/integration/test_health_checks.py::TestHealthCheckService::test_comprehensive_health_check
+  /home/paul/boardroom-repo/app/core/health_checks.py:369: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "uptime_seconds": (datetime.utcnow() - self.startup_time).total_seconds()
+
+tests/integration/test_health_checks.py::TestHealthCheckService::test_system_resources_health_check
+tests/integration/test_health_checks.py::TestHealthCheckService::test_comprehensive_health_check
+  /home/paul/boardroom-repo/app/core/health_checks.py:384: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow(),
+
+tests/integration/test_health_checks.py::TestHealthCheckService::test_comprehensive_health_check
+tests/integration/test_health_checks.py::TestHealthCheckService::test_comprehensive_health_check
+tests/integration/test_health_checks.py::TestHealthCheckService::test_is_ready
+tests/integration/test_health_checks.py::TestHealthCheckService::test_is_ready
+tests/integration/test_health_checks.py::TestHealthCaching::test_health_check_caching
+tests/integration/test_health_checks.py::TestHealthCaching::test_health_check_caching
+  /home/paul/boardroom-repo/app/core/health_checks.py:233: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    age = (datetime.utcnow() - result.timestamp).total_seconds()
+
+tests/integration/test_health_checks.py::TestHealthCheckService::test_comprehensive_health_check
+  /home/paul/boardroom-repo/app/core/health_checks.py:453: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "timestamp": datetime.utcnow().isoformat(),
+
+tests/integration/test_health_checks.py::TestHealthCheckService::test_comprehensive_health_check
+  /home/paul/boardroom-repo/app/core/health_checks.py:455: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "uptime_seconds": (datetime.utcnow() - self.startup_time).total_seconds(),
+
+tests/integration/test_health_checks.py::TestHealthCheckService::test_is_alive
+  /home/paul/boardroom-repo/app/core/health_checks.py:481: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return not self._shutting_down and (datetime.utcnow() - self.startup_time).total_seconds() > 0
+
+tests/integration/test_health_checks.py::TestHealthCaching::test_health_check_caching
+  /home/paul/boardroom-repo/tests/integration/test_health_checks.py:336: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    start_time = datetime.utcnow()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/paul/boardroom-repo/test-results/backend-integration.xml -
+=========================== short test summary info ============================
+FAILED tests/integration/test_api_standards.py::TestAPIStandards::test_standard_headers_present
+FAILED tests/integration/test_api_standards.py::TestAPIStandards::test_api_version_info_endpoint
+FAILED tests/integration/test_api_standards.py::TestAPIStandards::test_detailed_health_endpoint
+FAILED tests/integration/test_api_standards.py::TestAPIConsistency::test_error_response_consistency
+FAILED tests/integration/test_api_standards.py::TestAPIConsistency::test_cors_headers_present
+FAILED tests/integration/test_api_standards.py::TestAPIVersioning::test_version_header_support
+FAILED tests/integration/test_api_standards.py::TestAPIVersioning::test_unsupported_version_handling
+FAILED tests/integration/test_health_checks.py::TestHealthCheckService::test_redis_health_check
+FAILED tests/integration/test_health_checks.py::TestHealthEndpoints::test_basic_health_endpoint
+FAILED tests/integration/test_health_checks.py::TestHealthEndpoints::test_readiness_endpoint
+FAILED tests/integration/test_health_checks.py::TestHealthEndpoints::test_liveness_endpoint
+FAILED tests/integration/test_health_checks.py::TestHealthEndpoints::test_detailed_health_endpoint
+FAILED tests/integration/test_health_checks.py::TestHealthEndpoints::test_dependencies_endpoint
+FAILED tests/integration/test_health_checks.py::TestHealthEndpoints::test_circuit_breakers_endpoint
+FAILED tests/integration/test_health_checks.py::TestHealthEndpoints::test_metrics_endpoint
+FAILED tests/integration/test_health_checks.py::TestExternalAPIHealthCheck::test_external_api_health_check_success
+FAILED tests/integration/test_health_checks.py::TestExternalAPIHealthCheck::test_external_api_health_check_failure
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_ai_health_check_success
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_ai_health_check_degraded_performance
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_ai_health_check_error_handling
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_get_active_sessions_success
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_get_active_sessions_empty
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_create_session_checkpoint_success
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_create_session_checkpoint_error
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_restore_session_checkpoint_success
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_restore_session_checkpoint_error
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_cleanup_expired_sessions_success
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_cleanup_expired_sessions_default_expiry
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_cleanup_expired_sessions_error
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_get_ai_metrics_summary_success
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_get_ai_metrics_summary_error
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndpoints::test_rate_limiting
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsAuthentication::test_health_check_without_auth
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsAuthentication::test_active_sessions_without_auth
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsAuthentication::test_checkpoint_creation_without_auth
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsAuthentication::test_metrics_summary_without_auth
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndToEnd::test_session_management_workflow
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsEndToEnd::test_health_monitoring_workflow
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsPerformance::test_health_check_response_time
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsPerformance::test_metrics_summary_response_time
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsPerformance::test_concurrent_requests_handling
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsPerformance::test_session_operations_performance
+ERROR tests/integration/test_ai_operations_endpoints.py::TestAIOperationsPerformance::test_throughput_under_sustained_load
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_login_success
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_login_invalid_credentials
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_login_wrong_password
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_login_inactive_user
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_login_invalid_input
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_register_success
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_register_duplicate_email
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_register_weak_password
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationEndpoints::test_user_register_invalid_input
+ERROR tests/integration/test_auth_endpoints.py::TestTokenValidation::test_protected_endpoint_with_valid_token
+ERROR tests/integration/test_auth_endpoints.py::TestTokenValidation::test_protected_endpoint_with_invalid_token
+ERROR tests/integration/test_auth_endpoints.py::TestTokenValidation::test_protected_endpoint_without_token
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationFlow::test_register_login_flow
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationFlow::test_multiple_login_attempts
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationSecurity::test_sql_injection_prevention
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationSecurity::test_xss_prevention_in_registration
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationSecurity::test_password_not_returned_in_responses
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationSecurity::test_case_insensitive_email_handling
+ERROR tests/integration/test_auth_endpoints.py::TestAuthenticationRateLimiting::test_login_rate_limiting
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_create_boardroom_success
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_create_boardroom_unauthorized
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_create_boardroom_missing_token
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_create_boardroom_invalid_input
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_get_boardroom_success
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_get_boardroom_not_found
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_list_boardrooms_success
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_update_boardroom_success
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_update_boardroom_not_owner
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_delete_boardroom_success
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomEndpoints::test_delete_boardroom_not_owner
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomSessionEndpoints::test_create_session_success
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomSessionEndpoints::test_get_session_success
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomSessionEndpoints::test_list_sessions_success
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomSessionEndpoints::test_end_session_success
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomPermissions::test_admin_can_access_any_boardroom
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomPermissions::test_user_cannot_access_private_boardroom
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomPermissions::test_user_can_access_public_boardroom
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomValidation::test_boardroom_name_validation
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomValidation::test_boardroom_settings_validation
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomErrorHandling::test_database_error_handling
+ERROR tests/integration/test_boardroom_endpoints.py::TestBoardroomErrorHandling::test_concurrent_access_handling
+ERROR tests/integration/test_monitoring_endpoints.py::TestHealthEndpoints::test_health_check_healthy
+ERROR tests/integration/test_monitoring_endpoints.py::TestHealthEndpoints::test_health_check_unhealthy_database
+ERROR tests/integration/test_monitoring_endpoints.py::TestHealthEndpoints::test_root_endpoint
+ERROR tests/integration/test_monitoring_endpoints.py::TestHealthEndpoints::test_health_check_with_migration_status
+ERROR tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_get_error_summary_success
+ERROR tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_get_error_summary_empty
+ERROR tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_get_error_summary_with_timeframe
+ERROR tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_get_error_summary_invalid_timeframe
+ERROR tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_get_monitoring_health_success
+ERROR tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_get_monitoring_health_degraded
+ERROR tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_record_error_endpoint
+ERROR tests/integration/test_monitoring_endpoints.py::TestErrorMonitoringEndpoints::test_record_error_endpoint_invalid_data
+ERROR tests/integration/test_monitoring_endpoints.py::TestMetricsEndpoints::test_get_system_metrics_success
+ERROR tests/integration/test_monitoring_endpoints.py::TestMetricsEndpoints::test_get_application_metrics_success
+ERROR tests/integration/test_monitoring_endpoints.py::TestMetricsEndpoints::test_prometheus_metrics_endpoint
+ERROR tests/integration/test_monitoring_endpoints.py::TestMonitoringAuthentication::test_monitoring_endpoints_require_admin
+ERROR tests/integration/test_monitoring_endpoints.py::TestMonitoringAuthentication::test_monitoring_endpoints_allow_admin
+ERROR tests/integration/test_monitoring_endpoints.py::TestMonitoringAuthentication::test_health_endpoint_public_access
+ERROR tests/integration/test_monitoring_endpoints.py::TestMonitoringAuthentication::test_prometheus_metrics_public_access
+ERROR tests/integration/test_monitoring_endpoints.py::TestMonitoringErrorScenarios::test_error_summary_service_failure
+ERROR tests/integration/test_monitoring_endpoints.py::TestMonitoringErrorScenarios::test_metrics_collection_failure
+ERROR tests/integration/test_monitoring_endpoints.py::TestMonitoringErrorScenarios::test_health_check_partial_failure
+ERROR tests/integration/test_monitoring_endpoints.py::TestMonitoringPerformance::test_monitoring_endpoints_response_time
+ERROR tests/integration/test_monitoring_endpoints.py::TestMonitoringPerformance::test_concurrent_monitoring_requests
+ERROR tests/integration/test_monitoring_endpoints.py::TestMonitoringPerformance::test_large_error_summary_handling
+============ 17 failed, 25 passed, 44 warnings, 92 errors in 53.87s ============
