@@ -1,0 +1,26 @@
+============================= test session starts ==============================
+collecting ... collected 71 items
+
+tests/performance/test_ai_operations_performance.py::TestLangGraphAgentPerformance::test_agent_initialization_time FAILED [  1%]
+tests/performance/test_ai_operations_performance.py::TestLangGraphAgentPerformance::test_single_query_response_time FAILED [  2%]
+tests/performance/test_ai_operations_performance.py::TestLangGraphAgentPerformance::test_concurrent_queries_performance FAILED [  4%]
+tests/performance/test_ai_operations_performance.py::TestLangGraphAgentPerformance::test_memory_usage_single_query FAILED [  5%]
+tests/performance/test_ai_operations_performance.py::TestLangGraphAgentPerformance::test_streaming_response_performance FAILED [  7%]
+tests/performance/test_ai_operations_performance.py::TestLangGraphAgentPerformance::test_chat_history_performance FAILED [  8%]
+tests/performance/test_ai_operations_performance.py::TestLangGraphAgentPerformance::test_sustained_load_performance FAILED [  9%]
+tests/performance/test_ai_operations_performance.py::TestMeetingToolsPerformance::test_agenda_creation_performance ERROR [ 11%]
+tests/performance/test_ai_operations_performance.py::TestMeetingToolsPerformance::test_decision_support_performance ERROR [ 12%]
+tests/performance/test_ai_operations_performance.py::TestMeetingToolsPerformance::test_minutes_generation_performance ERROR [ 14%]
+tests/performance/test_ai_operations_performance.py::TestMeetingToolsPerformance::test_concurrent_tool_execution ERROR [ 15%]
+tests/performance/test_ai_operations_performance.py::TestMeetingToolsPerformance::test_tools_memory_efficiency ERROR [ 16%]
+tests/performance/test_ai_operations_performance.py::TestMeetingToolsPerformance::test_tool_response_time_consistency ERROR [ 18%]
+tests/performance/test_ai_operations_performance.py::TestAIStateManagerPerformance::test_state_creation_performance PASSED [ 19%]
+tests/performance/test_ai_operations_performance.py::TestAIStateManagerPerformance::test_state_update_performance PASSED [ 21%]
+tests/performance/test_ai_operations_performance.py::TestAIStateManagerPerformance::test_state_retrieval_performance PASSED [ 22%]
+tests/performance/test_ai_operations_performance.py::TestAIStateManagerPerformance::test_concurrent_state_operations PASSED [ 23%]
+tests/performance/test_ai_operations_performance.py::TestAIStateManagerPerformance::test_checkpoint_performance PASSED [ 25%]
+tests/performance/test_ai_operations_performance.py::TestAIStateManagerPerformance::test_cleanup_performance PASSED [ 26%]
+tests/performance/test_ai_operations_performance.py::TestAIStateManagerPerformance::test_state_manager_memory_efficiency PASSED [ 28%]
+tests/performance/test_ai_operations_performance.py::TestAIStateManagerPerformance::test_active_sessions_performance PASSED [ 29%]
+tests/performance/test_ai_operations_performance.py::TestAIOperationsLoadTesting::test_high_concurrency_ai_operations FAILED [ 30%]
+tests/performance/test_ai_operations_performance.py::TestAIOperationsLoadTesting::test_sustained_load_performance 

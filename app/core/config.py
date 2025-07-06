@@ -188,6 +188,24 @@ class Settings:
         self.CACHE_DEFAULT_TTL = int(os.getenv("CACHE_DEFAULT_TTL", "300"))
         self.CACHE_MAX_MEMORY = os.getenv("CACHE_MAX_MEMORY", "256mb")
 
+        # Performance Optimization Settings
+        self.MEMORY_THRESHOLD_MB = int(os.getenv("MEMORY_THRESHOLD_MB", "512"))
+        self.OPTIMIZE_JSON_PAYLOAD = os.getenv("OPTIMIZE_JSON_PAYLOAD", "true").lower() in ("true", "1", "t", "yes")
+        self.ENABLE_RESPONSE_COMPRESSION = os.getenv("ENABLE_RESPONSE_COMPRESSION", "true").lower() in ("true", "1", "t", "yes")
+        self.CACHE_WARMING_ENABLED = os.getenv("CACHE_WARMING_ENABLED", "true").lower() in ("true", "1", "t", "yes")
+        self.AUTO_SCALING_ENABLED = os.getenv("AUTO_SCALING_ENABLED", "true").lower() in ("true", "1", "t", "yes")
+        
+        # Advanced Cache Configuration
+        self.L1_CACHE_SIZE = int(os.getenv("L1_CACHE_SIZE", "1000"))
+        self.L1_CACHE_TTL = int(os.getenv("L1_CACHE_TTL", "300"))
+        self.L2_CACHE_TTL = int(os.getenv("L2_CACHE_TTL", "1800"))
+        self.L3_CACHE_TTL = int(os.getenv("L3_CACHE_TTL", "7200"))
+        
+        # AI Operations Optimization
+        self.AI_MEMORY_OPTIMIZATION = os.getenv("AI_MEMORY_OPTIMIZATION", "true").lower() in ("true", "1", "t", "yes")
+        self.MAX_CONVERSATION_HISTORY = int(os.getenv("MAX_CONVERSATION_HISTORY", "50"))
+        self.MODEL_CACHE_SIZE = int(os.getenv("MODEL_CACHE_SIZE", "3"))
+
         # Rate Limiting Configuration
         self.RATE_LIMIT_DEFAULT = parse_list_from_env("RATE_LIMIT_DEFAULT", ["200 per day", "50 per hour"])
 

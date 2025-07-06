@@ -14,6 +14,7 @@ from app.api.v1.endpoints.decisions import router as decisions_router
 from app.api.v1.endpoints.events import router as events_router
 from app.api.v1.ai_operations import router as ai_operations_router
 from app.api.v1.cache import router as cache_router
+from app.api.v1.health import router as health_router
 from app.core.logging import logger
 
 api_router = APIRouter()
@@ -98,13 +99,12 @@ api_router.include_router(
     }
 )
 
-
-@api_router.get("/health", tags=["Health & Status"])
-async def health_check():
-    """Health check endpoint.
-
-    Returns:
-        dict: Health status information.
-    """
-    logger.info("health_check_called")
-    return {"status": "healthy", "version": "1.0.0"}
+api_router.include_router(
+    health_router,
+    prefix="/health",
+    tags=["Health & Service Integration"],
+    responses={
+        200: {"description": "Service healthy"},
+        503: {"description": "Service unavailable or degraded"}
+    }
+)
