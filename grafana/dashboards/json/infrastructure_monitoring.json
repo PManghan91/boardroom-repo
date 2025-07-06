@@ -1,0 +1,559 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "infrastructure-monitoring",
+    "title": "Infrastructure Monitoring Dashboard",
+    "tags": ["infrastructure", "system", "resources", "containers"],
+    "timezone": "browser",
+    "schemaVersion": 30,
+    "version": 1,
+    "refresh": "30s",
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "type": "row",
+        "title": "System Overview",
+        "gridPos": { "x": 0, "y": 0, "w": 24, "h": 1 }
+      },
+      {
+        "id": 2,
+        "type": "stat",
+        "title": "CPU Usage",
+        "targets": [
+          {
+            "expr": "100 - (avg by (instance) (irate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
+            "legendFormat": "CPU %",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 1, "w": 4, "h": 4 },
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "steps": [
+                { "color": "green", "value": 0 },
+                { "color": "yellow", "value": 70 },
+                { "color": "red", "value": 90 }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 3,
+        "type": "stat",
+        "title": "Memory Usage",
+        "targets": [
+          {
+            "expr": "(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100",
+            "legendFormat": "Memory %",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 4, "y": 1, "w": 4, "h": 4 },
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "steps": [
+                { "color": "green", "value": 0 },
+                { "color": "yellow", "value": 80 },
+                { "color": "red", "value": 95 }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 4,
+        "type": "stat",
+        "title": "Disk Usage",
+        "targets": [
+          {
+            "expr": "100 - ((node_filesystem_avail_bytes{mountpoint=\"/\",fstype!=\"rootfs\"} / node_filesystem_size_bytes{mountpoint=\"/\",fstype!=\"rootfs\"}) * 100)",
+            "legendFormat": "Disk %",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 8, "y": 1, "w": 4, "h": 4 },
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "steps": [
+                { "color": "green", "value": 0 },
+                { "color": "yellow", "value": 85 },
+                { "color": "red", "value": 95 }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 5,
+        "type": "stat",
+        "title": "Network I/O",
+        "targets": [
+          {
+            "expr": "rate(node_network_receive_bytes_total{device!=\"lo\"}[5m]) + rate(node_network_transmit_bytes_total{device!=\"lo\"}[5m])",
+            "legendFormat": "Network I/O",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 12, "y": 1, "w": 4, "h": 4 },
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "Bps"
+          }
+        }
+      },
+      {
+        "id": 6,
+        "type": "stat",
+        "title": "Load Average",
+        "targets": [
+          {
+            "expr": "node_load1",
+            "legendFormat": "1m Load",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 16, "y": 1, "w": 4, "h": 4 },
+        "options": {
+          "colorMode": "value"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "decimals": 2
+          }
+        }
+      },
+      {
+        "id": 7,
+        "type": "stat",
+        "title": "Open File Descriptors",
+        "targets": [
+          {
+            "expr": "node_filefd_allocated / node_filefd_maximum * 100",
+            "legendFormat": "FD Usage %",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 20, "y": 1, "w": 4, "h": 4 },
+        "options": {
+          "colorMode": "background"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "thresholds": {
+              "steps": [
+                { "color": "green", "value": 0 },
+                { "color": "yellow", "value": 80 },
+                { "color": "red", "value": 95 }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 8,
+        "type": "row",
+        "title": "Resource Trends",
+        "gridPos": { "x": 0, "y": 5, "w": 24, "h": 1 }
+      },
+      {
+        "id": 9,
+        "type": "graph",
+        "title": "CPU Usage Over Time",
+        "targets": [
+          {
+            "expr": "100 - (avg by (instance) (irate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
+            "legendFormat": "{{instance}} CPU %",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 6, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "percent",
+            "min": 0,
+            "max": 100
+          }
+        ],
+        "thresholds": [
+          {
+            "value": 90,
+            "colorMode": "critical",
+            "op": "gt"
+          },
+          {
+            "value": 70,
+            "colorMode": "warning",
+            "op": "gt"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "type": "graph",
+        "title": "Memory Usage Over Time",
+        "targets": [
+          {
+            "expr": "(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100",
+            "legendFormat": "{{instance}} Memory %",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 12, "y": 6, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "percent",
+            "min": 0,
+            "max": 100
+          }
+        ],
+        "thresholds": [
+          {
+            "value": 95,
+            "colorMode": "critical",
+            "op": "gt"
+          },
+          {
+            "value": 80,
+            "colorMode": "warning",
+            "op": "gt"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "type": "graph",
+        "title": "Disk I/O",
+        "targets": [
+          {
+            "expr": "rate(node_disk_read_bytes_total[5m])",
+            "legendFormat": "{{instance}} Read",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(node_disk_written_bytes_total[5m])",
+            "legendFormat": "{{instance}} Write",
+            "refId": "B"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 14, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "Bps",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "type": "graph",
+        "title": "Network I/O",
+        "targets": [
+          {
+            "expr": "rate(node_network_receive_bytes_total{device!=\"lo\"}[5m])",
+            "legendFormat": "{{instance}} {{device}} RX",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(node_network_transmit_bytes_total{device!=\"lo\"}[5m])",
+            "legendFormat": "{{instance}} {{device}} TX",
+            "refId": "B"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 12, "y": 14, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "Bps",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "type": "row",
+        "title": "Container Metrics",
+        "gridPos": { "x": 0, "y": 22, "w": 24, "h": 1 }
+      },
+      {
+        "id": 14,
+        "type": "graph",
+        "title": "Container CPU Usage",
+        "targets": [
+          {
+            "expr": "rate(container_cpu_usage_seconds_total{name!=\"\"}[5m]) * 100",
+            "legendFormat": "{{name}}",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 23, "w": 8, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "percent",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "type": "graph",
+        "title": "Container Memory Usage",
+        "targets": [
+          {
+            "expr": "container_memory_usage_bytes{name!=\"\"} / 1024 / 1024",
+            "legendFormat": "{{name}}",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 8, "y": 23, "w": 8, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "MB",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "type": "graph",
+        "title": "Container Network I/O",
+        "targets": [
+          {
+            "expr": "rate(container_network_receive_bytes_total{name!=\"\"}[5m])",
+            "legendFormat": "{{name}} RX",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(container_network_transmit_bytes_total{name!=\"\"}[5m])",
+            "legendFormat": "{{name}} TX",
+            "refId": "B"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 16, "y": 23, "w": 8, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "Bps",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "type": "row",
+        "title": "Application Services",
+        "gridPos": { "x": 0, "y": 31, "w": 24, "h": 1 }
+      },
+      {
+        "id": 18,
+        "type": "stat",
+        "title": "Database Connections",
+        "targets": [
+          {
+            "expr": "database_pool_active + database_pool_idle",
+            "legendFormat": "Total Connections",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 32, "w": 6, "h": 4 },
+        "options": {
+          "colorMode": "value"
+        }
+      },
+      {
+        "id": 19,
+        "type": "stat",
+        "title": "Redis Memory",
+        "targets": [
+          {
+            "expr": "redis_memory_usage_bytes / 1024 / 1024",
+            "legendFormat": "Memory MB",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 6, "y": 32, "w": 6, "h": 4 },
+        "options": {
+          "colorMode": "value"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "MB"
+          }
+        }
+      },
+      {
+        "id": 20,
+        "type": "stat",
+        "title": "Active WebSocket Connections",
+        "targets": [
+          {
+            "expr": "active_websocket_connections",
+            "legendFormat": "Active Connections",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 12, "y": 32, "w": 6, "h": 4 },
+        "options": {
+          "colorMode": "value"
+        }
+      },
+      {
+        "id": 21,
+        "type": "stat",
+        "title": "Cache Hit Ratio",
+        "targets": [
+          {
+            "expr": "cache_hit_ratio",
+            "legendFormat": "Hit Ratio %",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 18, "y": 32, "w": 6, "h": 4 },
+        "options": {
+          "colorMode": "background"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "thresholds": {
+              "steps": [
+                { "color": "red", "value": 0 },
+                { "color": "yellow", "value": 70 },
+                { "color": "green", "value": 90 }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 22,
+        "type": "graph",
+        "title": "Database Connection Pool",
+        "targets": [
+          {
+            "expr": "database_pool_active",
+            "legendFormat": "Active Connections",
+            "refId": "A"
+          },
+          {
+            "expr": "database_pool_idle",
+            "legendFormat": "Idle Connections",
+            "refId": "B"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 36, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "short",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "type": "graph",
+        "title": "Redis Performance",
+        "targets": [
+          {
+            "expr": "redis_connected_clients",
+            "legendFormat": "Connected Clients",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(cache_operations_total[5m])",
+            "legendFormat": "{{operation}}",
+            "refId": "B"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 12, "y": 36, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "short",
+            "min": 0
+          }
+        ]
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "name": "instance",
+          "type": "query",
+          "query": "label_values(node_uname_info, instance)",
+          "refresh": 1,
+          "includeAll": true,
+          "multi": true
+        },
+        {
+          "name": "container",
+          "type": "query",
+          "query": "label_values(container_cpu_usage_seconds_total, name)",
+          "refresh": 1,
+          "includeAll": true,
+          "multi": true
+        }
+      ]
+    },
+    "annotations": {
+      "list": [
+        {
+          "name": "System Events",
+          "type": "tags",
+          "tags": ["system"],
+          "iconColor": "orange"
+        }
+      ]
+    }
+  }
+}

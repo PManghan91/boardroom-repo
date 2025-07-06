@@ -1,0 +1,18 @@
+
+> boardroom-ai@0.1.0 dev
+> next dev --turbopack
+
+ ⚠ Port 3000 is in use, using available port 3001 instead.
+   ▲ Next.js 15.3.3 (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://10.255.255.254:3001
+   - Environments: .env.local, .env
+   - Experiments (use with caution):
+     · clientTraceMetadata
+
+ ✓ Starting...
+ ○ Compiling instrumentation Node.js ...
+ ✓ Compiled instrumentation Node.js in 508ms
+ ✓ Compiled instrumentation Edge in 273ms
+ ✓ Compiled middleware in 147ms
+ ✓ Ready in 2.1s

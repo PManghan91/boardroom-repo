@@ -1,0 +1,280 @@
+groups:
+  - name: boardroom.rules
+    rules:
+      # High-level service availability
+      - alert: ServiceDown
+        expr: up == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service {{ $labels.instance }} is down"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 30 seconds."
+
+      # Application Performance
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High response time detected"
+          description: "95th percentile response time is {{ $value }}s for {{ $labels.instance }}"
+
+      - alert: CriticalResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 5
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical response time detected"
+          description: "95th percentile response time is {{ $value }}s for {{ $labels.instance }}"
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) * 100 > 5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is {{ $value }}% for {{ $labels.instance }}"
+
+      - alert: CriticalErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) * 100 > 15
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical error rate detected"
+          description: "Error rate is {{ $value }}% for {{ $labels.instance }}"
+
+      # System Resources
+      - alert: HighCPUUsage
+        expr: system_cpu_usage_percent > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is {{ $value }}% on {{ $labels.instance }}"
+
+      - alert: CriticalCPUUsage
+        expr: system_cpu_usage_percent > 95
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical CPU usage detected"
+          description: "CPU usage is {{ $value }}% on {{ $labels.instance }}"
+
+      - alert: HighMemoryUsage
+        expr: system_memory_usage_percent > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage is {{ $value }}% on {{ $labels.instance }}"
+
+      - alert: CriticalMemoryUsage
+        expr: system_memory_usage_percent > 95
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical memory usage detected"
+          description: "Memory usage is {{ $value }}% on {{ $labels.instance }}"
+
+      - alert: HighDiskUsage
+        expr: system_disk_usage_percent > 90
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High disk usage detected"
+          description: "Disk usage is {{ $value }}% on {{ $labels.instance }}"
+
+      - alert: CriticalDiskUsage
+        expr: system_disk_usage_percent > 95
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical disk usage detected"
+          description: "Disk usage is {{ $value }}% on {{ $labels.instance }}"
+
+      # Database Alerts
+      - alert: DatabaseConnectionPoolHigh
+        expr: database_pool_active / (database_pool_active + database_pool_idle) > 0.9
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Database connection pool usage high"
+          description: "Database connection pool is {{ $value | humanizePercentage }} full"
+
+      - alert: DatabaseConnectionPoolFull
+        expr: database_pool_idle == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Database connection pool exhausted"
+          description: "No idle database connections available"
+
+      # Cache Alerts
+      - alert: LowCacheHitRatio
+        expr: cache_hit_ratio < 70
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low cache hit ratio"
+          description: "Cache hit ratio is {{ $value }}% which is below optimal threshold"
+
+      - alert: CriticalCacheHitRatio
+        expr: cache_hit_ratio < 50
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical cache hit ratio"
+          description: "Cache hit ratio is {{ $value }}% which indicates cache issues"
+
+      - alert: HighCacheMemoryUsage
+        expr: cache_memory_usage_bytes / (1024 * 1024 * 1024) > 2
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High cache memory usage"
+          description: "Cache memory usage is {{ $value | humanize }}B"
+
+      # AI Operations
+      - alert: HighAIOperationLatency
+        expr: histogram_quantile(0.95, rate(ai_operation_duration_seconds_bucket[5m])) > 30
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High AI operation latency"
+          description: "95th percentile AI operation latency is {{ $value }}s"
+
+      - alert: HighAIErrorRate
+        expr: rate(ai_operations_total{status="error"}[5m]) / rate(ai_operations_total[5m]) * 100 > 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High AI operation error rate"
+          description: "AI operation error rate is {{ $value }}%"
+
+      # Business Metrics
+      - alert: LowUserEngagement
+        expr: avg_over_time(user_engagement_score[1h]) < 30
+        for: 1h
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low user engagement detected"
+          description: "Average user engagement score is {{ $value }} over the last hour"
+
+      - alert: NoMeetingsCreated
+        expr: increase(meetings_created_total[4h]) == 0
+        for: 4h
+        labels:
+          severity: warning
+        annotations:
+          summary: "No meetings created in 4 hours"
+          description: "No meetings have been created in the last 4 hours, which may indicate issues"
+
+      # Error Pattern Alerts
+      - alert: HighErrorPatternFrequency
+        expr: rate(error_patterns_total{severity="critical"}[5m]) > 0.5
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High frequency of critical error patterns"
+          description: "Critical error patterns occurring at {{ $value }} per second"
+
+      # Real-time Features
+      - alert: WebSocketConnectionDrop
+        expr: rate(active_websocket_connections[5m]) < -10
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Rapid WebSocket connection drop"
+          description: "WebSocket connections dropping rapidly at {{ $value }} per second"
+
+      # Infrastructure Health
+      - alert: ContainerRestartingFrequently
+        expr: rate(container_start_time_seconds[30m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Container restarting frequently"
+          description: "Container {{ $labels.name }} is restarting frequently"
+
+      - alert: NodeLoadHigh
+        expr: node_load1 / count(node_cpu_seconds_total{mode="idle"}) without (cpu, mode) > 2
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High system load"
+          description: "System load is {{ $value }} on {{ $labels.instance }}"
+
+      # Network Issues
+      - alert: HighNetworkErrorRate
+        expr: rate(node_network_receive_errs_total[5m]) + rate(node_network_transmit_errs_total[5m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High network error rate"
+          description: "Network errors on {{ $labels.instance }} at {{ $value }} errors/sec"
+
+  - name: prediction.rules
+    rules:
+      # Predictive Alerts
+      - alert: DiskWillFillSoon
+        expr: predict_linear(node_filesystem_free_bytes[6h], 24*3600) < 0
+        for: 1h
+        labels:
+          severity: warning
+        annotations:
+          summary: "Disk will fill within 24 hours"
+          description: "Disk on {{ $labels.instance }} is predicted to fill within 24 hours"
+
+      - alert: MemoryLeakDetected
+        expr: predict_linear(process_resident_memory_bytes[1h], 2*3600) > 2*1024*1024*1024
+        for: 30m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Potential memory leak detected"
+          description: "Memory usage trending upward, may indicate a memory leak"
+
+  - name: sla.rules
+    rules:
+      # SLA-based alerts
+      - alert: SLAErrorBudgetExhausted
+        expr: (1 - (rate(http_requests_total{status!~"5.."}[30d]) / rate(http_requests_total[30d]))) > 0.001
+        for: 15m
+        labels:
+          severity: critical
+        annotations:
+          summary: "SLA error budget exhausted"
+          description: "Monthly error budget has been exhausted"
+
+      - alert: SLALatencyBudgetExhausted
+        expr: histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[30d])) > 1
+        for: 15m
+        labels:
+          severity: critical
+        annotations:
+          summary: "SLA latency budget exhausted"
+          description: "Monthly latency budget has been exhausted"

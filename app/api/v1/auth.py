@@ -349,3 +349,44 @@ async def get_user_sessions(user: User = Depends(get_current_user)):
     except ValueError as ve:
         logger.error("get_sessions_validation_failed", user_id=user.id, error=str(ve), exc_info=True)
         raise HTTPException(status_code=422, detail=str(ve))
+
+
+@router.post("/refresh", response_model=TokenResponse)
+@limiter.limit(settings.RATE_LIMIT_ENDPOINTS.get("refresh", ["10/minute"])[0])
+async def refresh_token(request: Request, user: User = Depends(get_current_user)):
+    """Refresh an access token for an authenticated user.
+    
+    This endpoint allows users to get a new access token without re-authenticating.
+    The current token must still be valid (not expired) to refresh.
+    
+    Args:
+        request: The FastAPI request object
+        user: The current authenticated user
+        
+    Returns:
+        TokenResponse: A new access token
+        
+    Raises:
+        HTTPException: If the current token is invalid or expired
+    """
+    try:
+        # Create a new token for the user
+        new_token = create_access_token(str(user.id))
+        
+        logger.info(
+            "token_refreshed",
+            user_id=user.id,
+            expires_at=new_token.expires_at.isoformat()
+        )
+        
+        return TokenResponse(
+            access_token=new_token.access_token,
+            token_type="bearer",
+            expires_at=new_token.expires_at
+        )
+    except Exception as e:
+        logger.error("token_refresh_failed", user_id=user.id, error=str(e), exc_info=True)
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to refresh token"
+        )

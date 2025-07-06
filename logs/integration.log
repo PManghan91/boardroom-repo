@@ -1,0 +1,97 @@
+2025-07-06 00:25:31 [INFO] ==============================================
+2025-07-06 00:25:31 [INFO]    BOARDROOM AI - FINAL INTEGRATION STARTUP
+2025-07-06 00:25:31 [INFO] ==============================================
+2025-07-06 00:25:31 [INFO] ==============================================
+2025-07-06 00:25:31 [INFO]    COMPREHENSIVE CLEANUP
+2025-07-06 00:25:31 [INFO] ==============================================
+2025-07-06 00:25:31 [INFO] Killing processes from PID file...
+2025-07-06 00:25:31 [INFO] Killing processes on port 8001: 27767
+2025-07-06 00:25:31 [INFO] Cleaning up Node.js processes...
+2025-07-06 00:25:31 [INFO] Cleaning up Python processes...
+2025-07-06 00:25:31 [INFO] Stopping Docker containers...
+2025-07-06 00:25:43 [INFO] ✅ Cleanup completed
+2025-07-06 00:25:43 [INFO] ==============================================
+2025-07-06 00:25:43 [INFO]    ENVIRONMENT SETUP
+2025-07-06 00:25:43 [INFO] ==============================================
+2025-07-06 00:25:43 [INFO] Creating frontend .env.local file...
+2025-07-06 00:25:43 [INFO] ✅ Environment setup completed
+2025-07-06 00:25:43 [INFO] ==============================================
+2025-07-06 00:25:43 [INFO]    STARTING INFRASTRUCTURE
+2025-07-06 00:25:43 [INFO] ==============================================
+2025-07-06 00:25:43 [INFO] Starting Redis...
+2025-07-06 00:25:45 [INFO] ✅ Redis is ready
+2025-07-06 00:25:45 [INFO] Starting PostgreSQL...
+2025-07-06 00:25:46 [INFO] Waiting for PostgreSQL... (attempt 1/15)
+2025-07-06 00:25:48 [INFO] Waiting for PostgreSQL... (attempt 2/15)
+2025-07-06 00:25:50 [INFO] Waiting for PostgreSQL... (attempt 3/15)
+2025-07-06 00:25:52 [INFO] Waiting for PostgreSQL... (attempt 4/15)
+2025-07-06 00:25:54 [INFO] Waiting for PostgreSQL... (attempt 5/15)
+2025-07-06 00:25:56 [INFO] Waiting for PostgreSQL... (attempt 6/15)
+2025-07-06 00:25:58 [INFO] Waiting for PostgreSQL... (attempt 7/15)
+2025-07-06 00:26:00 [INFO] Waiting for PostgreSQL... (attempt 8/15)
+2025-07-06 00:26:02 [INFO] Waiting for PostgreSQL... (attempt 9/15)
+2025-07-06 00:26:04 [INFO] Waiting for PostgreSQL... (attempt 10/15)
+2025-07-06 00:26:06 [INFO] Waiting for PostgreSQL... (attempt 11/15)
+2025-07-06 00:26:08 [INFO] Waiting for PostgreSQL... (attempt 12/15)
+2025-07-06 00:26:10 [INFO] Waiting for PostgreSQL... (attempt 13/15)
+2025-07-06 00:26:12 [INFO] Waiting for PostgreSQL... (attempt 14/15)
+2025-07-06 00:26:14 [INFO] Waiting for PostgreSQL... (attempt 15/15)
+2025-07-06 00:26:16 [INFO] ==============================================
+2025-07-06 00:26:16 [INFO]    DATABASE INITIALIZATION
+2025-07-06 00:26:16 [INFO] ==============================================
+2025-07-06 00:26:16 [INFO] Initializing database schema...
+2025-07-06 00:26:16 [INFO] ==============================================
+2025-07-06 00:26:16 [INFO]    COMPREHENSIVE CLEANUP
+2025-07-06 00:26:16 [INFO] ==============================================
+2025-07-06 00:26:17 [INFO] Cleaning up Node.js processes...
+2025-07-06 00:26:17 [INFO] Cleaning up Python processes...
+2025-07-06 00:26:17 [INFO] Stopping Docker containers...
+2025-07-06 00:26:17 [INFO] ✅ Cleanup completed
+2025-07-06 00:27:00 [INFO] ==============================================
+2025-07-06 00:27:00 [INFO]    BOARDROOM AI - FINAL INTEGRATION STARTUP
+2025-07-06 00:27:00 [INFO] ==============================================
+2025-07-06 00:27:00 [INFO] ==============================================
+2025-07-06 00:27:00 [INFO]    COMPREHENSIVE CLEANUP
+2025-07-06 00:27:00 [INFO] ==============================================
+2025-07-06 00:27:00 [INFO] Killing processes from PID file...
+2025-07-06 00:27:00 [INFO] Cleaning up Node.js processes...
+2025-07-06 00:27:00 [INFO] Cleaning up Python processes...
+2025-07-06 00:27:00 [INFO] Stopping Docker containers...
+2025-07-06 00:27:01 [INFO] ✅ Cleanup completed
+2025-07-06 00:27:01 [INFO] ==============================================
+2025-07-06 00:27:01 [INFO]    ENVIRONMENT SETUP
+2025-07-06 00:27:01 [INFO] ==============================================
+2025-07-06 00:27:01 [INFO] ✅ Environment setup completed
+2025-07-06 00:27:01 [INFO] ==============================================
+2025-07-06 00:27:01 [INFO]    STARTING INFRASTRUCTURE
+2025-07-06 00:27:01 [INFO] ==============================================
+2025-07-06 00:27:01 [INFO] Starting Redis...
+2025-07-06 00:27:01 [INFO] ✅ Redis is ready
+2025-07-06 00:27:01 [INFO] Starting PostgreSQL...
+2025-07-06 00:27:01 [INFO] Waiting for PostgreSQL... (attempt 1/15)
+2025-07-06 00:27:03 [INFO] Waiting for PostgreSQL... (attempt 2/15)
+2025-07-06 00:27:05 [INFO] Waiting for PostgreSQL... (attempt 3/15)
+2025-07-06 00:27:07 [INFO] Waiting for PostgreSQL... (attempt 4/15)
+2025-07-06 00:27:09 [INFO] Waiting for PostgreSQL... (attempt 5/15)
+2025-07-06 00:27:11 [INFO] Waiting for PostgreSQL... (attempt 6/15)
+2025-07-06 00:27:13 [INFO] Waiting for PostgreSQL... (attempt 7/15)
+2025-07-06 00:27:15 [INFO] Waiting for PostgreSQL... (attempt 8/15)
+2025-07-06 00:27:17 [INFO] Waiting for PostgreSQL... (attempt 9/15)
+2025-07-06 00:27:19 [INFO] Waiting for PostgreSQL... (attempt 10/15)
+2025-07-06 00:27:21 [INFO] Waiting for PostgreSQL... (attempt 11/15)
+2025-07-06 00:27:23 [INFO] Waiting for PostgreSQL... (attempt 12/15)
+2025-07-06 00:27:25 [INFO] Waiting for PostgreSQL... (attempt 13/15)
+2025-07-06 00:27:27 [INFO] Waiting for PostgreSQL... (attempt 14/15)
+2025-07-06 00:27:29 [INFO] Waiting for PostgreSQL... (attempt 15/15)
+2025-07-06 00:27:31 [INFO] ==============================================
+2025-07-06 00:27:31 [INFO]    DATABASE INITIALIZATION
+2025-07-06 00:27:31 [INFO] ==============================================
+2025-07-06 00:27:31 [INFO] Initializing database schema...
+2025-07-06 00:27:32 [INFO] ==============================================
+2025-07-06 00:27:32 [INFO]    COMPREHENSIVE CLEANUP
+2025-07-06 00:27:32 [INFO] ==============================================
+2025-07-06 00:27:32 [INFO] Killing processes on port 8000: 21855
+2025-07-06 00:27:33 [INFO] Cleaning up Node.js processes...
+2025-07-06 00:27:33 [INFO] Cleaning up Python processes...
+2025-07-06 00:27:33 [INFO] Stopping Docker containers...
+2025-07-06 00:27:33 [INFO] ✅ Cleanup completed

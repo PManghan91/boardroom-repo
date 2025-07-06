@@ -41,7 +41,7 @@ class CreateMeetingAgendaTool(BaseTool):
     
     name: str = "create_meeting_agenda"
     description: str = "Creates a structured meeting agenda based on topic, duration, and participants"
-    args_schema = MeetingAgendaInput
+    args_schema: type = MeetingAgendaInput
 
     def _run(self, **kwargs) -> str:
         """Execute the tool synchronously."""
@@ -120,7 +120,7 @@ class DecisionSupportTool(BaseTool):
     
     name: str = "decision_support_analysis"
     description: str = "Provides structured analysis to support decision making"
-    args_schema = DecisionSupportInput
+    args_schema: type = DecisionSupportInput
 
     def _run(self, **kwargs) -> str:
         """Execute the tool synchronously."""
@@ -206,7 +206,7 @@ class GenerateMeetingMinutesTool(BaseTool):
     
     name: str = "generate_meeting_minutes"
     description: str = "Generates structured meeting minutes from discussion points and decisions"
-    args_schema = MeetingMinutesInput
+    args_schema: type = MeetingMinutesInput
 
     def _run(self, **kwargs) -> str:
         """Execute the tool synchronously."""
