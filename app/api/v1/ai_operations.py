@@ -99,9 +99,9 @@ async def get_ai_health(
 
 
 @router.get("/sessions/active")
-@limiter.limit("10 per minute")
 @memory_optimized
 @cached(ttl=30, key_prefix="active_sessions")
+@limiter.limit("10 per minute")
 async def get_active_sessions(
     request: Request,
     session: Session = Depends(get_current_session),

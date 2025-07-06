@@ -150,7 +150,7 @@ class APIListRequest(BaseModel):
     page: int = Field(default=1, ge=1, le=1000, description="Page number")
     size: int = Field(default=20, ge=1, le=100, description="Items per page")
     sort: Optional[str] = Field(None, description="Sort field")
-    order: str = Field(default="asc", regex="^(asc|desc)$", description="Sort order")
+    order: str = Field(default="asc", pattern="^(asc|desc)$", description="Sort order")
     search: Optional[str] = Field(None, max_length=100, description="Search query")
     filters: Optional[Dict[str, Any]] = Field(None, description="Additional filters")
 

@@ -1,0 +1,399 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "production-monitoring",
+    "title": "Production Monitoring Dashboard",
+    "tags": ["production", "monitoring", "apm", "business"],
+    "timezone": "browser",
+    "schemaVersion": 30,
+    "version": 1,
+    "refresh": "10s",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "type": "stat",
+        "title": "System Health",
+        "targets": [
+          {
+            "expr": "up",
+            "legendFormat": "System Status",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 },
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "center"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "steps": [
+                { "color": "red", "value": 0 },
+                { "color": "green", "value": 1 }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 2,
+        "type": "stat",
+        "title": "Response Time (P95)",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "P95 Response Time",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 },
+        "options": {
+          "unit": "s",
+          "colorMode": "value"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "steps": [
+                { "color": "green", "value": 0 },
+                { "color": "yellow", "value": 1 },
+                { "color": "red", "value": 2 }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 3,
+        "type": "stat",
+        "title": "Error Rate",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{status=~\"5..\"}[5m]) / rate(http_requests_total[5m]) * 100",
+            "legendFormat": "Error Rate %",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 12, "y": 0, "w": 6, "h": 4 },
+        "options": {
+          "unit": "percent",
+          "colorMode": "value"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "steps": [
+                { "color": "green", "value": 0 },
+                { "color": "yellow", "value": 1 },
+                { "color": "red", "value": 5 }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 4,
+        "type": "stat",
+        "title": "Throughput",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])",
+            "legendFormat": "Requests/sec",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 18, "y": 0, "w": 6, "h": 4 },
+        "options": {
+          "unit": "reqps",
+          "colorMode": "none"
+        }
+      },
+      {
+        "id": 5,
+        "type": "graph",
+        "title": "Response Time Trends",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.50, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "P50",
+            "refId": "A"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "P95",
+            "refId": "B"
+          },
+          {
+            "expr": "histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "P99",
+            "refId": "C"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 4, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "s",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "type": "graph",
+        "title": "Request Volume",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])",
+            "legendFormat": "{{method}} {{endpoint}}",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 12, "y": 4, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "reqps",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "type": "graph",
+        "title": "System Resources",
+        "targets": [
+          {
+            "expr": "system_cpu_usage_percent",
+            "legendFormat": "CPU Usage %",
+            "refId": "A"
+          },
+          {
+            "expr": "system_memory_usage_percent",
+            "legendFormat": "Memory Usage %",
+            "refId": "B"
+          },
+          {
+            "expr": "system_disk_usage_percent",
+            "legendFormat": "Disk Usage %",
+            "refId": "C"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 12, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "percent",
+            "min": 0,
+            "max": 100
+          }
+        ],
+        "thresholds": [
+          {
+            "value": 80,
+            "colorMode": "critical",
+            "op": "gt"
+          },
+          {
+            "value": 70,
+            "colorMode": "warning",
+            "op": "gt"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "type": "graph",
+        "title": "Database Performance",
+        "targets": [
+          {
+            "expr": "database_pool_active",
+            "legendFormat": "Active Connections",
+            "refId": "A"
+          },
+          {
+            "expr": "database_pool_idle",
+            "legendFormat": "Idle Connections",
+            "refId": "B"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 12, "y": 12, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "short",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "type": "graph",
+        "title": "Cache Performance",
+        "targets": [
+          {
+            "expr": "cache_hit_ratio",
+            "legendFormat": "Hit Ratio %",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(cache_operations_total[5m])",
+            "legendFormat": "{{operation}}",
+            "refId": "B"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 20, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "percent",
+            "min": 0,
+            "max": 100
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "type": "graph",
+        "title": "AI Operations",
+        "targets": [
+          {
+            "expr": "rate(ai_operations_total[5m])",
+            "legendFormat": "{{operation}} {{model}}",
+            "refId": "A"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(ai_operation_duration_seconds_bucket[5m]))",
+            "legendFormat": "P95 Duration",
+            "refId": "B"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 12, "y": 20, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "ops",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "type": "stat",
+        "title": "Business KPIs - Today",
+        "targets": [
+          {
+            "expr": "increase(meetings_created_total[1d])",
+            "legendFormat": "Meetings Created",
+            "refId": "A"
+          },
+          {
+            "expr": "increase(decisions_made_total[1d])",
+            "legendFormat": "Decisions Made",
+            "refId": "B"
+          },
+          {
+            "expr": "increase(ai_operations_total[1d])",
+            "legendFormat": "AI Interactions",
+            "refId": "C"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 28, "w": 24, "h": 6 },
+        "options": {
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          }
+        }
+      },
+      {
+        "id": 12,
+        "type": "graph",
+        "title": "Error Patterns",
+        "targets": [
+          {
+            "expr": "rate(error_patterns_total[5m])",
+            "legendFormat": "{{error_type}} - {{severity}}",
+            "refId": "A"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 0, "y": 34, "w": 12, "h": 8 },
+        "yAxes": [
+          {
+            "unit": "short",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "type": "graph",
+        "title": "Real-time Events",
+        "targets": [
+          {
+            "expr": "rate(realtime_events_total[5m])",
+            "legendFormat": "{{event_type}}",
+            "refId": "A"
+          },
+          {
+            "expr": "active_websocket_connections",
+            "legendFormat": "Active Connections",
+            "refId": "B"
+          }
+        ],
+        "datasource": "Prometheus",
+        "gridPos": { "x": 12, "y": 34, "w": 12, "h": 8 }
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "name": "instance",
+          "type": "query",
+          "query": "label_values(up, instance)",
+          "refresh": 1,
+          "includeAll": true,
+          "multi": true
+        },
+        {
+          "name": "endpoint",
+          "type": "query",
+          "query": "label_values(http_requests_total, endpoint)",
+          "refresh": 1,
+          "includeAll": true,
+          "multi": true
+        }
+      ]
+    },
+    "annotations": {
+      "list": [
+        {
+          "name": "Deployments",
+          "type": "tags",
+          "tags": ["deployment"],
+          "iconColor": "blue"
+        },
+        {
+          "name": "Alerts",
+          "type": "tags", 
+          "tags": ["alert"],
+          "iconColor": "red"
+        }
+      ]
+    }
+  }
+}

@@ -56,14 +56,8 @@ class DatabaseService:
                     }
                 }
 
-                # Configure pooling based on environment
-                if self.settings.ENVIRONMENT.value == "test":
-                    engine_kwargs["poolclass"] = NullPool
-                else:
-                    engine_kwargs["poolclass"] = QueuePool
-                    engine_kwargs["pool_size"] = 5
-                    engine_kwargs["max_overflow"] = 10
-                    engine_kwargs["pool_timeout"] = 30
+                # Configure pooling based on environment (use NullPool for async)
+                engine_kwargs["poolclass"] = NullPool
 
                 self._engine = create_async_engine(
                     self.settings.database_url,
@@ -223,8 +217,8 @@ class DatabaseService:
         Returns:
             Optional[User]: The user if found, None otherwise
         """
-        with Session(self.engine) as session:
-            user = session.get(User, user_id)
+        async with self.get_session() as session:
+            user = await session.get(User, user_id)
             return user
 
     async def get_user_by_email(self, email: str) -> Optional[User]:
@@ -236,9 +230,11 @@ class DatabaseService:
         Returns:
             Optional[User]: The user if found, None otherwise
         """
-        with Session(self.engine) as session:
+        from sqlalchemy import select
+        async with self.get_session() as session:
             statement = select(User).where(User.email == email)
-            user = session.exec(statement).first()
+            result = await session.execute(statement)
+            user = result.scalar_one_or_none()
             return user
 
     async def delete_user_by_email(self, email: str) -> bool:
@@ -250,13 +246,16 @@ class DatabaseService:
         Returns:
             bool: True if deletion was successful, False if user not found
         """
-        with Session(self.engine) as session:
-            user = session.exec(select(User).where(User.email == email)).first()
+        from sqlalchemy import select
+        async with self.get_session() as session:
+            statement = select(User).where(User.email == email)
+            result = await session.execute(statement)
+            user = result.scalar_one_or_none()
             if not user:
                 return False
 
-            session.delete(user)
-            session.commit()
+            await session.delete(user)
+            await session.commit()
             logger.info("user_deleted", email=email)
             return True
 
@@ -271,11 +270,11 @@ class DatabaseService:
         Returns:
             ChatSession: The created session
         """
-        with Session(self.engine) as session:
+        async with self.get_session() as session:
             chat_session = ChatSession(id=session_id, user_id=user_id, name=name)
             session.add(chat_session)
-            session.commit()
-            session.refresh(chat_session)
+            await session.commit()
+            await session.refresh(chat_session)
             logger.info("session_created", session_id=session_id, user_id=user_id, name=name)
             return chat_session
 
@@ -288,13 +287,13 @@ class DatabaseService:
         Returns:
             bool: True if deletion was successful, False if session not found
         """
-        with Session(self.engine) as session:
-            chat_session = session.get(ChatSession, session_id)
+        async with self.get_session() as session:
+            chat_session = await session.get(ChatSession, session_id)
             if not chat_session:
                 return False
 
-            session.delete(chat_session)
-            session.commit()
+            await session.delete(chat_session)
+            await session.commit()
             logger.info("session_deleted", session_id=session_id)
             return True
 
@@ -307,8 +306,8 @@ class DatabaseService:
         Returns:
             Optional[ChatSession]: The session if found, None otherwise
         """
-        with Session(self.engine) as session:
-            chat_session = session.get(ChatSession, session_id)
+        async with self.get_session() as session:
+            chat_session = await session.get(ChatSession, session_id)
             return chat_session
 
     async def get_user_sessions(self, user_id: int) -> List[ChatSession]:
@@ -320,10 +319,12 @@ class DatabaseService:
         Returns:
             List[ChatSession]: List of user's sessions
         """
-        with Session(self.engine) as session:
+        from sqlalchemy import select
+        async with self.get_session() as session:
             statement = select(ChatSession).where(ChatSession.user_id == user_id).order_by(ChatSession.created_at)
-            sessions = session.exec(statement).all()
-            return sessions
+            result = await session.execute(statement)
+            sessions = result.scalars().all()
+            return list(sessions)
 
     async def update_session_name(self, session_id: str, name: str) -> ChatSession:
         """Update a session's name.
@@ -338,15 +339,15 @@ class DatabaseService:
         Raises:
             HTTPException: If session is not found
         """
-        with Session(self.engine) as session:
-            chat_session = session.get(ChatSession, session_id)
+        async with self.get_session() as session:
+            chat_session = await session.get(ChatSession, session_id)
             if not chat_session:
                 raise HTTPException(status_code=404, detail="Session not found")
 
             chat_session.name = name
             session.add(chat_session)
-            session.commit()
-            session.refresh(chat_session)
+            await session.commit()
+            await session.refresh(chat_session)
             logger.info("session_name_updated", session_id=session_id, name=name)
             return chat_session
 
@@ -356,23 +357,20 @@ class DatabaseService:
         Returns:
             Session: A SQLModel session maker
         """
-        return Session(self.engine)
-
-    async def health_check(self) -> bool:
-        """Check database connection health.
-
-        Returns:
-            bool: True if database is healthy, False otherwise
-        """
-        try:
-            with Session(self.engine) as session:
-                # Execute a simple query to check connection
-                session.exec(select(1)).first()
-                return True
-        except Exception as e:
-            logger.error("database_health_check_failed", error=str(e))
-            return False
+        if not self._initialized:
+            raise RuntimeError("Database service not initialized")
+        return self._session_factory
 
 
 # Create a singleton instance
 database_service = DatabaseService()
+
+
+async def get_db():
+    """Dependency to get a database session.
+    
+    Yields:
+        Session: Database session
+    """
+    async with database_service.get_session() as session:
+        yield session
